@@ -63,34 +63,36 @@ public class MapInit : MonoBehaviour
         {
             return;
         }
-        float di = 3 + m_spacing * Mathf.Sqrt(3);
-        float dj = (Mathf.Sqrt(3) + m_spacing) * 0.5f;
-        for (int j = 0; j < m_countY; j++)
+        float di = (3 + m_spacing * Mathf.Sqrt(3)) * 0.5f;
+        float dj = Mathf.Sqrt(3) + m_spacing;
+
+        for(int i = 0; i < m_countX; i++)
         {
-            if (j % 2 == 0)
+            if (i % 2 == 0)
             {
-                for (int i = 0; i < m_countX; i++)
+                for (int j = 0; j < m_countY; j++)
                 {
                     createCell(new Vector3(i * di, 0, j * dj));
                 }
             }
             else
             {
-                for (int i = 0; i < m_countX; i++)
+                for (int j = 0; j < m_countY; j++)
                 {
-                    createCell(new Vector3((i + 0.5f) * di, 0, j * dj));
+                    createCell(new Vector3(i * di, 0, (j - 0.5f) * dj));
                 }
             }
         }
-        createCell(new Vector3(), new Quaternion());
+
         if(m_isCenter == true)
         {
-            if(m_countY > 1)
+            if(m_countX > 1)
             {
-                gameObject.transform.position = new Vector3(m_x - ((m_countX - 0.5f) * di * 0.5f), m_y, m_z - ((m_countY - 1) * dj * 0.5f));
-            } else
+                gameObject.transform.position = new Vector3(m_x - ((m_countX - 1) * di * 0.5f), m_y, m_z - ((m_countY - 1.5f) * dj * 0.5f));
+            }
+            else
             {
-                gameObject.transform.position = new Vector3(m_x, m_y, m_z);
+                gameObject.transform.position = new Vector3(m_x, m_y, m_z - ((m_countY - 1) * dj * 0.5f));
             }
         }
         else
