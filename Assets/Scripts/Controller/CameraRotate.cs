@@ -17,12 +17,15 @@ public class CameraRotate : MonoBehaviour
         {
             float mx = Input.GetAxis("Mouse X") * roate_Speed;
             float my = Input.GetAxis("Mouse Y") * roate_Speed;
-            var oldRo = Camera.main.transform.rotation;
-            var dRo = Quaternion.Euler(-my, mx, 0);
+            //var oldRo = Camera.main.transform.rotation;
+            //var dRo = Quaternion.Euler(-my, mx, 0);
+            var root = GameObject.Find("GameRoot");
+            Camera.main.transform.RotateAround(root.transform.position, Vector3.up, mx);
+            Camera.main.transform.RotateAround(root.transform.position, Vector3.left, -my);
             //var newRo = new Quaternion(oldRo.x + dRo.x, oldRo.y + dRo.y, oldRo.z + dRo.z, oldRo.w + dRo.w);
-            var newRo = oldRo * dRo;
-            
-            Camera.main.transform.rotation = newRo;
+            //var newRo = oldRo * dRo;
+
+            //Camera.main.transform.rotation = newRo;
             //var nr = Camera.main.transform.rotation;
             //nr.y -= mx;
             //nr.w += my;
