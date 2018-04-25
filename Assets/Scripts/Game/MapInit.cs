@@ -47,9 +47,25 @@ public class MapInit : MonoBehaviour
         cell.transform.rotation = rot;
         cell.AddComponent<MeshFilter>();
         var mr = cell.AddComponent<MeshRenderer>();
-        var mat = Resources.Load<Material>("Materials/normal");
-        mat.color = m_color;
-        mr.material = mat;
+        Material[] mats = new Material[2];
+        if(m_mat0)
+        {
+            mats[0] = m_mat0;
+            if(m_mat1)
+            {
+                mats[1] = m_mat1;
+            }
+        }
+        if (mats[0] != null)
+        {
+            mats[0].color = m_color0;
+        }
+        if (mats[1] != null)
+        {
+            mats[1].color = m_color1;
+        }
+        mr.materials = mats;
+        mr.material = mats[0];
         cell.transform.parent = gameObject.transform;
         var mesh = cell.GetComponent<MeshFilter>().mesh;
         mesh.vertices = getCellVertexs();
@@ -66,38 +82,42 @@ public class MapInit : MonoBehaviour
         float di = (3 + m_spacing * Mathf.Sqrt(3)) * 0.5f;
         float dj = Mathf.Sqrt(3) + m_spacing;
 
-        for(int i = 0; i < m_countX; i++)
+        float dx, dy;
+        if (m_isCenter == true)
+        {
+            if (m_countX > 1)
+            {
+                dx = -(m_countX - 1) * di * 0.5f;
+                dy = -(m_countY - 1.5f) * dj * 0.5f;
+            }
+            else
+            {
+                dx = 0;
+                dy = -(m_countY - 1) * dj * 0.5f;
+            }
+        }
+        else
+        {
+            dx = 0;
+            dy = 0;
+        }
+
+        for (int i = 0; i < m_countX; i++)
         {
             if (i % 2 == 0)
             {
                 for (int j = 0; j < m_countY; j++)
                 {
-                    createCell(new Vector3(i * di, 0, j * dj));
+                    createCell(new Vector3(i * di + dx, 0, j * dj + dy));
                 }
             }
             else
             {
                 for (int j = 0; j < m_countY; j++)
                 {
-                    createCell(new Vector3(i * di, 0, (j - 0.5f) * dj));
+                    createCell(new Vector3(i * di + dx, 0, (j - 0.5f) * dj + dy));
                 }
             }
-        }
-
-        if(m_isCenter == true)
-        {
-            if(m_countX > 1)
-            {
-                gameObject.transform.position = new Vector3(m_x - ((m_countX - 1) * di * 0.5f), m_y, m_z - ((m_countY - 1.5f) * dj * 0.5f));
-            }
-            else
-            {
-                gameObject.transform.position = new Vector3(m_x, m_y, m_z - ((m_countY - 1) * dj * 0.5f));
-            }
-        }
-        else
-        {
-            gameObject.transform.position = new Vector3(m_x, m_y, m_z);
         }
     }
 	
@@ -113,5 +133,8 @@ public class MapInit : MonoBehaviour
     public float m_x = 0;
     public float m_y = 0;
     public float m_z = 0;
-    public Color m_color = Color.gray;
+    public Color m_color0 = Color.gray;
+    public Color m_color1 = Color.gray;
+    public Material m_mat0;
+    public Material m_mat1;
 }
