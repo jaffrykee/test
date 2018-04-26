@@ -56,20 +56,12 @@ public class MapInit : MonoBehaviour
                 mats[1] = m_mat1;
             }
         }
-        if (mats[0] != null)
-        {
-            mats[0].color = m_color0;
-        }
-        if (mats[1] != null)
-        {
-            mats[1].color = m_color1;
-        }
         mr.materials = mats;
-        mr.material = mats[0];
-        cell.transform.parent = gameObject.transform;
+        //        mr.material = mats[0];
         var mesh = cell.GetComponent<MeshFilter>().mesh;
         mesh.vertices = getCellVertexs();
         mesh.triangles = getTriangles();
+        cell.transform.parent = gameObject.transform;
         return cell;
     }
 	// Use this for initialization
@@ -133,8 +125,6 @@ public class MapInit : MonoBehaviour
     public float m_x = 0;
     public float m_y = 0;
     public float m_z = 0;
-    public Color m_color0 = Color.gray;
-    public Color m_color1 = Color.gray;
     public Material m_mat0;
     public Material m_mat1;
 }
