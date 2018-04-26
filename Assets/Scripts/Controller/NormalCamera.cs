@@ -76,36 +76,41 @@ public class NormalCamera : MonoBehaviour
                     break;
             }
         }
-        if (true)
+        switch(m_zoomType)
         {
-            //重新计算位置    
-            tra.position = tra.rotation * new Vector3(0.0F, 0.0F, Input.GetAxis("Mouse ScrollWheel") * m_zoomSpeed) + tra.position;
-        } else
-        {
-            //Zoom out  
-            if (Input.GetAxis("Mouse ScrollWheel") < 0)
-            {
-                if (Camera.main.fieldOfView <= 100)
+            case ZoomType.Move:
                 {
-                    Camera.main.fieldOfView += 2;
+                    tra.position = tra.rotation * new Vector3(0.0F, 0.0F, Input.GetAxis("Mouse ScrollWheel") * m_zoomSpeed) + tra.position;
                 }
-                if (Camera.main.orthographicSize <= 20)
+                break;
+            case ZoomType.Telescope:
                 {
-                    Camera.main.orthographicSize += 0.5F;
+                    if (Input.GetAxis("Mouse ScrollWheel") < 0)
+                    {
+                        if (Camera.main.fieldOfView <= 100)
+                        {
+                            Camera.main.fieldOfView += 2;
+                        }
+                        if (Camera.main.orthographicSize <= 20)
+                        {
+                            Camera.main.orthographicSize += 0.5F;
+                        }
+                    }
+                    if (Input.GetAxis("Mouse ScrollWheel") > 0)
+                    {
+                        if (Camera.main.fieldOfView > 2)
+                        {
+                            Camera.main.fieldOfView -= 2;
+                        }
+                        if (Camera.main.orthographicSize >= 1)
+                        {
+                            Camera.main.orthographicSize -= 0.5F;
+                        }
+                    }
                 }
-            }
-            //Zoom in  
-            if (Input.GetAxis("Mouse ScrollWheel") > 0)
-            {
-                if (Camera.main.fieldOfView > 2)
-                {
-                    Camera.main.fieldOfView -= 2;
-                }
-                if (Camera.main.orthographicSize >= 1)
-                {
-                    Camera.main.orthographicSize -= 0.5F;
-                }
-            }
+                break;
+            default:
+                break;
         }
         float curMove = m_moveSpeed;
         if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftShift))
@@ -143,7 +148,13 @@ public class NormalCamera : MonoBehaviour
         RPG,
         SLG,
     };
+    public enum ZoomType
+    {
+        Move,
+        Telescope,
+    }
     public FixedType m_fixedType = FixedType.RPG;
+    public ZoomType m_zoomType = ZoomType.Move;
     public float m_rotationSpeed = 3.0f;
     public float m_moveSpeed = 1;
     public float m_moveExTimes = 5;

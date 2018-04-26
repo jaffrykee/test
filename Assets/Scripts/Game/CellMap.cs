@@ -3,21 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class MapInit : MonoBehaviour
+public class CellMap : MonoBehaviour
 {
     static float s23 = Mathf.Sqrt(3) * 0.5f;
-    private Vector3[] getCellVertexs()
-    {
-        Vector3[] vertexs = new Vector3[6];
-        //约定第一个顶点在原点,从左向右，从上到下的顺序排序
-        vertexs[0] = new Vector3(-1, 0, 0);
-        vertexs[1] = new Vector3(-0.5f, 0, s23);
-        vertexs[2] = new Vector3(0.5f, 0, s23);
-        vertexs[3] = new Vector3(1, 0, 0);
-        vertexs[4] = new Vector3(0.5f, 0, -s23);
-        vertexs[5] = new Vector3(-0.5f, 0, -s23);
-        return vertexs;
-    }
     private int[] getTriangles()
     {
         int[] triangles = new int[12];
@@ -40,13 +28,16 @@ public class MapInit : MonoBehaviour
 
         return triangles;
     }
-    GameObject createCell(Vector3 poi, Quaternion rot = new Quaternion())
+    GameObject createCell(Vector3 poi, int cellx = 0, int celly = 0, Quaternion rot = new Quaternion())
     {
         GameObject cell = new GameObject();
         cell.transform.position = poi;
         cell.transform.rotation = rot;
-        cell.AddComponent<MeshFilter>();
+        var mf = cell.AddComponent<MeshFilter>();
         var mr = cell.AddComponent<MeshRenderer>();
+        var mc = cell.AddComponent<MeshCollider>();
+        var cellData = cell.AddComponent<MapCellData>();
+        mc.sharedMesh = mf.mesh;
         Material[] mats = new Material[2];
         if(m_mat0)
         {
@@ -58,19 +49,23 @@ public class MapInit : MonoBehaviour
         }
         mr.materials = mats;
         //        mr.material = mats[0];
-        var mesh = cell.GetComponent<MeshFilter>().mesh;
-        mesh.vertices = getCellVertexs();
+        var mesh = mf.mesh;
+        mesh.vertices = MapCellData.getCellVertexs();
         mesh.triangles = getTriangles();
         cell.transform.parent = gameObject.transform;
+        cellData.m_centerPoi = poi;
+        cellData.m_cellPoi = new Vector2Int(cellx, celly);
+        m_cellData[cellx, celly] = cellData;
         return cell;
     }
 	// Use this for initialization
 	void Start ()
     {
-        if (gameObject == null)
+        if (gameObject == null || m_countX <= 0 || m_countY <= 0)
         {
             return;
         }
+        m_cellData = new MapCellData[m_countX, m_countY];
         float di = (3 + m_spacing * Mathf.Sqrt(3)) * 0.5f;
         float dj = Mathf.Sqrt(3) + m_spacing;
 
@@ -100,14 +95,14 @@ public class MapInit : MonoBehaviour
             {
                 for (int j = 0; j < m_countY; j++)
                 {
-                    createCell(new Vector3(i * di + dx, 0, j * dj + dy));
+                    createCell(new Vector3(i * di + dx, 0, j * dj + dy), i, j);
                 }
             }
             else
             {
                 for (int j = 0; j < m_countY; j++)
                 {
-                    createCell(new Vector3(i * di + dx, 0, (j - 0.5f) * dj + dy));
+                    createCell(new Vector3(i * di + dx, 0, (j - 0.5f) * dj + dy), i, j);
                 }
             }
         }
@@ -127,4 +122,9 @@ public class MapInit : MonoBehaviour
     public float m_z = 0;
     public Material m_mat0;
     public Material m_mat1;
+    public bool m_showOutline = true;
+    public float m_outlineWidth = 1.0f;
+    public Color m_outlineColor = Color.white;
+    [HideInInspector]
+    public MapCellData[,] m_cellData;
 }
