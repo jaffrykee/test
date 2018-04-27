@@ -45,6 +45,10 @@ public class CellMap : MonoBehaviour
         cell.transform.parent = gameObject.transform;
         cellData.m_centerPoi = poi;
         cellData.m_cellPoi = new Vector2Int(cellx, celly);
+        if(m_showOutline == false)
+        {
+
+        }
         m_cellData[cellx, celly] = cellData;
         return cell;
     }
@@ -117,12 +121,12 @@ public class CellMap : MonoBehaviour
             var lr = m_selectLine.GetComponent<LineRenderer>();
             if(lr != null)
             {
-                lr.numCornerVertices = 6;
                 lr.positionCount = 7;
+                lr.numCornerVertices = 6;
                 var linePoi = m_curCell.m_centerPoi;
-                linePoi.y += 0.1f;
+                linePoi.y += m_selectLineHeight;
                 lr.SetPositions(CellData.getLinesVertexs(linePoi));
-                lr.material = m_matSelectLine;
+                lr.material = m_selectLineMaterial;
                 lr.startColor = m_selectLineColor;
                 lr.endColor = m_selectLineColor;
                 lr.startWidth = m_selectLineWidth;
@@ -140,12 +144,15 @@ public class CellMap : MonoBehaviour
     public float m_z = 0;
     public Material m_matCell;
     public bool m_showOutline = true;
-    public Material m_matOutline;
+    public bool m_isQuickOutline = true;
+    public Material m_outlineMaterial;
     public Color m_outlineColor = Color.gray;
     public float m_outlineWidth = 0.05f;
-    public Material m_matSelectLine;
+    public float m_outlineHeight = 0.01f;
+    public Material m_selectLineMaterial;
     public Color m_selectLineColor = Color.blue;
     public float m_selectLineWidth = 0.15f;
+    public float m_selectLineHeight = 0.1f;
     [HideInInspector]
     public CellData[,] m_cellData;
     [HideInInspector]

@@ -27,7 +27,7 @@ public class CellData : MonoBehaviour
         vertexs[3] = new Vector3(1, 0, 0);
         vertexs[4] = new Vector3(0.5f, 0, -s23);
         vertexs[5] = new Vector3(-0.5f, 0, -s23);
-        vertexs[6] = new Vector3(-1, 0, 0);
+        vertexs[6] = new Vector3(-1.0f, 0, 0);
 
         vertexs[0] += poi;
         vertexs[1] += poi;
@@ -40,15 +40,17 @@ public class CellData : MonoBehaviour
     }
     static public Vector3[] getHalfCellVertexs(Vector3 poi)
     {
-        Vector3[] vertexs = new Vector3[6];
+        Vector3[] vertexs = new Vector3[4];
         //约定第一个顶点在原点,从左向右，从上到下的顺序排序
         vertexs[0] = new Vector3(-1, 0, 0);
         vertexs[1] = new Vector3(-0.5f, 0, s23);
         vertexs[2] = new Vector3(0.5f, 0, s23);
+        vertexs[3] = new Vector3(1, 0, 0);
 
         vertexs[0] += poi;
         vertexs[1] += poi;
         vertexs[2] += poi;
+        vertexs[3] += poi;
         return vertexs;
     }
     public LineRenderer createMapLine()
@@ -85,27 +87,38 @@ public class CellData : MonoBehaviour
             return;
         }
         var lr = gameObject.AddComponent<LineRenderer>();
-        lr.positionCount = 7;
-        lr.numCapVertices = 7;
-        var parent = lr.gameObject.transform.parent.gameObject;
-        if(parent != null)
+        var cellMap = getParentMap();
+        var linePoi = m_centerPoi;
+        if (cellMap != null)
         {
-            var cellMap = parent.GetComponent<CellMap>();
-            if(cellMap != null)
+            lr.material = cellMap.m_outlineMaterial;
+            lr.startColor = cellMap.m_outlineColor;
+            lr.endColor = cellMap.m_outlineColor;
+            lr.enabled = cellMap.m_showOutline;
+            if(cellMap.m_showOutline == true)
             {
-                lr.material = cellMap.m_matOutline;
-                lr.startColor = cellMap.m_outlineColor;
-                lr.endColor = cellMap.m_outlineColor;
+                m_outlineType = OutlineType.normal;
+            }
+            else
+            {
+                m_outlineType = OutlineType.none;
+            }
+            linePoi.y += cellMap.m_outlineHeight;
+            lr.startWidth = cellMap.m_outlineWidth;
+            lr.endWidth = cellMap.m_outlineWidth;
+            if(cellMap.m_isQuickOutline == true)
+            {
+                lr.positionCount = 4;
+                lr.numCornerVertices = 6;
+                lr.SetPositions(getHalfCellVertexs(linePoi));
+            }
+            else
+            {
+                lr.positionCount = 7;
+                lr.numCornerVertices = 6;
+                lr.SetPositions(getLinesVertexs(linePoi));
             }
         }
-        //lr.numCornerVertices = 7;
-        var linePoi = m_centerPoi;
-        linePoi.y += 0.01f;
-        lr.SetPositions(getLinesVertexs(linePoi));
-        lr.startWidth = c_normalWidth;
-        lr.endWidth = c_normalWidth;
-        lr.startColor = Color.gray;
-        lr.endColor = Color.gray;
         
     }
 	// Update is called once per frame
@@ -155,6 +168,4 @@ public class CellData : MonoBehaviour
             }
         }
     }
-    const float c_normalWidth = 0.05f;
-    const float c_selectWidth = 0.15f;
 }

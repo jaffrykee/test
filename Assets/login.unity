@@ -769,8 +769,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83406136b8ad1c74bad743fc55878f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_countX: 70
-  m_countY: 60
+  m_countX: 210
+  m_countY: 180
   m_isCenter: 1
   m_spacing: 0
   m_x: 0
@@ -778,12 +778,16 @@ MonoBehaviour:
   m_z: 0
   m_matCell: {fileID: 2100000, guid: 32bf398e800c58a418208506193684c5, type: 2}
   m_showOutline: 1
-  m_matOutline: {fileID: 2100000, guid: 0f10f74f976fd5b46a579b700483cf71, type: 2}
-  m_outlineColor: {r: 0.35294116, g: 0.35294116, b: 0.35294116, a: 0}
-  m_outlineWidth: 0
-  m_matSelectLine: {fileID: 2100000, guid: 42f982cbdb13e2d469a809fddffcdc55, type: 2}
-  m_selectLineColor: {r: 0.66176474, g: 0.51968, b: 0.3065528, a: 1}
-  m_selectLineWidth: 0.15
+  m_isQuickOutline: 1
+  m_outlineMaterial: {fileID: 2100000, guid: 0f10f74f976fd5b46a579b700483cf71, type: 2}
+  m_outlineColor: {r: 0, g: 0, b: 0, a: 0.534}
+  m_outlineWidth: 0.05
+  m_outlineHeight: 0.01
+  m_selectLineMaterial: {fileID: 2100000, guid: 42f982cbdb13e2d469a809fddffcdc55,
+    type: 2}
+  m_selectLineColor: {r: 1, g: 1, b: 1, a: 1}
+  m_selectLineWidth: 0.1
+  m_selectLineHeight: 0.15
   m_curCell: {fileID: 0}
 --- !u!4 &649247573
 Transform:
@@ -1355,7 +1359,7 @@ MonoBehaviour:
   m_fixedType: 0
   m_zoomType: 0
   m_rotationSpeed: 3
-  m_moveSpeed: 1
+  m_moveSpeed: 0.1
   m_moveExTimes: 5
   m_curDistance: 0
   m_zoomSpeed: 25
