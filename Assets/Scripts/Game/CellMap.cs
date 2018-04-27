@@ -36,21 +36,11 @@ public class CellMap : MonoBehaviour
         var mf = cell.AddComponent<MeshFilter>();
         var mr = cell.AddComponent<MeshRenderer>();
         var mc = cell.AddComponent<MeshCollider>();
-        var cellData = cell.AddComponent<MapCellData>();
+        var cellData = cell.AddComponent<CellData>();
         mc.sharedMesh = mf.mesh;
-        Material[] mats = new Material[2];
-        if(m_mat0)
-        {
-            mats[0] = m_mat0;
-            if(m_mat1)
-            {
-                mats[1] = m_mat1;
-            }
-        }
-        mr.materials = mats;
-        //        mr.material = mats[0];
+        mr.material = m_matCell;
         var mesh = mf.mesh;
-        mesh.vertices = MapCellData.getCellVertexs();
+        mesh.vertices = CellData.getCellVertexs();
         mesh.triangles = getTriangles();
         cell.transform.parent = gameObject.transform;
         cellData.m_centerPoi = poi;
@@ -65,7 +55,7 @@ public class CellMap : MonoBehaviour
         {
             return;
         }
-        m_cellData = new MapCellData[m_countX, m_countY];
+        m_cellData = new CellData[m_countX, m_countY];
         float di = (3 + m_spacing * Mathf.Sqrt(3)) * 0.5f;
         float dj = Mathf.Sqrt(3) + m_spacing;
 
@@ -113,6 +103,34 @@ public class CellMap : MonoBehaviour
     {
     }
 
+    public void setCurCell(CellData curCell)
+    {
+        m_curCell = curCell;
+        if(m_curCell != null)
+        {
+            if(m_selectLine == null)
+            {
+                var comp = new System.Type[1];
+                comp[0] = typeof(LineRenderer);
+                m_selectLine = new GameObject("SelectCellLine", comp);
+            }
+            var lr = m_selectLine.GetComponent<LineRenderer>();
+            if(lr != null)
+            {
+                lr.numCornerVertices = 6;
+                lr.positionCount = 7;
+                var linePoi = m_curCell.m_centerPoi;
+                linePoi.y += 0.1f;
+                lr.SetPositions(CellData.getLinesVertexs(linePoi));
+                lr.material = m_matSelectLine;
+                lr.startColor = m_selectLineColor;
+                lr.endColor = m_selectLineColor;
+                lr.startWidth = m_selectLineWidth;
+                lr.endWidth = m_selectLineWidth;
+            }
+        }
+    }
+
     public int m_countX = 10;
     public int m_countY = 20;
     public bool m_isCenter = true;
@@ -120,11 +138,17 @@ public class CellMap : MonoBehaviour
     public float m_x = 0;
     public float m_y = 0;
     public float m_z = 0;
-    public Material m_mat0;
-    public Material m_mat1;
+    public Material m_matCell;
     public bool m_showOutline = true;
-    public float m_outlineWidth = 1.0f;
-    public Color m_outlineColor = Color.white;
+    public Material m_matOutline;
+    public Color m_outlineColor = Color.gray;
+    public float m_outlineWidth = 0.05f;
+    public Material m_matSelectLine;
+    public Color m_selectLineColor = Color.blue;
+    public float m_selectLineWidth = 0.15f;
     [HideInInspector]
-    public MapCellData[,] m_cellData;
+    public CellData[,] m_cellData;
+    [HideInInspector]
+    public CellData m_curCell = null;
+    private GameObject m_selectLine = null;
 }
