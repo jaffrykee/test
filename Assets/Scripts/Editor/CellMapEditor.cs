@@ -30,13 +30,58 @@ public class CellMapEditor : EditorWindow
     }
     private void OnGUI()
     {
-        if(m_cmdTree == null)
+
+        EditorGUILayout.BeginVertical();
+        if (GUILayout.Button("刷新", ZESetting.LayoutSetting("Button")) || m_cmdTree == null)
         {
             m_cmdTree = new CellMapDataFileTreeView(new TreeViewState());
         }
-        m_cmdTree.OnGUI(new Rect(0, 100, 100, 100));
-
-        EditorGUILayout.BeginVertical();
+        m_cmdTree.OnGUI(new Rect(0, 20, 200, 200));
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
         EditorGUILayout.Space();
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("地图尺寸：", ZESetting.LayoutSetting("LabelFieldShort"));
@@ -44,7 +89,7 @@ public class CellMapEditor : EditorWindow
         EditorGUILayout.TextField(m_mapSizeX, ZESetting.LayoutSetting("TextField"));
         EditorGUILayout.LabelField("y:", ZESetting.LayoutSetting("LabelFieldShort"));
         EditorGUILayout.TextField(m_mapSizeY, ZESetting.LayoutSetting("TextField"));
-        if (GUILayout.Button("重置尺寸", ZESetting.LayoutSetting("Button")))
+        if (GUILayout.Button("设置", ZESetting.LayoutSetting("Button")))
         {
             //int x = m_mapSizeX.tr
         }
