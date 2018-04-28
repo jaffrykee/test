@@ -30,59 +30,17 @@ public class CellMapEditor : EditorWindow
     }
     private void OnGUI()
     {
-
-        EditorGUILayout.BeginVertical();
+        GUILayout.BeginVertical();
         if (GUILayout.Button("刷新", ZESetting.LayoutSetting("Button")) || m_cmdTree == null)
         {
             m_cmdTree = new CellMapDataFileTreeView(new TreeViewState());
         }
-        m_cmdTree.OnGUI(new Rect(0, 20, 200, 200));
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
+        GUILayout.BeginHorizontal();
+
+        //TreeView
+        m_cmdTree.OnGUI(new Rect(0, 0, 400, 500));
+
+        EditorGUILayout.BeginVertical();
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("地图尺寸：", ZESetting.LayoutSetting("LabelFieldShort"));
         EditorGUILayout.LabelField("x:", ZESetting.LayoutSetting("LabelFieldShort"));
@@ -103,8 +61,8 @@ public class CellMapEditor : EditorWindow
         }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
-
-        //EditorGUILayout.LabelField(m_showValue, ZESetting.LayoutSetting("LabelField"));
+        GUILayout.EndHorizontal();
+        GUILayout.EndVertical();
     }
 
     private const string c_rootPath = "./Assets/Resources/Data/CellMap/";
@@ -116,4 +74,7 @@ public class CellMapEditor : EditorWindow
     public string m_mapSizeY = "";
     public string m_showValue = "";
     public CellMapDataFileTreeView m_cmdTree;
+
+    #region splitter
+    #endregion
 }
