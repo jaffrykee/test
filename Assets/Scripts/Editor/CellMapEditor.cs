@@ -25,22 +25,22 @@ public class CellMapEditor : EditorWindow
         UnityEngine.Input.imeCompositionMode = IMECompositionMode.On;
 
         m_HorizontalSplitterRect = new Rect(
-            (int)(position.x + position.width * m_HorizontalSplitterPercent),
-            position.y,
+            (int)(position.width * m_HorizontalSplitterPercent),
+            0,
             k_SplitterWidth,
             position.height
             );
 
         m_VerticalSplitterRectRight = new Rect(
             m_HorizontalSplitterRect.x,
-            (int)(position.y + m_HorizontalSplitterRect.height * m_VerticalSplitterPercentRight),
+            (int)(m_HorizontalSplitterRect.height * m_VerticalSplitterPercentRight),
             (position.width - m_HorizontalSplitterRect.width) - k_SplitterWidth,
             k_SplitterWidth
             );
 
         m_VerticalSplitterRectLeft = new Rect(
-            position.x,
-            (int)(position.y + m_HorizontalSplitterRect.height * m_VerticalSplitterPercentLeft),
+            0,
+            (int)(m_HorizontalSplitterRect.height * m_VerticalSplitterPercentLeft),
             (m_HorizontalSplitterRect.width) - k_SplitterWidth,
             k_SplitterWidth
             );
@@ -55,18 +55,21 @@ public class CellMapEditor : EditorWindow
         HandleVerticalResize();
 
         var unitTreeRect = new Rect(
-            position.x,
-            position.y,
+            0,
+            0,
             m_HorizontalSplitterRect.x,
-            m_VerticalSplitterRectLeft.y - position.y
+            m_VerticalSplitterRectLeft.y
             );
 
         if (GUILayout.Button("刷新", ZESetting.LayoutSetting("Button")) || m_cmdTree == null)
         {
             m_cmdTree = new CellMapDataFileTreeView(new TreeViewState());
         }
+        var unitTreeRect2 = unitTreeRect;
+        unitTreeRect2.y += 25;
+        unitTreeRect2.height -= 25;
         //TreeView
-        m_cmdTree.OnGUI(unitTreeRect);
+        m_cmdTree.OnGUI(unitTreeRect2);
 
         var unitPreviewRect = new Rect(
             unitTreeRect.x,
@@ -76,6 +79,22 @@ public class CellMapEditor : EditorWindow
             );
 
         GUILayout.BeginArea(unitPreviewRect, EditorStyles.helpBox);
+
+        GUILayout.EndArea();
+        
+        float panelLeft = m_HorizontalSplitterRect.x + k_SplitterWidth;
+        float panelWidth = m_VerticalSplitterRectRight.width - k_SplitterWidth * 2;
+        float panelHeight = m_VerticalSplitterRectRight.y;
+
+        var unitListRect = new Rect(
+            panelLeft,
+            0,
+            panelWidth,
+            panelHeight
+            );
+        GUILayout.BeginArea(unitListRect, EditorStyles.helpBox);
+        //m_UnitList.OnGUI(unitListRect);
+        #region attr
         GUILayout.BeginVertical();
         GUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
@@ -101,24 +120,12 @@ public class CellMapEditor : EditorWindow
         EditorGUILayout.EndVertical();
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
+        #endregion
         GUILayout.EndArea();
 
-
-
-        float panelLeft = m_HorizontalSplitterRect.x + k_SplitterWidth;
-        float panelWidth = m_VerticalSplitterRectRight.width - k_SplitterWidth * 2;
-        float panelHeight = m_VerticalSplitterRectRight.y - position.y;
-
-        var unitListRect = new Rect(
-            panelLeft,
-            position.y,
-            panelWidth,
-            panelHeight
-            );
-        //m_UnitList.OnGUI(unitListRect);
         var unitEditorRect = new Rect(
             panelLeft,
-            position.y + panelHeight + k_SplitterWidth,
+            panelHeight + k_SplitterWidth,
             panelWidth,
             (position.height - panelHeight) - k_SplitterWidth * 2
             );
