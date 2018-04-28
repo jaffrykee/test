@@ -8,7 +8,7 @@ using System.Text;
 
 public class ZEditor : EditorWindow
 {
-    [MenuItem("Editors/LiumkTest/123123")]
+    //[MenuItem("Editors/LiumkTest/123123")]
     static void ShowEditor()
     {
         //EditorUtility.DisplayDialog("MyTool", "Do It in C# !", "OK", "");

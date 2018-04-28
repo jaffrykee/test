@@ -489,8 +489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83406136b8ad1c74bad743fc55878f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_countX: 210
-  m_countY: 180
+  m_countX: 5
+  m_countY: 5
   m_isCenter: 1
   m_spacing: 0
   m_x: 0
