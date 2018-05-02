@@ -14,31 +14,29 @@ public class CellMapDataFileTreeView : TreeView
         showBorder = true;
         Reload();
     }
-    private void buildFolderView(CellMapItem parent, DirectoryInfo parentDi, int curDepth)
+    private void buildFolderView(CellMapFileItem parent, DirectoryInfo parentDi, int curDepth)
     {
         var arrDi = parentDi.GetDirectories();
         foreach (var di in arrDi)
         {
-            var diView = new CellMapItem { id = ++m_curId, depth = 0, displayName = di.Name, m_fdi = di, m_resPath = parent.m_resPath + di.Name + "/" };
+            var diView = new CellMapFileItem { id = ++m_curId, depth = 0, displayName = di.Name, m_fdi = di, m_resPath = parent.m_resPath + di.Name + "/" };
             parent.AddChild(diView);
             buildFolderView(diView, di, curDepth + 1);
         }
-        var arrFi = parentDi.GetFiles("*.cmp");
+        var arrFi = parentDi.GetFiles("*.json");
         foreach (var fi in arrFi)
         {
-            parent.AddChild(new CellMapItem { id = ++m_curId, depth = curDepth + 1, displayName = fi.Name, m_fdi = fi, m_resPath = parent.m_resPath + fi.Name });
+            parent.AddChild(new CellMapFileItem { id = ++m_curId, depth = curDepth + 1, displayName = fi.Name, m_fdi = fi, m_resPath = parent.m_resPath + fi.Name });
         }
     }
     protected override TreeViewItem BuildRoot()
     {
         m_curId = 0;
         var di = new DirectoryInfo(c_rootFullPath);
-        var root = new CellMapItem { id = 0, depth = -1, displayName = "root", m_fdi = di, m_resPath = c_resPath };
+        var root = new CellMapFileItem { id = 0, depth = -1, displayName = "root", m_fdi = di, m_resPath = c_resPath };
         if (di != null)
         {
             buildFolderView(root, di, -1);
-            //TreeView
-            //TreeEditor.
         }
         return root;
     }
@@ -57,7 +55,7 @@ public class CellMapDataFileTreeView : TreeView
         {
             return;
         }
-        var curMapItem = FindItem(selectedIds[0], rootItem) as CellMapItem;
+        var curMapItem = FindItem(selectedIds[0], rootItem) as CellMapFileItem;
         if (curMapItem == null)
         {
             return;

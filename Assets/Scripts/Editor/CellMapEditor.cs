@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using System.IO;
+using LitJson;
+using System;
 
 public class CellMapEditor : EditorWindow
 {
@@ -46,9 +48,16 @@ public class CellMapEditor : EditorWindow
             k_SplitterWidth
             );
     }
+    private void saveCellMapSetting()
+    {
+        var writer = new LitJson.JsonWriter { PrettyPrint = true };
+        LitJson.JsonMapper.ToJson(m_curMapSetting, writer);
+        File.WriteAllText(mt_curFilePath, writer.ToString());
+    }
     private void resizeCellMap(int x, int y)
     {
-
+        m_curMapSetting.resizeCellMap(x, y);
+        saveCellMapSetting();
     }
     private void OnGUI()
     {
@@ -111,12 +120,14 @@ public class CellMapEditor : EditorWindow
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("地图尺寸：", ZESetting.LayoutSetting("LabelFieldShort"));
         EditorGUILayout.LabelField("x:", ZESetting.LayoutSetting("LabelFieldShort"));
-        EditorGUILayout.TextField(m_mapSizeX, ZESetting.LayoutSetting("TextField"));
+        m_mapSizeX = EditorGUILayout.TextField(m_mapSizeX, ZESetting.LayoutSetting("TextField"));
         EditorGUILayout.LabelField("y:", ZESetting.LayoutSetting("LabelFieldShort"));
-        EditorGUILayout.TextField(m_mapSizeY, ZESetting.LayoutSetting("TextField"));
+        m_mapSizeY = EditorGUILayout.TextField(m_mapSizeY, ZESetting.LayoutSetting("TextField"));
         if (GUILayout.Button("设置", ZESetting.LayoutSetting("Button")))
         {
-            //int x = m_mapSizeX.tr
+            var sizeX = Convert.ToInt32(m_mapSizeX);
+            var sizeY = Convert.ToInt32(m_mapSizeY);
+            resizeCellMap(sizeX, sizeY);
         }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
@@ -218,8 +229,6 @@ public class CellMapEditor : EditorWindow
 
     public static CellMapEditor s_instance = null;
 
-    public string m_mapSizeX = "";
-    public string m_mapSizeY = "";
     public string m_showValue = "";
     public CellMapDataFileTreeView m_cmdTree;
 
@@ -237,9 +246,33 @@ public class CellMapEditor : EditorWindow
     float m_VerticalSplitterPercentLeft = 0.85f;
 
     const float k_SplitterWidth = 3f;
-    private static float m_UpdateDelay = 0f;
-    [HideInInspector]
-    public string m_curFilePath = "";
+    private static float m_UpdateDelay = 0;
+    private string mt_curFilePath;
+    public string m_curFilePath
+    {
+        get
+        {
+            return mt_curFilePath;
+        }
+        set
+        {
+            mt_curFilePath = value;
+            if(File.Exists(value))
+            {
+                m_curMapSetting = JsonMapper.ToObject<CellMapSetting>(File.ReadAllText(value));
+                if(m_curMapSetting == null)
+                {
+                    m_curMapSetting = new CellMapSetting(2, 2);
+                    saveCellMapSetting();
+                }
+                m_mapSizeX = m_curMapSetting.mapSizeX.ToString();
+                m_mapSizeY = m_curMapSetting.mapSizeY.ToString();
+            }
+        }
+    }
+    private string m_mapSizeX;
+    private string m_mapSizeY;
+    private CellMapSetting m_curMapSetting;
     [HideInInspector]
     public string m_curResPath;
     #endregion

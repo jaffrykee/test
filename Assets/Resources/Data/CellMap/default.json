@@ -1,0 +1,98 @@
+
+{
+    "mapSizeX" : 6,
+    "mapSizeY" : 5,
+    "spacing"  : 0.1,
+    "cellData" : [
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        },
+        {
+            "isEnable" : true
+        }
+    ]
+}
