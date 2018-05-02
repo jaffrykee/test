@@ -6,7 +6,6 @@ using System.IO;
 [System.Serializable]
 public class CellMap : MonoBehaviour
 {
-    static float s23 = Mathf.Sqrt(3) * 0.5f;
     private int[] getTriangles()
     {
         int[] triangles = new int[12];
@@ -46,15 +45,15 @@ public class CellMap : MonoBehaviour
         cell.transform.parent = gameObject.transform;
         cellData.m_centerPoi = poi;
         cellData.m_cellPoi = new Vector2Int(cellx, celly);
-        if(m_showOutline == false)
+        if (m_showOutline == false)
         {
 
         }
         m_cellData[cellx, celly] = cellData;
         return cell;
     }
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         if (gameObject == null || m_countX <= 0 || m_countY <= 0)
         {
@@ -102,25 +101,25 @@ public class CellMap : MonoBehaviour
             }
         }
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
     }
 
     public void setCurCell(CellData curCell)
     {
         m_curCell = curCell;
-        if(m_curCell != null)
+        if (m_curCell != null)
         {
-            if(m_selectLine == null)
+            if (m_selectLine == null)
             {
                 var comp = new System.Type[1];
                 comp[0] = typeof(LineRenderer);
                 m_selectLine = new GameObject("SelectCellLine", comp);
             }
             var lr = m_selectLine.GetComponent<LineRenderer>();
-            if(lr != null)
+            if (lr != null)
             {
                 lr.positionCount = 7;
                 lr.numCornerVertices = 6;

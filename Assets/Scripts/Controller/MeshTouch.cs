@@ -42,7 +42,7 @@ public class MeshTouch : MonoBehaviour
                     var cellData = curCell.GetComponent<CellData>();
                     if(cellData != null)
                     {
-                        var render = curCell.GetComponent<Renderer>();
+                        //var render = curCell.GetComponent<Renderer>();
                         //render.enabled = !render.enabled;
                         //curCell.SetActive(!curCell.activeSelf);
 

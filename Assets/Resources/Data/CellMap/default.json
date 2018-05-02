@@ -1,81 +1,9 @@
 
 {
-    "mapSizeX" : 6,
-    "mapSizeY" : 5,
+    "mapSizeX" : 3,
+    "mapSizeY" : 2,
     "spacing"  : 0.1,
     "cellData" : [
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
         {
             "isEnable" : true
         },

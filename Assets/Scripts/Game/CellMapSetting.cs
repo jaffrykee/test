@@ -53,7 +53,6 @@ public class CellMapSetting
     }
     public void resizeCellMap(int x, int y)
     {
-        int count = mapSizeX * mapSizeY;
         int newCount = x * y;
         var newCellData = new CellDataSetting[newCount];
         for (int i = 0; i < x; i++)

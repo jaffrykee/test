@@ -110,7 +110,6 @@ public class CellMapEditor : EditorWindow
         EditorGUILayout.BeginVertical();
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("本地路径", ZESetting.LayoutSetting("LabelFieldShort"));
-        GUIStyle ro = new GUIStyle();
         EditorGUILayout.TextField(m_curFilePath, ZESetting.LayoutSetting("TextFieldLong"));
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
@@ -248,8 +247,7 @@ public class CellMapEditor : EditorWindow
     [SerializeField]
     float m_VerticalSplitterPercentLeft = 0.85f;
 
-    const float k_SplitterWidth = 3f;
-    private static float m_UpdateDelay = 0;
+    const float k_SplitterWidth = 3.0f;
     private string mt_curFilePath;
     public string m_curFilePath
     {
