@@ -117,27 +117,30 @@ public class CellMapEditor : EditorWindow
         EditorGUILayout.LabelField("资源路径", ZESetting.LayoutSetting("LabelFieldShort"));
         EditorGUILayout.TextField(m_curResPath, ZESetting.LayoutSetting("TextFieldLong"));
         EditorGUILayout.EndHorizontal();
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("地图尺寸：", ZESetting.LayoutSetting("LabelFieldShort"));
-        EditorGUILayout.LabelField("x:", ZESetting.LayoutSetting("LabelFieldShort"));
-        m_mapSizeX = EditorGUILayout.TextField(m_mapSizeX, ZESetting.LayoutSetting("TextField"));
-        EditorGUILayout.LabelField("y:", ZESetting.LayoutSetting("LabelFieldShort"));
-        m_mapSizeY = EditorGUILayout.TextField(m_mapSizeY, ZESetting.LayoutSetting("TextField"));
-        if (GUILayout.Button("设置", ZESetting.LayoutSetting("Button")))
+        if(!(m_curResPath == null || m_curResPath.Length == 0 || m_curResPath[m_curResPath.Length - 1] == '/'))
         {
-            var sizeX = Convert.ToInt32(m_mapSizeX);
-            var sizeY = Convert.ToInt32(m_mapSizeY);
-            resizeCellMap(sizeX, sizeY);
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("地图尺寸：", ZESetting.LayoutSetting("LabelFieldShort"));
+            EditorGUILayout.LabelField("x:", ZESetting.LayoutSetting("LabelFieldShort"));
+            m_mapSizeX = EditorGUILayout.TextField(m_mapSizeX, ZESetting.LayoutSetting("TextField"));
+            EditorGUILayout.LabelField("y:", ZESetting.LayoutSetting("LabelFieldShort"));
+            m_mapSizeY = EditorGUILayout.TextField(m_mapSizeY, ZESetting.LayoutSetting("TextField"));
+            if (GUILayout.Button("设置", ZESetting.LayoutSetting("Button")))
+            {
+                var sizeX = Convert.ToInt32(m_mapSizeX);
+                var sizeY = Convert.ToInt32(m_mapSizeY);
+                resizeCellMap(sizeX, sizeY);
+            }
+            EditorGUILayout.EndHorizontal();
+            //EditorGUILayout.BeginHorizontal();
+            //if (GUILayout.Button("Ok", ZESetting.LayoutSetting("Button")))
+            //{
+            //}
+            //else if (GUILayout.Button("Cancel", ZESetting.LayoutSetting("Button")))
+            //{
+            //}
+            //EditorGUILayout.EndHorizontal();
         }
-        EditorGUILayout.EndHorizontal();
-        EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Ok", ZESetting.LayoutSetting("Button")))
-        {
-        }
-        else if (GUILayout.Button("Cancel", ZESetting.LayoutSetting("Button")))
-        {
-        }
-        EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
