@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
+using System.IO;
 
 public class CellMapEditor : EditorWindow
 {
@@ -63,7 +64,7 @@ public class CellMapEditor : EditorWindow
 
         if (GUILayout.Button("刷新", ZESetting.LayoutSetting("Button")) || m_cmdTree == null)
         {
-            m_cmdTree = new CellMapDataFileTreeView(new TreeViewState());
+            m_cmdTree = new CellMapDataFileTreeView(new TreeViewState(), this);
         }
         var unitTreeRect2 = unitTreeRect;
         unitTreeRect2.y += 25;
@@ -98,6 +99,15 @@ public class CellMapEditor : EditorWindow
         GUILayout.BeginVertical();
         GUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("本地路径", ZESetting.LayoutSetting("LabelFieldShort"));
+        GUIStyle ro = new GUIStyle();
+        EditorGUILayout.TextField(m_curFilePath, ZESetting.LayoutSetting("TextFieldLong"));
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("资源路径", ZESetting.LayoutSetting("LabelFieldShort"));
+        EditorGUILayout.TextField(m_curResPath, ZESetting.LayoutSetting("TextFieldLong"));
+        EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("地图尺寸：", ZESetting.LayoutSetting("LabelFieldShort"));
         EditorGUILayout.LabelField("x:", ZESetting.LayoutSetting("LabelFieldShort"));
@@ -228,5 +238,9 @@ public class CellMapEditor : EditorWindow
 
     const float k_SplitterWidth = 3f;
     private static float m_UpdateDelay = 0f;
+    [HideInInspector]
+    public string m_curFilePath = "";
+    [HideInInspector]
+    public string m_curResPath;
     #endregion
 }

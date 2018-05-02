@@ -8,31 +8,32 @@ using System.IO;
 public class CellMapDataFileTreeView : TreeView
 {
     //int curId;
-    public CellMapDataFileTreeView(TreeViewState state) : base(state)
+    public CellMapDataFileTreeView(TreeViewState state, CellMapEditor parent) : base(state)
     {
+        m_parent = parent;
         showBorder = true;
         Reload();
     }
-    private void buildFolderView(TreeViewItem parent, DirectoryInfo parentDi, int curDepth)
+    private void buildFolderView(CellMapItem parent, DirectoryInfo parentDi, int curDepth)
     {
         var arrDi = parentDi.GetDirectories();
         foreach (var di in arrDi)
         {
-            var diView = new TreeViewItem { id = ++m_curId, depth = 0, displayName = di.Name };
+            var diView = new CellMapItem { id = ++m_curId, depth = 0, displayName = di.Name, m_fdi = di, m_resPath = parent.m_resPath + di.Name + "/" };
             parent.AddChild(diView);
             buildFolderView(diView, di, curDepth + 1);
         }
         var arrFi = parentDi.GetFiles("*.cmp");
         foreach (var fi in arrFi)
         {
-            parent.AddChild(new TreeViewItem { id = ++m_curId, depth = curDepth + 1, displayName = fi.Name });
+            parent.AddChild(new CellMapItem { id = ++m_curId, depth = curDepth + 1, displayName = fi.Name, m_fdi = fi, m_resPath = parent.m_resPath + fi.Name });
         }
     }
     protected override TreeViewItem BuildRoot()
     {
         m_curId = 0;
-        var root = new TreeViewItem { id = 0, depth = -1, displayName = "root" };
-        var di = new DirectoryInfo(c_rootPath);
+        var di = new DirectoryInfo(c_rootFullPath);
+        var root = new CellMapItem { id = 0, depth = -1, displayName = "root", m_fdi = di, m_resPath = c_resPath };
         if (di != null)
         {
             buildFolderView(root, di, -1);
@@ -52,13 +53,39 @@ public class CellMapDataFileTreeView : TreeView
     }
     protected override void SelectionChanged(IList<int> selectedIds)
     {
+        if(selectedIds.Count == 0)
+        {
+            return;
+        }
+        var curMapItem = FindItem(selectedIds[0], rootItem) as CellMapItem;
+        if (curMapItem == null)
+        {
+            return;
+        }
+        var fi = curMapItem.m_fdi as FileInfo;
+        if(fi != null)
+        {
+            m_parent.m_curFilePath = fi.FullName;
+            m_parent.m_curResPath = curMapItem.m_resPath;
+        }
+        else
+        {
+            var di = curMapItem.m_fdi as DirectoryInfo;
+            if (di != null)
+            {
+                m_parent.m_curFilePath = di.FullName;
+                m_parent.m_curResPath = curMapItem.m_resPath;
+            }
+        }
     }
 
     protected override void ContextClickedItem(int id)
     {
     }
 
-    private const string c_rootPath = "./Assets/Resources/Data/CellMap/";
+    private const string c_rootFullPath = "./Assets/Resources/Data/CellMap/";
+    private const string c_rootResPath = "./Data/CellMap/";
     private const string c_resPath = "Data/CellMap/";
     private int m_curId = 0;
+    private CellMapEditor m_parent;
 }
