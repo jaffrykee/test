@@ -126,7 +126,22 @@ public class CellData : MonoBehaviour
 		
 	}
 
-    public Vector3 m_centerPoi;
+    public class Config
+    {
+        public bool m_isEnable = true;
+    }
+    private Vector3 mt_centerPoi;
+    public Vector3 m_centerPoi
+    {
+        get
+        {
+            return mt_centerPoi;
+        }
+        set
+        {
+            mt_centerPoi = value;
+        }
+    }
     public Vector2Int m_cellPoi;
     public enum OutlineType
     {

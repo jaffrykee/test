@@ -138,21 +138,24 @@ public class CellMap : MonoBehaviour
     public int m_countX = 10;
     public int m_countY = 20;
     public bool m_isCenter = true;
-    public float m_spacing = 0.1f;
+    public float m_spacing = 0;
     public float m_x = 0;
     public float m_y = 0;
     public float m_z = 0;
+    //outLight
     public Material m_matCell;
     public bool m_showOutline = true;
     public bool m_isQuickOutline = true;
+    //CellMapOutline
     public Material m_outlineMaterial;
     public Color m_outlineColor = Color.gray;
     public float m_outlineWidth = 0.05f;
     public float m_outlineHeight = 0.01f;
+    //CellMapSelectLine
     public Material m_selectLineMaterial;
-    public Color m_selectLineColor = Color.blue;
-    public float m_selectLineWidth = 0.15f;
-    public float m_selectLineHeight = 0.1f;
+    public Color m_selectLineColor = Color.white;
+    public float m_selectLineWidth = 0.1f;
+    public float m_selectLineHeight = 0.15f;
     [HideInInspector]
     public CellData[,] m_cellData;
     [HideInInspector]

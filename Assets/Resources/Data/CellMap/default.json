@@ -1,26 +1,17 @@
 
 {
-    "mapSizeX" : 3,
-    "mapSizeY" : 2,
-    "spacing"  : 0.1,
+    "m_test" : false,
+    "mapSizeX" : 1,
+    "mapSizeY" : 3,
     "cellData" : [
         {
-            "isEnable" : true
+            "m_isEnable" : true
         },
         {
-            "isEnable" : true
+            "m_isEnable" : true
         },
         {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
-        },
-        {
-            "isEnable" : true
+            "m_isEnable" : true
         }
     ]
 }
