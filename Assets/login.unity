@@ -489,14 +489,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83406136b8ad1c74bad743fc55878f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_countX: 5
-  m_countY: 5
+  m_mapSizeX: 10
+  m_mapSizeY: 20
   m_isCenter: 1
   m_spacing: 0
   m_x: 0
   m_y: 0
   m_z: 0
-  m_matCell: {fileID: 2100000, guid: 32bf398e800c58a418208506193684c5, type: 2}
+  m_matCell: {fileID: 2100000, guid: d957a042b17beb549964d1fe187e4e40, type: 2}
   m_showOutline: 1
   m_isQuickOutline: 1
   m_outlineMaterial: {fileID: 2100000, guid: 0f10f74f976fd5b46a579b700483cf71, type: 2}

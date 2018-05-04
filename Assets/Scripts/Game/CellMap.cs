@@ -94,8 +94,7 @@ public class CellMap : MonoBehaviour
     public void resetData(string resPath)
     {
         //Resources
-        var test = Resources.Load("Data/CellMap/default.txt");
-        TextAsset jsonText = Resources.Load("Data/CellMap/default.txt") as TextAsset;
+        TextAsset jsonText = Resources.Load(resPath) as TextAsset;
         if(jsonText != null)
         {
             var cellMapData = JsonMapper.ToObject<CellMapData>(jsonText.text);
@@ -174,7 +173,7 @@ public class CellMap : MonoBehaviour
     }
 
     const string c_dataFolder = "Data/CellMap/";
-    const string c_defaultData = c_dataFolder + "default.json";
+    const string c_defaultData = c_dataFolder + "default";
 
     public int m_mapSizeX = 10;
     public int m_mapSizeY = 20;
