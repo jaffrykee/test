@@ -22,4 +22,13 @@ public class GameConvert
         writer.Write(data.y);
         writer.WriteArrayEnd();
     }
+    static public void LitJsonInit()
+    {
+        JsonMapper.RegisterExporter<float>((obj, writerFloat) => writerFloat.Write(Convert.ToDouble(obj)));
+        JsonMapper.RegisterImporter<double, float>(inputFlot => Convert.ToSingle(inputFlot));
+        JsonMapper.RegisterExporter<Vector3>((obj, writerVector3) => GameConvert.ToJsonWritter(writerVector3, obj));
+        JsonMapper.RegisterImporter<double[], Vector3>(inputVector3 => new Vector3(Convert.ToSingle(inputVector3[0]), Convert.ToSingle(inputVector3[1]), Convert.ToSingle(inputVector3[2])));
+        JsonMapper.RegisterExporter<Vector2Int>((obj, writerVector2Int) => GameConvert.ToJsonWritter(writerVector2Int, obj));
+        JsonMapper.RegisterImporter<int[], Vector2Int>(inputVector2Int => new Vector2Int(inputVector2Int[0], inputVector2Int[1]));
+    }
 }

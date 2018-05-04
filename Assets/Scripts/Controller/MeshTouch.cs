@@ -39,7 +39,7 @@ public class MeshTouch : MonoBehaviour
                 var curCell = meshFilter.gameObject;
                 if(curCell != null)
                 {
-                    var cellData = curCell.GetComponent<CellData>();
+                    var cellData = curCell.GetComponent<Cell>();
                     if(cellData != null)
                     {
                         //var render = curCell.GetComponent<Renderer>();
