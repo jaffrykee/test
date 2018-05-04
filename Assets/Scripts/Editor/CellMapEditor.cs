@@ -50,22 +50,13 @@ public class CellMapEditor : EditorWindow
     }
     private void saveCellMapSetting()
     {
-
         var writer = new LitJson.JsonWriter { PrettyPrint = true };
-
-        JsonMapper.RegisterExporter<float>((obj, writerFloat) => writerFloat.Write(Convert.ToDouble(obj)));
-        JsonMapper.RegisterImporter<double, float>(inputFlot => Convert.ToSingle(inputFlot));
-        JsonMapper.RegisterExporter<Vector3>((obj, writerVector3) => GameConvert.ToJsonWritter(writerVector3, obj));
-        JsonMapper.RegisterImporter<double[], Vector3>(inputVector3 => new Vector3(Convert.ToSingle(inputVector3[0]), Convert.ToSingle(inputVector3[1]), Convert.ToSingle(inputVector3[2])));
-        JsonMapper.RegisterExporter<Vector2Int>((obj, writerVector2Int) => GameConvert.ToJsonWritter(writerVector2Int, obj));
-        JsonMapper.RegisterImporter<int[], Vector2Int>(inputVector2Int => new Vector2Int(inputVector2Int[0], inputVector2Int[1]));
-        
-        LitJson.JsonMapper.ToJson(m_curMapSetting, writer);
+        LitJson.JsonMapper.ToJson(m_curMapConfig, writer);
         File.WriteAllText(mt_curFilePath, writer.ToString());
     }
     private void resizeCellMap(int x, int y)
     {
-        m_curMapSetting.resizeCellMap(x, y);
+        m_curMapConfig.resizeCellMap(x, y);
         saveCellMapSetting();
     }
     private void OnGUI()
@@ -269,20 +260,20 @@ public class CellMapEditor : EditorWindow
             mt_curFilePath = value;
             if(File.Exists(value))
             {
-                m_curMapSetting = JsonMapper.ToObject<CellMapSetting>(File.ReadAllText(value));
-                if(m_curMapSetting == null)
+                m_curMapConfig = JsonMapper.ToObject<CellMapData>(File.ReadAllText(value));
+                if(m_curMapConfig == null)
                 {
-                    m_curMapSetting = new CellMapSetting(2, 2);
+                    m_curMapConfig = new CellMapData(2, 2);
                     saveCellMapSetting();
                 }
-                m_mapSizeX = m_curMapSetting.mapSizeX.ToString();
-                m_mapSizeY = m_curMapSetting.mapSizeY.ToString();
+                m_mapSizeX = m_curMapConfig.mapSizeX.ToString();
+                m_mapSizeY = m_curMapConfig.mapSizeY.ToString();
             }
         }
     }
     private string m_mapSizeX;
     private string m_mapSizeY;
-    private CellMapSetting m_curMapSetting;
+    private CellMapData m_curMapConfig;
     [HideInInspector]
     public string m_curResPath;
     #endregion
