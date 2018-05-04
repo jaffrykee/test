@@ -1,0 +1,34 @@
+
+{
+    "mapSizeX" : 3,
+    "mapSizeY" : 3,
+    "cellData" : [
+        {
+            "isEnable" : false
+        },
+        {
+            "isEnable" : false
+        },
+        {
+            "isEnable" : false
+        },
+        {
+            "isEnable" : false
+        },
+        {
+            "isEnable" : false
+        },
+        {
+            "isEnable" : false
+        },
+        {
+            "isEnable" : false
+        },
+        {
+            "isEnable" : false
+        },
+        {
+            "isEnable" : false
+        }
+    ]
+}
