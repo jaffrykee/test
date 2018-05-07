@@ -16,6 +16,7 @@ public class ZESetting
                 st_default.m_layoutSetting["TextField"] = new GUILayoutOption[] { GUILayout.Width(100) , GUILayout.ExpandWidth(false)};
                 st_default.m_layoutSetting["TextFieldLong"] = new GUILayoutOption[] { GUILayout.Width(500), GUILayout.ExpandWidth(false)};
                 st_default.m_layoutSetting["Button"] = new GUILayoutOption[] { GUILayout.Width(50) };
+                st_default.m_layoutSetting["Cell"] = new GUILayoutOption[] { GUILayout.Width(50), GUILayout.Height(50) };
                 st_default.m_layoutSetting["LabelFieldShort"] = new GUILayoutOption[] { GUILayout.Width(50) };
                 st_default.m_layoutSetting["LabelField"] = new GUILayoutOption[] { GUILayout.Width(200) };
                 st_default.m_layoutSetting["LabelFieldLong"] = new GUILayoutOption[] { GUILayout.Width(500) };

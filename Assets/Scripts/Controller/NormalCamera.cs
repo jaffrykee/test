@@ -32,7 +32,11 @@ public class NormalCamera : MonoBehaviour
 	void Update ()
     {
         var tra = Camera.main.transform;
+#if UNITY_ANDROID || UNITY_IPHONE || UNITY_IOS
+        if (Input.GetMouseButton(0))
+#else
         if (Input.GetMouseButton(1))
+#endif
         {
             switch (m_fixedType)
             {

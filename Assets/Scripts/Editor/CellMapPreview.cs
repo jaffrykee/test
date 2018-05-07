@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 
 public class CellMapPreview
 {
@@ -72,7 +70,6 @@ public class CellMapPreview
 
     const string c_path = "Assets/CellMap.prefab";
     const string c_scenePath = "Assets/Scenes/CellMapEditor.unity";
-    Scene m_curScene;
     GameObject m_cellMapObject;
     GameObject m_curObject;
     Editor m_cellMapObjectEditor;
