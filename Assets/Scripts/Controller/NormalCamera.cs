@@ -31,12 +31,9 @@ public class NormalCamera : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        var tra = Camera.main.transform;
 #if UNITY_ANDROID || UNITY_IPHONE || UNITY_IOS
-        if (Input.GetMouseButton(0))
-#else
+        var tra = Camera.main.transform;
         if (Input.GetMouseButton(1))
-#endif
         {
             switch (m_fixedType)
             {
@@ -145,6 +142,7 @@ public class NormalCamera : MonoBehaviour
             dpos.y = 0;
             tra.position += dpos;
         }
+#endif
     }
 
     public enum FixedType
