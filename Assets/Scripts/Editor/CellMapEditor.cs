@@ -47,6 +47,11 @@ public class CellMapEditor : EditorWindow
             (m_HorizontalSplitterRect.width) - k_SplitterWidth,
             k_SplitterWidth
             );
+
+        if (m_preview == null)
+        {
+            m_preview = new CellMapPreview();
+        }
     }
     private void saveCellMapSetting()
     {
@@ -89,7 +94,7 @@ public class CellMapEditor : EditorWindow
             );
 
         GUILayout.BeginArea(unitPreviewRect, EditorStyles.helpBox);
-
+        m_preview.OnGUI(unitPreviewRect);
         GUILayout.EndArea();
         
         float panelLeft = m_HorizontalSplitterRect.x + k_SplitterWidth;
@@ -233,6 +238,7 @@ public class CellMapEditor : EditorWindow
 
     public string m_showValue = "";
     public CellMapDataFileTreeView m_cmdTree;
+    public CellMapPreview m_preview;
 
     #region splitter
     bool m_ResizingHorizontalSplitter = false;

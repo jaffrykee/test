@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1719242740163124}
+  m_IsPrefabParent: 1
+--- !u!1 &1719242740163124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4785809667918452}
+  - component: {fileID: 114850590687739188}
+  m_Layer: 0
+  m_Name: CellMap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4785809667918452
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1719242740163124}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114850590687739188
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1719242740163124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83406136b8ad1c74bad743fc55878f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mapSizeX: 7
+  m_mapSizeY: 6
+  m_isCenter: 1
+  m_spacing: 0
+  m_x: 0
+  m_y: 0
+  m_z: 0
+  m_matCell: {fileID: 2100000, guid: d957a042b17beb549964d1fe187e4e40, type: 2}
+  m_showOutline: 1
+  m_isQuickOutline: 1
+  m_outlineMaterial: {fileID: 2100000, guid: 0f10f74f976fd5b46a579b700483cf71, type: 2}
+  m_outlineColor: {r: 0, g: 0, b: 0, a: 0.534}
+  m_outlineWidth: 0.05
+  m_outlineHeight: 0.01
+  m_selectLineMaterial: {fileID: 2100000, guid: 42f982cbdb13e2d469a809fddffcdc55,
+    type: 2}
+  m_selectLineColor: {r: 1, g: 1, b: 1, a: 1}
+  m_selectLineWidth: 0.1
+  m_selectLineHeight: 0.15
+  m_curCell: {fileID: 0}

@@ -6,7 +6,7 @@ public class CellMapData
 {
     public CellMapData()
     {
-        
+
     }
     public CellMapData(int x, int y)
     {
@@ -14,10 +14,6 @@ public class CellMapData
         mapSizeX = x;
         mapSizeY = y;
         cellData = new CellData[count];
-        for (int i = 0; i < count; i++)
-        {
-            cellData[i] = new CellData();
-        }
     }
     public void resizeCellMap(int x, int y)
     {
@@ -27,7 +23,6 @@ public class CellMapData
         {
             for (int j = 0; j < y; j++)
             {
-                newCellDataSetting[i * y + j] = new CellData();
                 if (i < mapSizeX && j < mapSizeY)
                 {
                     newCellDataSetting[i * y + j] = cellData[i * mapSizeY + j];

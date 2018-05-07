@@ -7,7 +7,7 @@ public class Cell : MonoBehaviour
     static float s23 = Mathf.Sqrt(3) * 0.5f;
     public void resetData(CellData data)
     {
-        m_isEnable = data.isEnable;
+        m_isDisable = data.disable;
     }
     static public Vector3[] getCellVertexs()
     {
@@ -130,7 +130,23 @@ public class Cell : MonoBehaviour
 		
 	}
 
-    bool m_isEnable = true;
+    bool mt_isDisable = false;
+    bool m_isDisable
+    {
+        get
+        {
+            return mt_isDisable;
+        }
+        set
+        {
+            mt_isDisable = value;
+            if (gameObject == null)
+            {
+                return;
+            }
+            gameObject.SetActive(!value);
+        }
+    }
     private Vector3 mt_centerPoi;
     public Vector3 m_centerPoi
     {

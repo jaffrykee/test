@@ -1,34 +1,133 @@
 
 {
-    "mapSizeX" : 3,
-    "mapSizeY" : 3,
+    "mapSizeX" : 7,
+    "mapSizeY" : 6,
     "cellData" : [
         {
-            "isEnable" : false
+            "disable" : false
         },
         {
-            "isEnable" : false
+            "disable" : false
         },
         {
-            "isEnable" : false
+            "disable" : false
         },
         {
-            "isEnable" : false
+            "disable" : false
         },
         {
-            "isEnable" : false
+            "disable" : false
         },
         {
-            "isEnable" : false
+            "disable" : false
         },
         {
-            "isEnable" : false
+            "disable" : false
         },
         {
-            "isEnable" : false
+            "disable" : false
         },
         {
-            "isEnable" : false
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
+        },
+        {
+            "disable" : false
         }
     ]
 }
