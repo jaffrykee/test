@@ -5,10 +5,6 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
     static float s23 = Mathf.Sqrt(3) * 0.5f;
-    public void resetData(CellData data)
-    {
-        m_isDisable = data.disable;
-    }
     static public Vector3[] getCellVertexs()
     {
         Vector3[] vertexs = new Vector3[6];
@@ -123,30 +119,35 @@ public class Cell : MonoBehaviour
                 lr.SetPositions(getLinesVertexs(linePoi));
             }
         }
-        
+        m_data = m_data;
     }
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-    bool mt_isDisable = false;
-    bool m_isDisable
+    public const float c_height = 1;
+    private CellData mt_data = new CellData();
+    public CellData m_data
     {
         get
         {
-            return mt_isDisable;
+            return mt_data;
         }
         set
         {
-            mt_isDisable = value;
+            mt_data = value;
             if (gameObject == null)
             {
                 return;
             }
-            gameObject.SetActive(!value);
+            gameObject.SetActive(!value.disable);
+            var np = gameObject.transform.position;
+            np.y = (value.height * c_height);
+            gameObject.transform.position = np;
         }
     }
+
     private Vector3 mt_centerPoi;
     public Vector3 m_centerPoi
     {

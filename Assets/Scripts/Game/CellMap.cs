@@ -22,7 +22,7 @@ public class CellMap : MonoBehaviour
         mesh.vertices = Cell.getCellVertexs();
         mesh.triangles = getTriangles();
         cell.transform.parent = gameObject.transform;
-        cellData.resetData(data);
+        cellData.m_data = data;
         cellData.m_centerPoi = poi;
         cellData.m_cellPoi = new Vector2Int(cellx, celly);
         if (m_showOutline == false)

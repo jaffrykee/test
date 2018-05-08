@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public struct CellData
+public class CellData
 {
-    public CellData(bool disValue = false)
-    {
-        disable = disValue;
-    }
-    public bool disable;
+    public bool disable = false;
+    //高度级别
+    public int height = 0;
+    public List<string> sprite = new List<string>();
 }

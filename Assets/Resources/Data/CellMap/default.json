@@ -1,82 +1,31 @@
 
 {
-    "mapSizeX" : 5,
-    "mapSizeY" : 5,
+    "mapSizeX" : 2,
+    "mapSizeY" : 2,
     "cellData" : [
         {
-            "disable" : true
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
         },
         {
-            "disable" : false
+            "disable" : true,
+            "height"  : 0,
+            "sprite"  : [
+            ]
         },
         {
-            "disable" : false
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
         },
         {
-            "disable" : false
-        },
-        {
-            "disable" : true
-        },
-        {
-            "disable" : true
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : true
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : true
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : false
-        },
-        {
-            "disable" : true
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
         }
     ]
 }
