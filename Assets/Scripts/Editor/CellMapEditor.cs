@@ -102,7 +102,7 @@ public class CellMapEditor : EditorWindow
             );
         GUILayout.BeginArea(unitListRect, EditorStyles.helpBox);
         #region Canvas
-        if(m_curMapConfig != null)
+        if (m_curMapConfig != null && m_isShowCanvas == true)
         {
             GUILayout.BeginHorizontal(GUILayout.Width(m_curMapConfig.mapSizeX * c_cellButtonWidth));
             string curTip = "";
@@ -169,6 +169,7 @@ public class CellMapEditor : EditorWindow
         EditorGUILayout.EndHorizontal();
         if (!(m_curResPath == null || m_curResPath.Length == 0 || m_curResPath[m_curResPath.Length - 1] == '/'))
         {
+            m_isShowCanvas = true;
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("地图尺寸：", ZESetting.LayoutSetting("LabelFieldShort"));
             EditorGUILayout.LabelField("x:", ZESetting.LayoutSetting("LabelFieldShort"));
@@ -206,6 +207,10 @@ public class CellMapEditor : EditorWindow
             //{
             //}
             //EditorGUILayout.EndHorizontal();
+        }
+        else
+        {
+            m_isShowCanvas = false;
         }
         EditorGUILayout.EndVertical();
         GUILayout.EndHorizontal();
@@ -335,6 +340,7 @@ public class CellMapEditor : EditorWindow
     private string m_mapSizeY;
     private int m_curCellX = 0;
     private int m_curCellY = 0;
+    private bool m_isShowCanvas = false;
     private CellMapData m_curMapConfig;
     private bool m_isChangedValue = true;
     [HideInInspector]
