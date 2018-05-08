@@ -18,6 +18,23 @@ public class CellMapEditor : EditorWindow
         }
         s_instance.Show();
     }
+    private void initCellBtnTex()
+    {
+
+        /*
+            0xxx: small
+            1xxx: middle
+            2xxx: large
+            200 : curSelect         白
+            300 : disable           深灰
+            000 : normal height:0   浅绿
+            001 : normal height:1   黄绿至红
+            101 : normal height:-1  深绿
+            102 : noraml height:-2  深深绿至蓝
+        */
+        m_cellBtnTex = new Dictionary<int, Texture2D>();
+        //Texture2D tex
+    }
     private void OnEnable()
     {
         UnityEngine.Input.imeCompositionMode = IMECompositionMode.On;
@@ -44,6 +61,7 @@ public class CellMapEditor : EditorWindow
             );
 
         m_preview = new CellMapPreview();
+        initCellBtnTex();
     }
     private void saveCellMapSetting()
     {
@@ -94,15 +112,15 @@ public class CellMapEditor : EditorWindow
         const int btnLen = 32;
         if (GUILayout.Button("大", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) }))
         {
-            m_cellButtonLen = 50;
+            m_cellButtonLen = c_cellButtonLenLarge;
         }
         if (GUILayout.Button("中", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) }))
         {
-            m_cellButtonLen = 32;
+            m_cellButtonLen = c_cellButtonLenMiddle;
         }
         if (GUILayout.Button("小", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) }))
         {
-            m_cellButtonLen = 20;
+            m_cellButtonLen = c_cellButtonLenSmall;
         }
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
@@ -147,7 +165,18 @@ public class CellMapEditor : EditorWindow
                             curTip += "O";
                         }
                     }
-                    if (GUILayout.Button(curTip, new GUILayoutOption[] { GUILayout.Width(m_cellButtonLen), GUILayout.Height(m_cellButtonLen) }))
+                    GUIStyle s = new GUIStyle();
+                    
+                    //var tex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Texture/Hexagon.png");
+                    var tmpTex = new Texture2D(m_cellButtonLen, m_cellButtonLen);
+                    s.imagePosition = ImagePosition.ImageOnly;
+                    GUIContent gc = new GUIContent(curTip, tmpTex);
+
+                    //tex.width = m_cellButtonLen;
+                    //tex.height = m_cellButtonLen;
+                    //GUILayout.Button()
+                    //if (GUILayout.Button(curTip, new GUILayoutOption[] { GUILayout.Width(m_cellButtonLen), GUILayout.Height(m_cellButtonLen) }))
+                    if (GUILayout.Button(gc, s, new GUILayoutOption[] { GUILayout.Width(m_cellButtonLen), GUILayout.Height(m_cellButtonLen) }))
                     {
                         m_curCellX = i;
                         m_curCellY = j;
@@ -323,7 +352,20 @@ public class CellMapEditor : EditorWindow
     private const string c_rootPath = "./Assets/Resources/Data/CellMap/";
     private const string c_resPath = "Data/CellMap/";
 
-    private int m_cellButtonLen = 20;
+    private const int c_cellButtonLenSmall = 20;
+    private const int c_cellButtonLenMiddle = 32;
+    private const int c_cellButtonLenLarge = 50;
+    private int m_cellButtonLen = c_cellButtonLenSmall;
+
+    /*
+        100 : curSelect
+        200 : disable
+        0   : normal height:0
+        1   : normal height:1
+        11  : normal height:-1
+        12  : noraml height:-2
+    */
+    Dictionary<int, Texture2D> m_cellBtnTex;
 
     public static CellMapEditor s_instance = null;
 
@@ -376,7 +418,7 @@ public class CellMapEditor : EditorWindow
     private int m_curCellY = 0;
     private bool m_isShowCanvas = false;
     private CellMapData m_curMapConfig;
-    private bool m_isChangedValue = true;
+    private bool m_isChangedValue = false;
     [HideInInspector]
     public string m_curResPath;
 }
