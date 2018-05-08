@@ -18,21 +18,44 @@ public class CellMapEditor : EditorWindow
         }
         s_instance.Show();
     }
+    private Texture2D createTexture(int len, Color color)
+    {
+        var tex = new Texture2D(len, len);
+        for(int i = 0; i < tex.width; i++)
+        {
+            for(int j = 0; j < tex.height; j++)
+            {
+                tex.SetPixel(i, j, color);
+            }
+        }
+        return tex;
+    }
+    private void initCellButtonTextureCacheFunc(int basicSize, int len)
+    {
+        //m_cellBtnTex.Add(basicSize, createTexture(len, Color.green));
+        //m_cellBtnTex.Add(basicSize + 200, createTexture(len, Color.white));
+        //m_cellBtnTex.Add(basicSize + 300, createTexture(len, new Color(0.2f, 0.2f, 0.2f)));
+        m_cellBtnTex.Add(basicSize, createTexture(len, Color.green));
+        m_cellBtnTex.Add(basicSize + 200, createTexture(len, Color.red));
+        m_cellBtnTex.Add(basicSize + 300, createTexture(len, Color.blue));
+    }
     private void initCellBtnTex()
     {
-
         /*
             0xxx: small
             1xxx: middle
             2xxx: large
-            200 : curSelect         白
-            300 : disable           深灰
             000 : normal height:0   浅绿
             001 : normal height:1   黄绿至红
             101 : normal height:-1  深绿
             102 : noraml height:-2  深深绿至蓝
+            200 : curSelect         白
+            300 : disable           深灰
         */
         m_cellBtnTex = new Dictionary<int, Texture2D>();
+        initCellButtonTextureCacheFunc(0, c_cellButtonLenSmall);
+        initCellButtonTextureCacheFunc(1000, c_cellButtonLenMiddle);
+        initCellButtonTextureCacheFunc(2000, c_cellButtonLenLarge);
         //Texture2D tex
     }
     private void OnEnable()
@@ -142,7 +165,6 @@ public class CellMapEditor : EditorWindow
         if (m_curMapConfig != null && m_isShowCanvas == true)
         {
             GUILayout.BeginHorizontal(GUILayout.Width(m_curMapConfig.mapSizeX * m_cellButtonLen));
-            string curTip = "";
             for (int i = 0; i < m_curMapConfig.mapSizeX; i++)
             {
                 GUILayout.BeginVertical();
@@ -153,12 +175,16 @@ public class CellMapEditor : EditorWindow
                 for (int j = m_curMapConfig.mapSizeY - 1; j >= 0; j--)
                 {
                     //curTip = i.ToString() + ", " + j.ToString() + "\n";
-                    curTip = "";
+                    string curTip = "";
+                    int texId = 0;
+                    Texture2D tmpTex = null;
+
                     if (m_curMapConfig != null)
                     {
                         if (m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j].disable)
                         {
                             curTip += "X";
+                            texId += 300;
                         }
                         else
                         {
@@ -166,10 +192,28 @@ public class CellMapEditor : EditorWindow
                         }
                     }
                     GUIStyle s = new GUIStyle();
-                    
+
                     //var tex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Texture/Hexagon.png");
-                    var tmpTex = new Texture2D(m_cellButtonLen, m_cellButtonLen);
+                    switch (m_cellButtonLen)
+                    {
+                        case c_cellButtonLenSmall:
+                            texId += 0;
+                            break;
+                        case c_cellButtonLenMiddle:
+                            texId += 1000;
+                            break;
+                        case c_cellButtonLenLarge:
+                            texId += 2000;
+                            break;
+                        default:
+                            break;
+                    }
                     s.imagePosition = ImagePosition.ImageOnly;
+                    tmpTex = m_cellBtnTex[texId];
+                    if(tmpTex == null)
+                    {
+                        tmpTex = new Texture2D(m_cellButtonLen, m_cellButtonLen);
+                    }
                     GUIContent gc = new GUIContent(curTip, tmpTex);
 
                     //tex.width = m_cellButtonLen;

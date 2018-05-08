@@ -28,7 +28,7 @@
             ]
         },
         {
-            "disable" : false,
+            "disable" : true,
             "height"  : 0,
             "sprite"  : [
             ]
