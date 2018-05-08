@@ -14,6 +14,10 @@ public class CellMapData
         mapSizeX = x;
         mapSizeY = y;
         cellData = new CellData[count];
+        for(int i = 0; i < cellData.Length; i++)
+        {
+            cellData[i] = new CellData();
+        }
     }
     public void resizeCellMap(int x, int y)
     {
@@ -23,9 +27,13 @@ public class CellMapData
         {
             for (int j = 0; j < y; j++)
             {
-                if (i < mapSizeX && j < mapSizeY)
+                if (i < mapSizeX && j < mapSizeY && cellData[i * mapSizeY + j] != null)
                 {
                     newCellDataSetting[i * y + j] = cellData[i * mapSizeY + j];
+                }
+                else
+                {
+                    newCellDataSetting[i * y + j] = new CellData();
                 }
             }
         }
