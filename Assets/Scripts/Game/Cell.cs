@@ -126,7 +126,7 @@ public class Cell : MonoBehaviour
 		
 	}
 
-    public const float c_height = 1;
+    public const float c_height = 0.2f;
     private CellData mt_data = new CellData();
     public CellData m_data
     {

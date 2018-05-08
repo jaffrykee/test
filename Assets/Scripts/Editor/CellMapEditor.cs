@@ -56,6 +56,7 @@ public class CellMapEditor : EditorWindow
         m_curMapConfig.resizeCellMap(x, y);
         saveCellMapSetting();
     }
+    Vector2 scrollPosition = new Vector2();
     private void OnGUI()
     {
         HandleHorizontalResize();
@@ -87,7 +88,24 @@ public class CellMapEditor : EditorWindow
 
         GUILayout.BeginArea(unitPreviewRect, EditorStyles.helpBox);
         //m_preview.OnGUI(unitPreviewRect);
+        GUILayout.BeginVertical();
         m_isChangedValue = EditorGUILayout.Toggle("改disable", m_isChangedValue);
+        GUILayout.BeginHorizontal();
+        const int btnLen = 32;
+        if (GUILayout.Button("大", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) }))
+        {
+            m_cellButtonLen = 50;
+        }
+        if (GUILayout.Button("中", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) }))
+        {
+            m_cellButtonLen = 32;
+        }
+        if (GUILayout.Button("小", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) }))
+        {
+            m_cellButtonLen = 20;
+        }
+        GUILayout.EndHorizontal();
+        GUILayout.EndVertical();
         GUILayout.EndArea();
         
         float panelLeft = m_HorizontalSplitterRect.x + k_SplitterWidth;
@@ -101,17 +119,18 @@ public class CellMapEditor : EditorWindow
             panelHeight
             );
         GUILayout.BeginArea(unitListRect, EditorStyles.helpBox);
+        scrollPosition = GUILayout.BeginScrollView(scrollPosition);
         #region Canvas
         if (m_curMapConfig != null && m_isShowCanvas == true)
         {
-            GUILayout.BeginHorizontal(GUILayout.Width(m_curMapConfig.mapSizeX * c_cellButtonWidth));
+            GUILayout.BeginHorizontal(GUILayout.Width(m_curMapConfig.mapSizeX * m_cellButtonLen));
             string curTip = "";
             for (int i = 0; i < m_curMapConfig.mapSizeX; i++)
             {
                 GUILayout.BeginVertical();
                 if ((i & 1) == 1)
                 {
-                    GUILayout.Space(c_cellButtonWidth * 0.5f);
+                    GUILayout.Space(m_cellButtonLen * 0.5f);
                 }
                 for (int j = m_curMapConfig.mapSizeY - 1; j >= 0; j--)
                 {
@@ -128,7 +147,7 @@ public class CellMapEditor : EditorWindow
                             curTip += "O";
                         }
                     }
-                    if (GUILayout.Button(curTip, new GUILayoutOption[] { GUILayout.Width(c_cellButtonWidth), GUILayout.Height(c_cellButtonWidth) }))
+                    if (GUILayout.Button(curTip, new GUILayoutOption[] { GUILayout.Width(m_cellButtonLen), GUILayout.Height(m_cellButtonLen) }))
                     {
                         m_curCellX = i;
                         m_curCellY = j;
@@ -137,6 +156,9 @@ public class CellMapEditor : EditorWindow
                             m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j].disable = !m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j].disable;
                             saveCellMapSetting();
                         }
+                        GUI.SetNextControlName("mx_tmpFocus");
+                        GUI.TextField(new Rect(), "", 0);
+                        GUI.FocusControl("mx_tmpFocus");
                     }
                 }
                 GUILayout.EndVertical();
@@ -144,6 +166,7 @@ public class CellMapEditor : EditorWindow
             GUILayout.EndHorizontal();
         }
         #endregion
+        GUILayout.EndScrollView();
         GUILayout.EndArea();
 
         var unitEditorRect = new Rect(
@@ -195,6 +218,16 @@ public class CellMapEditor : EditorWindow
                 if(newValue != oldValue)
                 {
                     m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].disable = newValue;
+                    saveCellMapSetting();
+                }
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("height:", ZESetting.LayoutSetting("LabelFieldShort"));
+                string newHeightStr = EditorGUILayout.TextField(m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height.ToString(), ZESetting.LayoutSetting("TextField"));
+                var newHeight = Convert.ToInt32(newHeightStr);
+                if(newHeight != m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height)
+                {
+                    m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height = newHeight;
                     saveCellMapSetting();
                 }
                 EditorGUILayout.EndHorizontal();
@@ -289,7 +322,8 @@ public class CellMapEditor : EditorWindow
 
     private const string c_rootPath = "./Assets/Resources/Data/CellMap/";
     private const string c_resPath = "Data/CellMap/";
-    private const int c_cellButtonWidth = 50;
+
+    private int m_cellButtonLen = 20;
 
     public static CellMapEditor s_instance = null;
 
