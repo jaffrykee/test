@@ -10,6 +10,30 @@
             ]
         },
         {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : true,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
             "disable" : true,
             "height"  : 0,
             "sprite"  : [
@@ -53,6 +77,24 @@
         },
         {
             "disable" : false,
+            "height"  : 2,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : true,
             "height"  : 0,
             "sprite"  : [
             ]
@@ -82,7 +124,7 @@
             ]
         },
         {
-            "disable" : false,
+            "disable" : true,
             "height"  : 0,
             "sprite"  : [
             ]
@@ -106,49 +148,7 @@
             ]
         },
         {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
+            "disable" : true,
             "height"  : 0,
             "sprite"  : [
             ]

@@ -18,9 +18,13 @@ public class CellMapEditor : EditorWindow
         }
         s_instance.Show();
     }
-    private Texture2D createTexture(int len, Color color)
+    private Texture2D createTexture(uint len, Color color)
     {
-        var tex = new Texture2D(len, len);
+        if(len > 2048)
+        {
+            return null;
+        }
+        var tex = new Texture2D((int)len, (int)len);
         for(int i = 0; i < tex.width; i++)
         {
             for(int j = 0; j < tex.height; j++)
@@ -31,33 +35,46 @@ public class CellMapEditor : EditorWindow
         tex.Apply();
         return tex;
     }
-    private void initCellButtonTextureCacheFunc(int basicSize, int len)
-    {
-        m_cellBtnTex.Add(basicSize, createTexture(len, new Color(0.3f, 0.6f, 0.3f)));
-        m_cellBtnTex.Add(basicSize + 200, createTexture(len, Color.white));
-        m_cellBtnTex.Add(basicSize + 300, createTexture(len, new Color(0, 0, 0)));
-        //m_cellBtnTex.Add(basicSize, createTexture(len, Color.green));
-        //m_cellBtnTex.Add(basicSize + 200, createTexture(len, Color.red));
-        //m_cellBtnTex.Add(basicSize + 300, createTexture(len, Color.blue));
-    }
     private void initCellBtnTex()
     {
         /*
-            0xxx: small
-            1xxx: middle
-            2xxx: large
-            000 : normal height:0   浅绿
-            001 : normal height:1   黄绿至红
-            101 : normal height:-1  深绿
-            102 : noraml height:-2  深深绿至蓝
-            200 : curSelect         白
-            300 : disable           深灰
+            0x SIZx xxxx : SIZ代表大小
+            
+            0x SIZ1 0000 : normal 0     浅绿
+            0x SIZ1 0001 : normal 1     黄绿至红
+            0x SIZ0 ffff : normal -1    深绿
+            0x SIZ0 fffe : normal -2    深深绿至蓝
+
+            0x SIZ2 0000 : curSelect         白
+            0x SIZ3 0000 : disable           深灰
         */
-        m_cellBtnTex = new Dictionary<int, Texture2D>();
-        initCellButtonTextureCacheFunc(0, c_cellButtonLenSmall);
-        initCellButtonTextureCacheFunc(1000, c_cellButtonLenMiddle);
-        initCellButtonTextureCacheFunc(2000, c_cellButtonLenLarge);
+        m_cellBtnTex = new Dictionary<uint, Texture2D>();
+        m_cellColor = new Dictionary<uint, Color>();
+        m_cellColor.Add(c_cbtnStateNormal, new Color(0.3f, 0.6f, 0.3f, 1.0f));
+        m_cellColor.Add(c_cbtnStateNormal + 1, new Color(0.6f, 0.6f, 0.3f, 1.0f));
+        m_cellColor.Add(c_cbtnStateNormal + 2, new Color(0.6f, 0.3f, 0.3f, 1.0f));
+        m_cellColor.Add(c_cbtnStateNormal - 1, new Color(0.3f, 0.6f, 0.6f, 1.0f));
+        m_cellColor.Add(c_cbtnStateNormal - 2, new Color(0.3f, 0.3f, 0.6f, 1.0f));
+        m_cellColor.Add(c_cbtnStateCurSelect, new Color(1.0f, 1.0f, 1.0f, 1.0f));
+        m_cellColor.Add(c_cbtnStateDisable, new Color(0.1f, 0.1f, 0.1f, 1.0f));
         //Texture2D tex
+    }
+    private Texture2D getCellBtnTexCache(uint id)
+    {
+        Texture2D cache;
+        if(m_cellBtnTex.TryGetValue(id, out cache) == false || cache == null)
+        {
+            uint size = ((id & 0xfff00000) >> 20);
+            uint colorIndex = (id & 0x000fffff);
+            Color color;
+            if (m_cellColor.TryGetValue(colorIndex, out color) == false)
+            {
+                color = new Color(0, 0, 0, 0);
+            }
+            m_cellBtnTex.Add(id, createTexture(size - c_cellButtonSpacing, color));
+            cache = m_cellBtnTex[id];
+        }
+        return cache;
     }
     private void OnEnable()
     {
@@ -176,58 +193,42 @@ public class CellMapEditor : EditorWindow
                 for (int j = m_curMapConfig.mapSizeY - 1; j >= 0; j--)
                 {
                     //curTip = i.ToString() + ", " + j.ToString() + "\n";
-                    string curTip = "";
-                    int texId = 0;
+                    uint texId = 0;
                     Texture2D tmpTex = null;
 
                     if (m_curMapConfig != null)
                     {
-                        if (m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j].disable)
+                        var curCell = m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j];
+                        if (m_curCellX == i && m_curCellY == j && m_isChangedValue == false)
                         {
-                            curTip += "X";
-                            texId += 300;
+                            //curSelect
+                            texId |= c_cbtnStateCurSelect;
                         }
                         else
                         {
-                            curTip += "O";
+                            if (curCell.disable)
+                            {
+                                //disable
+                                texId |= c_cbtnStateDisable;
+                            }
+                            else
+                            {
+                                //normal
+                                texId |= c_cbtnStateNormal;
+                            }
                         }
                     }
                     GUIStyle s = new GUIStyle();
 
                     //var tex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Texture/Hexagon.png");
-                    switch (m_cellButtonLen)
+                    texId |= (((uint)m_cellButtonLen) << 20);
+                    //s.imagePosition = ImagePosition.ImageOnly;
+                    tmpTex = getCellBtnTexCache(texId);
+                    if (tmpTex == null)
                     {
-                        case c_cellButtonLenSmall:
-                            texId += 0;
-                            break;
-                        case c_cellButtonLenMiddle:
-                            texId += 1000;
-                            break;
-                        case c_cellButtonLenLarge:
-                            texId += 2000;
-                            break;
-                        default:
-                            break;
+                        tmpTex = new Texture2D(m_cellButtonLen, m_cellButtonLen);
                     }
-                    s.imagePosition = ImagePosition.ImageOnly;
-                    tmpTex = m_cellBtnTex[texId];
-                    if(tmpTex == null)
-                    {
-                        if (m_cellBtnTex.TryGetValue(texId, out tmpTex) == true)
-                        {
-                            initCellBtnTex();
-                            tmpTex = m_cellBtnTex[texId];
-                            if (tmpTex == null)
-                            {
-                                tmpTex = new Texture2D(m_cellButtonLen, m_cellButtonLen);
-                            }
-                        }
-                        else
-                        {
-                            tmpTex = new Texture2D(m_cellButtonLen, m_cellButtonLen);
-                        }
-                    }
-                    GUIContent gc = new GUIContent(curTip, tmpTex);
+                    GUIContent gc = new GUIContent(tmpTex);
 
                     //tex.width = m_cellButtonLen;
                     //tex.height = m_cellButtonLen;
@@ -412,6 +413,7 @@ public class CellMapEditor : EditorWindow
     private const int c_cellButtonLenSmall = 20;
     private const int c_cellButtonLenMiddle = 32;
     private const int c_cellButtonLenLarge = 50;
+    private const int c_cellButtonSpacing = 2;
     private int m_cellButtonLen = c_cellButtonLenSmall;
 
     /*
@@ -422,7 +424,8 @@ public class CellMapEditor : EditorWindow
         11  : normal height:-1
         12  : noraml height:-2
     */
-    Dictionary<int, Texture2D> m_cellBtnTex;
+    Dictionary<uint, Texture2D> m_cellBtnTex;
+    Dictionary<uint, Color> m_cellColor;
 
     public static CellMapEditor s_instance = null;
 
@@ -469,6 +472,10 @@ public class CellMapEditor : EditorWindow
             }
         }
     }
+    private const int c_cbtnStateNormal = 0x10000;
+    private const int c_cbtnStateCurSelect = 0x20000;
+    private const int c_cbtnStateDisable = 0x30000;
+
     private string m_mapSizeX;
     private string m_mapSizeY;
     private int m_curCellX = 0;
