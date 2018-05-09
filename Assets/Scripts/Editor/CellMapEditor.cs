@@ -28,16 +28,17 @@ public class CellMapEditor : EditorWindow
                 tex.SetPixel(i, j, color);
             }
         }
+        tex.Apply();
         return tex;
     }
     private void initCellButtonTextureCacheFunc(int basicSize, int len)
     {
+        m_cellBtnTex.Add(basicSize, createTexture(len, new Color(0.3f, 0.6f, 0.3f)));
+        m_cellBtnTex.Add(basicSize + 200, createTexture(len, Color.white));
+        m_cellBtnTex.Add(basicSize + 300, createTexture(len, new Color(0, 0, 0)));
         //m_cellBtnTex.Add(basicSize, createTexture(len, Color.green));
-        //m_cellBtnTex.Add(basicSize + 200, createTexture(len, Color.white));
-        //m_cellBtnTex.Add(basicSize + 300, createTexture(len, new Color(0.2f, 0.2f, 0.2f)));
-        m_cellBtnTex.Add(basicSize, createTexture(len, Color.green));
-        m_cellBtnTex.Add(basicSize + 200, createTexture(len, Color.red));
-        m_cellBtnTex.Add(basicSize + 300, createTexture(len, Color.blue));
+        //m_cellBtnTex.Add(basicSize + 200, createTexture(len, Color.red));
+        //m_cellBtnTex.Add(basicSize + 300, createTexture(len, Color.blue));
     }
     private void initCellBtnTex()
     {
