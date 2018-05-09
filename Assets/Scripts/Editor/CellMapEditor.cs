@@ -134,6 +134,7 @@ public class CellMapEditor : EditorWindow
         var writer = new LitJson.JsonWriter { PrettyPrint = true };
         LitJson.JsonMapper.ToJson(m_curMapConfig, writer);
         File.WriteAllText(mt_curFilePath, writer.ToString());
+        Repaint();
     }
     private void resizeCellMap(int x, int y)
     {
@@ -143,9 +144,27 @@ public class CellMapEditor : EditorWindow
     Vector2 scrollPosition = new Vector2();
     private void OnGUI()
     {
+        int dh = 0;
+        var e = Event.current;
+        if (e != null && e.isKey && e.type == EventType.KeyUp)
+        {
+            if (m_curMapConfig != null && m_curCellX < m_curMapConfig.mapSizeX && m_curCellY < m_curMapConfig.mapSizeY)
+            {
+                if (e.keyCode == KeyCode.Equals || e.keyCode == KeyCode.W)
+                {
+                    dh = 1;
+                }
+                if (e.keyCode == KeyCode.Minus || e.keyCode == KeyCode.S)
+                {
+                    dh = -1;
+                }
+            }
+        }
+
         HandleHorizontalResize();
         HandleVerticalResize();
 
+        #region TreeView_LT
         var unitTreeRect = new Rect(
             0,
             0,
@@ -162,14 +181,15 @@ public class CellMapEditor : EditorWindow
         unitTreeRect2.height -= 25;
         //TreeView
         m_cmdTree.OnGUI(unitTreeRect2);
+        #endregion
 
+        #region Setting_LB
         var unitPreviewRect = new Rect(
             unitTreeRect.x,
             unitTreeRect.y + unitTreeRect.height + k_SplitterWidth,
             unitTreeRect.width,
             position.height - unitTreeRect.height - k_SplitterWidth * 2
             );
-
         GUILayout.BeginArea(unitPreviewRect, EditorStyles.helpBox);
         //m_preview.OnGUI(unitPreviewRect);
         GUILayout.BeginVertical();
@@ -191,11 +211,13 @@ public class CellMapEditor : EditorWindow
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
         GUILayout.EndArea();
-        
+        #endregion
+
         float panelLeft = m_HorizontalSplitterRect.x + k_SplitterWidth;
         float panelWidth = m_VerticalSplitterRectRight.width - k_SplitterWidth * 2;
         float panelHeight = m_VerticalSplitterRectRight.y;
 
+        #region Canvas_RT
         var unitListRect = new Rect(
             panelLeft,
             0,
@@ -203,7 +225,6 @@ public class CellMapEditor : EditorWindow
             panelHeight
             );
         GUILayout.BeginArea(unitListRect, EditorStyles.helpBox);
-        #region Canvas
         if (m_curMapConfig != null && m_isShowCanvas == true)
         {
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -282,19 +303,18 @@ public class CellMapEditor : EditorWindow
             GUILayout.Button(new GUIContent(texSel), new GUIStyle(), new GUILayoutOption[] { GUILayout.Width(m_cellButtonLen), GUILayout.Height(m_cellButtonLen) });
             GUILayout.EndArea();
         }
-        #endregion
         GUILayout.EndArea();
+        #endregion
 
+        #region Attr_RB
         var unitEditorRect = new Rect(
             panelLeft,
             panelHeight + k_SplitterWidth,
             panelWidth,
             (position.height - panelHeight) - k_SplitterWidth * 2
             );
-
         GUILayout.BeginArea(unitEditorRect, EditorStyles.helpBox);
         //m_UnitList.OnGUI(unitListRect);
-        #region attr
         GUILayout.BeginVertical();
         GUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
@@ -340,7 +360,7 @@ public class CellMapEditor : EditorWindow
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("height:", ZESetting.LayoutSetting("LabelFieldShort"));
                 string newHeightStr = EditorGUILayout.TextField(m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height.ToString(), ZESetting.LayoutSetting("TextField"));
-                var newHeight = Convert.ToInt32(newHeightStr);
+                var newHeight = Convert.ToInt32(newHeightStr) + dh;
                 if(newHeight != m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height)
                 {
                     m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height = newHeight;
@@ -364,8 +384,8 @@ public class CellMapEditor : EditorWindow
         EditorGUILayout.EndVertical();
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
-        #endregion
         GUILayout.EndArea();
+        #endregion
 
         if (m_ResizingHorizontalSplitter || m_ResizingVerticalSplitterLeft || m_ResizingVerticalSplitterRight)
         {

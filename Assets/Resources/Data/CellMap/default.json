@@ -1,7 +1,7 @@
 
 {
-    "mapSizeX" : 7,
-    "mapSizeY" : 7,
+    "mapSizeX" : 6,
+    "mapSizeY" : 6,
     "cellData" : [
         {
             "disable" : false,
@@ -59,18 +59,6 @@
         },
         {
             "disable" : false,
-            "height"  : 1,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 1,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
             "height"  : 0,
             "sprite"  : [
             ]
@@ -95,19 +83,19 @@
         },
         {
             "disable" : false,
-            "height"  : 1,
+            "height"  : 0,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 2,
+            "height"  : 0,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 1,
+            "height"  : 0,
             "sprite"  : [
             ]
         },
@@ -149,25 +137,7 @@
         },
         {
             "disable" : false,
-            "height"  : 1,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
             "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : -1,
             "sprite"  : [
             ]
         },
@@ -185,31 +155,7 @@
         },
         {
             "disable" : false,
-            "height"  : 1,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
             "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : -1,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : -1,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : -2,
             "sprite"  : [
             ]
         },
@@ -239,19 +185,13 @@
         },
         {
             "disable" : false,
-            "height"  : -1,
+            "height"  : 0,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : -2,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : -2,
+            "height"  : 0,
             "sprite"  : [
             ]
         },
@@ -269,31 +209,13 @@
         },
         {
             "disable" : false,
-            "height"  : -1,
+            "height"  : 0,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : -1,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : -2,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : -2,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : -2,
+            "height"  : 0,
             "sprite"  : [
             ]
         }
