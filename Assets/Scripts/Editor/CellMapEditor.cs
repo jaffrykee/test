@@ -213,7 +213,19 @@ public class CellMapEditor : EditorWindow
                     tmpTex = m_cellBtnTex[texId];
                     if(tmpTex == null)
                     {
-                        tmpTex = new Texture2D(m_cellButtonLen, m_cellButtonLen);
+                        if (m_cellBtnTex.TryGetValue(texId, out tmpTex) == true)
+                        {
+                            initCellBtnTex();
+                            tmpTex = m_cellBtnTex[texId];
+                            if (tmpTex == null)
+                            {
+                                tmpTex = new Texture2D(m_cellButtonLen, m_cellButtonLen);
+                            }
+                        }
+                        else
+                        {
+                            tmpTex = new Texture2D(m_cellButtonLen, m_cellButtonLen);
+                        }
                     }
                     GUIContent gc = new GUIContent(curTip, tmpTex);
 

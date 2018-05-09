@@ -4,13 +4,13 @@
     "mapSizeY" : 5,
     "cellData" : [
         {
-            "disable" : false,
+            "disable" : true,
             "height"  : 0,
             "sprite"  : [
             ]
         },
         {
-            "disable" : false,
+            "disable" : true,
             "height"  : 0,
             "sprite"  : [
             ]
