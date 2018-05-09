@@ -215,6 +215,7 @@ public class CellMapEditor : EditorWindow
                             {
                                 //normal
                                 texId |= c_cbtnStateNormal;
+                                texId = (uint)(texId + curCell.height);
                             }
                         }
                     }

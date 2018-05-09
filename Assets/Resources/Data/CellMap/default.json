@@ -1,7 +1,7 @@
 
 {
-    "mapSizeX" : 5,
-    "mapSizeY" : 5,
+    "mapSizeX" : 7,
+    "mapSizeY" : 7,
     "cellData" : [
         {
             "disable" : true,
@@ -34,6 +34,18 @@
             ]
         },
         {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
             "disable" : true,
             "height"  : 0,
             "sprite"  : [
@@ -47,7 +59,13 @@
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 1,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 1,
             "sprite"  : [
             ]
         },
@@ -72,6 +90,12 @@
         {
             "disable" : false,
             "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 1,
             "sprite"  : [
             ]
         },
@@ -83,6 +107,12 @@
         },
         {
             "disable" : false,
+            "height"  : 1,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
             "height"  : 0,
             "sprite"  : [
             ]
@@ -90,6 +120,54 @@
         {
             "disable" : false,
             "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : true,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 1,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 1,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -1,
             "sprite"  : [
             ]
         },
@@ -119,13 +197,19 @@
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : -1,
             "sprite"  : [
             ]
         },
         {
-            "disable" : true,
-            "height"  : 0,
+            "disable" : false,
+            "height"  : -1,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -2,
             "sprite"  : [
             ]
         },
@@ -148,8 +232,68 @@
             ]
         },
         {
-            "disable" : true,
+            "disable" : false,
             "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -1,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -2,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -2,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -1,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -1,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -2,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -2,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -2,
             "sprite"  : [
             ]
         }
