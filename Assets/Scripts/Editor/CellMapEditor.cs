@@ -57,6 +57,7 @@ public class CellMapEditor : EditorWindow
         m_cellColor.Add(c_cbtnStateNormal - 2, new Color(0.3f, 0.3f, 0.6f, 1.0f));
         m_cellColor.Add(c_cbtnStateCurSelect, new Color(1.0f, 1.0f, 1.0f, 1.0f));
         m_cellColor.Add(c_cbtnStateDisable, new Color(0.1f, 0.1f, 0.1f, 1.0f));
+        m_curSelectTex = new Dictionary<int, Texture2D>();
         //Texture2D tex
     }
     private Texture2D getCellBtnTexCache(uint id)
@@ -75,6 +76,30 @@ public class CellMapEditor : EditorWindow
             cache = m_cellBtnTex[id];
         }
         return cache;
+    }
+    private Texture2D getSelectBorderTexCache(int len)
+    {
+        Texture2D tex;
+        if (m_curSelectTex.TryGetValue(len, out tex) == false || tex == null)
+        {
+            tex = new Texture2D(len, len);
+            for (int i = 0; i < tex.width; i++)
+            {
+                for (int j = 0; j < tex.height; j++)
+                {
+                    if(i < m_curSelectBorderWidth || j < m_curSelectBorderWidth || i >= len - m_curSelectBorderWidth || j >= len - m_curSelectBorderWidth)
+                    {
+                        tex.SetPixel(i, j, m_curSelectColor);
+                    }
+                    else
+                    {
+                        tex.SetPixel(i, j, new Color(0, 0, 0, 0));
+                    }
+                }
+            }
+            tex.Apply();
+        }
+        return tex;
     }
     private void OnEnable()
     {
@@ -178,10 +203,10 @@ public class CellMapEditor : EditorWindow
             panelHeight
             );
         GUILayout.BeginArea(unitListRect, EditorStyles.helpBox);
-        scrollPosition = GUILayout.BeginScrollView(scrollPosition);
         #region Canvas
         if (m_curMapConfig != null && m_isShowCanvas == true)
         {
+            scrollPosition = GUILayout.BeginScrollView(scrollPosition);
             GUILayout.BeginHorizontal(GUILayout.Width(m_curMapConfig.mapSizeX * m_cellButtonLen));
             for (int i = 0; i < m_curMapConfig.mapSizeX; i++)
             {
@@ -199,28 +224,23 @@ public class CellMapEditor : EditorWindow
                     if (m_curMapConfig != null)
                     {
                         var curCell = m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j];
-                        if (m_curCellX == i && m_curCellY == j && m_isChangedValue == false)
+                        //if (m_curCellX == i && m_curCellY == j)
+                        //{
+                        //    //curSelect
+                        //}
+                        if (curCell.disable)
                         {
-                            //curSelect
-                            texId |= c_cbtnStateCurSelect;
+                            //disable
+                            texId |= c_cbtnStateDisable;
                         }
                         else
                         {
-                            if (curCell.disable)
-                            {
-                                //disable
-                                texId |= c_cbtnStateDisable;
-                            }
-                            else
-                            {
-                                //normal
-                                texId |= c_cbtnStateNormal;
-                                texId = (uint)(texId + curCell.height);
-                            }
+                            //normal
+                            texId |= c_cbtnStateNormal;
+                            texId = (uint)(texId + curCell.height);
                         }
                     }
                     GUIStyle s = new GUIStyle();
-
                     //var tex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Texture/Hexagon.png");
                     texId |= (((uint)m_cellButtonLen) << 20);
                     //s.imagePosition = ImagePosition.ImageOnly;
@@ -230,7 +250,6 @@ public class CellMapEditor : EditorWindow
                         tmpTex = new Texture2D(m_cellButtonLen, m_cellButtonLen);
                     }
                     GUIContent gc = new GUIContent(tmpTex);
-
                     //tex.width = m_cellButtonLen;
                     //tex.height = m_cellButtonLen;
                     //GUILayout.Button()
@@ -252,9 +271,18 @@ public class CellMapEditor : EditorWindow
                 GUILayout.EndVertical();
             }
             GUILayout.EndHorizontal();
+            GUILayout.EndScrollView();
+            //curSelectBorder
+            const float dx = 4;
+            const float dy = 3;
+            float selbx = m_curCellX * m_cellButtonLen + dx;
+            float selby = ((m_curCellX & 1) * 0.5f + m_curMapConfig.mapSizeY - m_curCellY - 1) * m_cellButtonLen + dy;
+            GUILayout.BeginArea(new Rect(selbx, selby, m_cellButtonLen, m_cellButtonLen));
+            var texSel = getSelectBorderTexCache(m_cellButtonLen - c_cellButtonSpacing);
+            GUILayout.Button(new GUIContent(texSel), new GUIStyle(), new GUILayoutOption[] { GUILayout.Width(m_cellButtonLen), GUILayout.Height(m_cellButtonLen) });
+            GUILayout.EndArea();
         }
         #endregion
-        GUILayout.EndScrollView();
         GUILayout.EndArea();
 
         var unitEditorRect = new Rect(
@@ -425,8 +453,11 @@ public class CellMapEditor : EditorWindow
         11  : normal height:-1
         12  : noraml height:-2
     */
-    Dictionary<uint, Texture2D> m_cellBtnTex;
-    Dictionary<uint, Color> m_cellColor;
+    private Dictionary<uint, Texture2D> m_cellBtnTex;
+    private Dictionary<uint, Color> m_cellColor;
+    private Dictionary<int, Texture2D> m_curSelectTex;
+    private Color m_curSelectColor = Color.white;
+    private int m_curSelectBorderWidth = 3;
 
     public static CellMapEditor s_instance = null;
 

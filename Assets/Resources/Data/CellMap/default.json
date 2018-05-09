@@ -4,7 +4,19 @@
     "mapSizeY" : 7,
     "cellData" : [
         {
-            "disable" : true,
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
             "height"  : 0,
             "sprite"  : [
             ]
@@ -28,12 +40,6 @@
             ]
         },
         {
-            "disable" : true,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
             "disable" : false,
             "height"  : 0,
             "sprite"  : [
@@ -41,12 +47,6 @@
         },
         {
             "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : true,
             "height"  : 0,
             "sprite"  : [
             ]
@@ -130,7 +130,7 @@
             ]
         },
         {
-            "disable" : true,
+            "disable" : false,
             "height"  : 0,
             "sprite"  : [
             ]
@@ -172,12 +172,6 @@
             ]
         },
         {
-            "disable" : true,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
             "disable" : false,
             "height"  : 0,
             "sprite"  : [
@@ -186,6 +180,12 @@
         {
             "disable" : false,
             "height"  : 0,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 1,
             "sprite"  : [
             ]
         },
