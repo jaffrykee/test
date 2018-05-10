@@ -45,7 +45,6 @@ public class CellMapEditor : EditorWindow
             0x SIZ0 ffff : normal -1    深绿
             0x SIZ0 fffe : normal -2    深深绿至蓝
 
-            0x SIZ2 0000 : curSelect         白
             0x SIZ3 0000 : disable           深灰
         */
         m_cellBtnTex = new Dictionary<uint, Texture2D>();
@@ -133,22 +132,37 @@ public class CellMapEditor : EditorWindow
         m_curMapConfig.resizeCellMap(x, y);
         saveCellMapSetting();
     }
-    Vector2 scrollPosition = new Vector2();
+    private Vector2 scrollPosition = new Vector2();
+    private string keyCache = "";
+    private void curSelectCellChanged()
+    {
+        keyCache = "";
+    }
     private void OnGUI()
     {
         int dh = 0;
         var e = Event.current;
+        bool isChanged = false;
         if (e != null && e.isKey && e.type == EventType.KeyUp)
         {
             if (m_curMapConfig != null && m_curCellX < m_curMapConfig.mapSizeX && m_curCellY < m_curMapConfig.mapSizeY)
             {
-                if (e.keyCode == KeyCode.Equals || e.keyCode == KeyCode.W)
+                if (e.keyCode == KeyCode.W)
                 {
                     dh = 1;
                 }
-                if (e.keyCode == KeyCode.Minus || e.keyCode == KeyCode.S)
+                if (e.keyCode == KeyCode.S)
                 {
                     dh = -1;
+                }
+                if (e.keyCode == KeyCode.Minus)
+                {
+                    keyCache = "-";
+                }
+                if (e.keyCode >= KeyCode.Alpha0 && e.keyCode <= KeyCode.Alpha9)
+                {
+                    keyCache += (e.keyCode - KeyCode.Alpha0).ToString();
+                    isChanged = true;
                 }
             }
         }
@@ -279,6 +293,8 @@ public class CellMapEditor : EditorWindow
                         GUI.SetNextControlName("mx_tmpFocus");
                         GUI.TextField(new Rect(), "", 0);
                         GUI.FocusControl("mx_tmpFocus");
+                        curSelectCellChanged();
+                        isChanged = false;
                     }
                 }
                 GUILayout.EndVertical();
@@ -351,7 +367,16 @@ public class CellMapEditor : EditorWindow
                 EditorGUILayout.EndHorizontal();
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("height:", ZESetting.LayoutSetting("LabelFieldShort"));
-                string newHeightStr = EditorGUILayout.TextField(m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height.ToString(), ZESetting.LayoutSetting("TextField"));
+                string newHeightStr;
+                if (isChanged == true)
+                {
+                    newHeightStr = keyCache;
+                    isChanged = false;
+                }
+                else
+                {
+                    newHeightStr = EditorGUILayout.TextField(m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height.ToString(), ZESetting.LayoutSetting("TextField"));
+                }
                 var newHeight = Convert.ToInt32(newHeightStr) + dh;
                 if(newHeight != m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height)
                 {
