@@ -1,7 +1,7 @@
 
 {
-    "mapSizeX" : 6,
-    "mapSizeY" : 6,
+    "mapSizeX" : 5,
+    "mapSizeY" : 5,
     "cellData" : [
         {
             "disable" : false,
@@ -11,115 +11,31 @@
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 1,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 2,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 3,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 4,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
+            "height"  : -1,
             "sprite"  : [
             ]
         },
@@ -137,73 +53,91 @@
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 2,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 3,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : -1,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : -1,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 1,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 2,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 2,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : -4,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : -2,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : -1,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 1,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 1,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -3,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -2,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : -1,
             "sprite"  : [
             ]
         },

@@ -4,7 +4,38 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
+    private const float c_dColor = 0.2f;
+    private const uint c_max = 2;
+    private const float c_minColor = 0.3f;
+    private const float c_maxColor = c_minColor + c_max * c_dColor;
+    static Dictionary<uint, Color> colorDictionary()
+    {
+        var cd = new Dictionary<uint, Color>
+        {
+            {c_cbtnStateNormal,     new Color(c_minColor, c_maxColor, c_minColor, 1.0f)},
+            {c_cbtnStateCurSelect,  new Color(1.0f, 1.0f, 1.0f, 1.0f)},
+            {c_cbtnStateDisable,    new Color(0.1f, 0.1f, 0.1f, 1.0f)},
+        };
+        for (uint i = 1; i <= c_max * 2; i++)
+        {
+            if(i <= c_max)
+            {
+                cd.Add(c_cbtnStateNormal + i, new Color(c_minColor + c_dColor * i, c_maxColor, c_minColor, 1.0f));
+                cd.Add(c_cbtnStateNormal - i, new Color(c_minColor, c_maxColor, c_minColor + c_dColor * i, 1.0f));
+            }
+            else
+            {
+                cd.Add(c_cbtnStateNormal + i, new Color(c_maxColor, c_maxColor - c_dColor * (i - c_max), c_minColor, 1.0f));
+                cd.Add(c_cbtnStateNormal - i, new Color(c_minColor, c_maxColor - c_dColor * (i - c_max), c_maxColor, 1.0f));
+            }
+        }
+        return cd;
+    }
     static float s23 = Mathf.Sqrt(3) * 0.5f;
+    private const int c_cbtnStateNormal = 0x10000;
+    private const int c_cbtnStateCurSelect = 0x20000;
+    private const int c_cbtnStateDisable = 0x30000;
+    static public Dictionary<uint, Color> s_cellColor = colorDictionary();
     static public Vector3[] getCellVertexs()
     {
         Vector3[] vertexs = new Vector3[6];
@@ -123,8 +154,26 @@ public class Cell : MonoBehaviour
     }
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+    }
+    private Color getCellColor(CellData data)
+    {
+        Color c = Color.white;
+        if (s_cellColor.TryGetValue((uint)(c_cbtnStateNormal + data.height), out c) == true)
+        {
+        }
+        return c;
+    }
+    private List<Color> getCellColors(CellData data)
+    {
+        var colorList = new List<Color>();
+        Color c = getCellColor(data);
+        for (int i = 0; i < 6; i++)
+        {
+            colorList.Add(c);
+        }
+        return colorList;
+    }
 
     public const float c_height = 0.2f;
     private CellData mt_data = new CellData();
@@ -145,6 +194,8 @@ public class Cell : MonoBehaviour
             var np = gameObject.transform.position;
             np.y = (value.height * c_height);
             gameObject.transform.position = np;
+            var mr = gameObject.GetComponent<MeshRenderer>();
+            mr.material.color = getCellColor(value);
         }
     }
 

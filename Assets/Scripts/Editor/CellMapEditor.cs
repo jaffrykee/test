@@ -49,14 +49,6 @@ public class CellMapEditor : EditorWindow
             0x SIZ3 0000 : disable           深灰
         */
         m_cellBtnTex = new Dictionary<uint, Texture2D>();
-        m_cellColor = new Dictionary<uint, Color>();
-        m_cellColor.Add(c_cbtnStateNormal, new Color(0.3f, 0.6f, 0.3f, 1.0f));
-        m_cellColor.Add(c_cbtnStateNormal + 1, new Color(0.6f, 0.6f, 0.3f, 1.0f));
-        m_cellColor.Add(c_cbtnStateNormal + 2, new Color(0.6f, 0.3f, 0.3f, 1.0f));
-        m_cellColor.Add(c_cbtnStateNormal - 1, new Color(0.3f, 0.6f, 0.6f, 1.0f));
-        m_cellColor.Add(c_cbtnStateNormal - 2, new Color(0.3f, 0.3f, 0.6f, 1.0f));
-        m_cellColor.Add(c_cbtnStateCurSelect, new Color(1.0f, 1.0f, 1.0f, 1.0f));
-        m_cellColor.Add(c_cbtnStateDisable, new Color(0.1f, 0.1f, 0.1f, 1.0f));
         m_curSelectTex = new Dictionary<int, Texture2D>();
         //Texture2D tex
     }
@@ -68,7 +60,7 @@ public class CellMapEditor : EditorWindow
             uint size = ((id & 0xfff00000) >> 20);
             uint colorIndex = (id & 0x000fffff);
             Color color;
-            if (m_cellColor.TryGetValue(colorIndex, out color) == false)
+            if (Cell.s_cellColor.TryGetValue(colorIndex, out color) == false)
             {
                 color = new Color(0, 0, 0, 0);
             }
@@ -292,16 +284,16 @@ public class CellMapEditor : EditorWindow
                 GUILayout.EndVertical();
             }
             GUILayout.EndHorizontal();
-            GUILayout.EndScrollView();
             //curSelectBorder
-            const float dx = 4;
-            const float dy = 3;
+            const float dx = 0;
+            const float dy = 0;
             float selbx = m_curCellX * m_cellButtonLen + dx;
             float selby = ((m_curCellX & 1) * 0.5f + m_curMapConfig.mapSizeY - m_curCellY - 1) * m_cellButtonLen + dy;
             GUILayout.BeginArea(new Rect(selbx, selby, m_cellButtonLen, m_cellButtonLen));
             var texSel = getSelectBorderTexCache(m_cellButtonLen - c_cellButtonSpacing);
             GUILayout.Button(new GUIContent(texSel), new GUIStyle(), new GUILayoutOption[] { GUILayout.Width(m_cellButtonLen), GUILayout.Height(m_cellButtonLen) });
             GUILayout.EndArea();
+            GUILayout.EndScrollView();
         }
         GUILayout.EndArea();
         #endregion
@@ -465,16 +457,7 @@ public class CellMapEditor : EditorWindow
     private const int c_cellButtonSpacing = 2;
     private int m_cellButtonLen = c_cellButtonLenSmall;
 
-    /*
-        100 : curSelect
-        200 : disable
-        0   : normal height:0
-        1   : normal height:1
-        11  : normal height:-1
-        12  : noraml height:-2
-    */
     private Dictionary<uint, Texture2D> m_cellBtnTex;
-    private Dictionary<uint, Color> m_cellColor;
     private Dictionary<int, Texture2D> m_curSelectTex;
     private Color m_curSelectColor = Color.white;
     private int m_curSelectBorderWidth = 3;
