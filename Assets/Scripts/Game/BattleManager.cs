@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 
 public class BattleManager
 {
@@ -10,16 +11,51 @@ public class BattleManager
     {
         return s_instance;
     }
-    private List<Army> m_armys;
-    private List<League> m_leagues;
-    private List<Operation> m_operations;
 
-    public int indexOf(Army a)
+    private Dictionary<Type, Object> m_data = new Dictionary<Type, Object>
     {
-        return m_armys.IndexOf(a);
-    }
-    public int indexOf(Operation op)
+        {typeof(Army), new List<Army>()},
+        {typeof(League), new List<League>()},
+        {typeof(Operation), new List<Operation>()},
+    };
+
+    #region 容器
+    public List<T> getList<T>()
     {
-        return m_operations.IndexOf(op);
+        Object lst;
+        if (m_data.TryGetValue(typeof(T), out lst) == true && lst != null)
+        {
+            return lst as List<T>;
+        }
+        return null;
     }
+    public int indexOf<T>(T item)
+    {
+        var lst = getList<T>();
+        if (lst != null)
+        {
+            return lst.IndexOf(item);
+        }
+        else
+        {
+            return -1;
+        }
+    }
+    public void addItem<T>(T item)
+    {
+        var lst = getList<T>();
+        if (lst != null)
+        {
+            lst.Add(item);
+        }
+    }
+    public void deleteItem<T>(T item)
+    {
+        var lst = getList<T>();
+        if (lst != null)
+        {
+            lst.Remove(item);
+        }
+    }
+    #endregion
 }

@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class Unit
 {
-    public int id;
+    public int m_index
+    {
+        get
+        {
+            return BattleManager.s_instance.indexOf(this);
+        }
+    }
+
     public string m_name;
     public string m_text;
     //所属
