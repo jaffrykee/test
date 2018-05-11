@@ -4,16 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-public class BattleManager : Repertory
-{
+public class BattleManager : Repertory {
     static private BattleManager s_instance = new BattleManager();
-    static public BattleManager instance()
-    {
+    static public BattleManager instance() {
         return s_instance;
     }
 
-    private BattleManager() : base()
-    {
+    private BattleManager() : base() {
         m_data = new Dictionary<Type, Object>
         {
             {typeof(League), new List<League>()},

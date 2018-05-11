@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        if(gameObject != null)
-        {
+    // Use this for initialization
+    void Start() {
+        if (gameObject != null) {
             m_curRig = gameObject.GetComponent<Rigidbody>();
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if(m_curRig != null) {
+
+    // Update is called once per frame
+    void Update() {
+        if (m_curRig != null) {
             float curPowerCude = m_initPower;
             if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftShift)) {
                 curPowerCude *= m_exTimes;
@@ -32,8 +31,7 @@ public class Controller : MonoBehaviour {
                 m_curRig.AddForce(0, 0, curPowerCude);
             }
             var poi = gameObject.transform.position;
-            if(poi.y < -20)
-            {
+            if (poi.y < -20) {
                 gameObject.transform.position = new Vector3(poi.x, 20, poi.z);
             }
         }

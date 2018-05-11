@@ -6,14 +6,11 @@ using LitJson;
 using System.IO;
 using System.Text;
 
-public class ZEditor : EditorWindow
-{
+public class ZEditor : EditorWindow {
     //[MenuItem("Editors/LiumkTest/123123")]
-    static void ShowEditor()
-    {
+    static void ShowEditor() {
         //EditorUtility.DisplayDialog("MyTool", "Do It in C# !", "OK", "");
-        if(s_instance == null)
-        {
+        if (s_instance == null) {
             //Type[] types = new Type[2] { typeof(BlackWood.NodeCanvas.Editor.SkinContainer), typeof(BlackWood.NodeCanvas.Editor.BBPContainer) };
             //s_instance = GetWindow<ZEditor>("Unit Browser", true, types);
             s_instance = GetWindow<ZEditor>(false, "ZEditor");
@@ -26,18 +23,15 @@ public class ZEditor : EditorWindow
         LitJson.JsonMapper.ToJson(testObject, writer);
 
         string path = "./Assets/test.json";
-        if (File.Exists(path))
-        {
+        if (File.Exists(path)) {
             File.Delete(path);
         }
         File.WriteAllText(path, writer.ToString(), Encoding.UTF8);
     }
-    private void OnEnable()
-    {
+    private void OnEnable() {
         UnityEngine.Input.imeCompositionMode = IMECompositionMode.On;
     }
-    private void OnGUI()
-    {
+    private void OnGUI() {
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
         EditorGUILayout.BeginHorizontal();
@@ -45,12 +39,9 @@ public class ZEditor : EditorWindow
         EditorGUILayout.TextField(UnityEngine.Random.value.ToString(), ZESetting.LayoutSetting("TextField"));
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Ok", ZESetting.LayoutSetting("Button")))
-        {
+        if (GUILayout.Button("Ok", ZESetting.LayoutSetting("Button"))) {
             m_showValue = m_value00;
-        }
-        else if (GUILayout.Button("Cancel", ZESetting.LayoutSetting("Button")))
-        {
+        } else if (GUILayout.Button("Cancel", ZESetting.LayoutSetting("Button"))) {
             m_showValue = "";
         }
         EditorGUILayout.EndHorizontal();

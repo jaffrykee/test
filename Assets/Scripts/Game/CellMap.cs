@@ -5,10 +5,8 @@ using System.IO;
 using LitJson;
 
 [System.Serializable]
-public class CellMap : MonoBehaviour
-{
-    GameObject createCell(Vector3 poi, CellData data, int cellx = 0, int celly = 0, Quaternion rot = new Quaternion())
-    {
+public class CellMap : MonoBehaviour {
+    GameObject createCell(Vector3 poi, CellData data, int cellx = 0, int celly = 0, Quaternion rot = new Quaternion()) {
         GameObject cell = new GameObject();
         cell.transform.position = poi;
         cell.transform.rotation = rot;
@@ -25,21 +23,17 @@ public class CellMap : MonoBehaviour
         cellData.m_data = data;
         cellData.m_centerPoi = poi;
         cellData.m_cellPoi = new Vector2Int(cellx, celly);
-        if (m_showOutline == false)
-        {
+        if (m_showOutline == false) {
 
         }
         m_cellData[cellx, celly] = cellData;
         return cell;
     }
-    public void resetData()
-    {
-        if (gameObject == null || m_mapSizeX <= 0 || m_mapSizeY <= 0)
-        {
+    public void resetData() {
+        if (gameObject == null || m_mapSizeX <= 0 || m_mapSizeY <= 0) {
             return;
         }
-        if(m_curData == null)
-        {
+        if (m_curData == null) {
             m_curData = new CellMapData(2, 2);
         }
         m_mapSizeX = m_curData.mapSizeX;
@@ -49,63 +43,46 @@ public class CellMap : MonoBehaviour
         float dj = Mathf.Sqrt(3) + m_spacing;
 
         float dx, dy;
-        if (m_isCenter == true)
-        {
-            if (m_mapSizeX > 1)
-            {
+        if (m_isCenter == true) {
+            if (m_mapSizeX > 1) {
                 dx = -(m_mapSizeX - 1) * di * 0.5f;
                 dy = -(m_mapSizeY - 1.5f) * dj * 0.5f;
-            }
-            else
-            {
+            } else {
                 dx = 0;
                 dy = -(m_mapSizeY - 1) * dj * 0.5f;
             }
-        }
-        else
-        {
+        } else {
             dx = 0;
             dy = 0;
         }
 
-        for (int i = 0; i < m_mapSizeX; i++)
-        {
-            if (i % 2 == 0)
-            {
-                for (int j = 0; j < m_mapSizeY; j++)
-                {
+        for (int i = 0; i < m_mapSizeX; i++) {
+            if (i % 2 == 0) {
+                for (int j = 0; j < m_mapSizeY; j++) {
                     createCell(new Vector3(i * di + dx, 0, j * dj + dy), m_curData.cellData[i * m_mapSizeY + j], i, j);
                 }
-            }
-            else
-            {
-                for (int j = 0; j < m_mapSizeY; j++)
-                {
+            } else {
+                for (int j = 0; j < m_mapSizeY; j++) {
                     createCell(new Vector3(i * di + dx, 0, (j - 0.5f) * dj + dy), m_curData.cellData[i * m_mapSizeY + j], i, j);
                 }
             }
         }
     }
-    public void resetData(CellMapData newData)
-    {
+    public void resetData(CellMapData newData) {
         m_curData = newData;
         resetData();
     }
-    public void resetData(string resPath)
-    {
+    public void resetData(string resPath) {
         //Resources
         TextAsset jsonText = Resources.Load(resPath) as TextAsset;
-        if(jsonText != null)
-        {
+        if (jsonText != null) {
             var cellMapData = JsonMapper.ToObject<CellMapData>(jsonText.text);
             resetData(cellMapData);
-        } else
-        {
+        } else {
             resetData();
         }
     }
-    private int[] getTriangles()
-    {
+    private int[] getTriangles() {
         int[] triangles = new int[12];
 
         triangles[0] = 0;
@@ -127,37 +104,28 @@ public class CellMap : MonoBehaviour
         return triangles;
     }
     // Use this for initialization
-    void Start()
-    {
-        if(m_curData == null)
-        {
+    void Start() {
+        if (m_curData == null) {
             resetData(c_defaultData);
-        }
-        else
-        {
+        } else {
             resetData();
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
     }
 
-    public void setCurCell(Cell curCell)
-    {
+    public void setCurCell(Cell curCell) {
         m_curCell = curCell;
-        if (m_curCell != null)
-        {
-            if (m_selectLine == null)
-            {
+        if (m_curCell != null) {
+            if (m_selectLine == null) {
                 var comp = new System.Type[1];
                 comp[0] = typeof(LineRenderer);
                 m_selectLine = new GameObject("SelectCellLine", comp);
             }
             var lr = m_selectLine.GetComponent<LineRenderer>();
-            if (lr != null)
-            {
+            if (lr != null) {
                 lr.positionCount = 7;
                 lr.numCornerVertices = 6;
                 var linePoi = m_curCell.m_centerPoi;

@@ -4,25 +4,21 @@ using UnityEngine;
 using System;
 using LitJson;
 
-public class GameConvert
-{
-    static public void ToJsonWritter(JsonWriter writer, Vector3 data)
-    {
+public class GameConvert {
+    static public void ToJsonWritter(JsonWriter writer, Vector3 data) {
         writer.WriteArrayStart();
         writer.Write(Convert.ToDouble(data.x));
         writer.Write(Convert.ToDouble(data.y));
         writer.Write(Convert.ToDouble(data.z));
         writer.WriteArrayEnd();
     }
-    static public void ToJsonWritter(JsonWriter writer, Vector2Int data)
-    {
+    static public void ToJsonWritter(JsonWriter writer, Vector2Int data) {
         writer.WriteArrayStart();
         writer.Write(data.x);
         writer.Write(data.y);
         writer.WriteArrayEnd();
     }
-    static public void LitJsonInit()
-    {
+    static public void LitJsonInit() {
         JsonMapper.RegisterExporter<float>((obj, writerFloat) => writerFloat.Write(Convert.ToDouble(obj)));
         JsonMapper.RegisterImporter<double, float>(inputFlot => Convert.ToSingle(inputFlot));
         JsonMapper.RegisterExporter<Vector3>((obj, writerVector3) => GameConvert.ToJsonWritter(writerVector3, obj));

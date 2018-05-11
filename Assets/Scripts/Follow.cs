@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Follow : MonoBehaviour
-{
+public class Follow : MonoBehaviour {
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         m_sp = GameObject.Find(m_id);
-        if (m_sp != null)
-        {
+        if (m_sp != null) {
             transform.LookAt(m_sp.transform);
         }
     }

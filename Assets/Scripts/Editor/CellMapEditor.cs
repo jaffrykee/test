@@ -7,36 +7,28 @@ using System.IO;
 using LitJson;
 using System;
 
-public class CellMapEditor : EditorWindow
-{
+public class CellMapEditor : EditorWindow {
     [MenuItem("Editors/CellMapEditor")]
-    static void ShowEditor()
-    {
-        if (s_instance == null)
-        {
+    static void ShowEditor() {
+        if (s_instance == null) {
             s_instance = GetWindow<CellMapEditor>(false, "CellMapEditor");
         }
         s_instance.Show();
     }
-    private Texture2D createTexture(uint len, Color color)
-    {
-        if(len > 2048)
-        {
+    private Texture2D createTexture(uint len, Color color) {
+        if (len > 2048) {
             return null;
         }
         var tex = new Texture2D((int)len, (int)len);
-        for(int i = 0; i < tex.width; i++)
-        {
-            for(int j = 0; j < tex.height; j++)
-            {
+        for (int i = 0; i < tex.width; i++) {
+            for (int j = 0; j < tex.height; j++) {
                 tex.SetPixel(i, j, color);
             }
         }
         tex.Apply();
         return tex;
     }
-    private void initCellBtnTex()
-    {
+    private void initCellBtnTex() {
         /*
             0x SIZx xxxx : SIZ代表大小
             
@@ -51,16 +43,13 @@ public class CellMapEditor : EditorWindow
         m_curSelectTex = new Dictionary<int, Texture2D>();
         //Texture2D tex
     }
-    private Texture2D getCellBtnTexCache(uint id)
-    {
+    private Texture2D getCellBtnTexCache(uint id) {
         Texture2D cache;
-        if(m_cellBtnTex.TryGetValue(id, out cache) == false || cache == null)
-        {
+        if (m_cellBtnTex.TryGetValue(id, out cache) == false || cache == null) {
             uint size = ((id & 0xfff00000) >> 20);
             uint colorIndex = (id & 0x000fffff);
             Color color;
-            if (Cell.s_cellColor.TryGetValue(colorIndex, out color) == false)
-            {
+            if (Cell.s_cellColor.TryGetValue(colorIndex, out color) == false) {
                 color = new Color(0, 0, 0, 0);
             }
             m_cellBtnTex.Add(id, createTexture(size - c_cellButtonSpacing, color));
@@ -68,22 +57,15 @@ public class CellMapEditor : EditorWindow
         }
         return cache;
     }
-    private Texture2D getSelectBorderTexCache(int len)
-    {
+    private Texture2D getSelectBorderTexCache(int len) {
         Texture2D tex;
-        if (m_curSelectTex.TryGetValue(len, out tex) == false || tex == null)
-        {
+        if (m_curSelectTex.TryGetValue(len, out tex) == false || tex == null) {
             tex = new Texture2D(len, len);
-            for (int i = 0; i < tex.width; i++)
-            {
-                for (int j = 0; j < tex.height; j++)
-                {
-                    if(i < m_curSelectBorderWidth || j < m_curSelectBorderWidth || i >= len - m_curSelectBorderWidth || j >= len - m_curSelectBorderWidth)
-                    {
+            for (int i = 0; i < tex.width; i++) {
+                for (int j = 0; j < tex.height; j++) {
+                    if (i < m_curSelectBorderWidth || j < m_curSelectBorderWidth || i >= len - m_curSelectBorderWidth || j >= len - m_curSelectBorderWidth) {
                         tex.SetPixel(i, j, m_curSelectColor);
-                    }
-                    else
-                    {
+                    } else {
                         tex.SetPixel(i, j, new Color(0, 0, 0, 0));
                     }
                 }
@@ -92,8 +74,7 @@ public class CellMapEditor : EditorWindow
         }
         return tex;
     }
-    private void OnEnable()
-    {
+    private void OnEnable() {
         UnityEngine.Input.imeCompositionMode = IMECompositionMode.On;
 
         m_HorizontalSplitterRect = new Rect(
@@ -120,47 +101,37 @@ public class CellMapEditor : EditorWindow
         m_preview = new CellMapPreview();
         initCellBtnTex();
     }
-    private void saveCellMapSetting()
-    {
+    private void saveCellMapSetting() {
         var writer = new LitJson.JsonWriter { PrettyPrint = true };
         LitJson.JsonMapper.ToJson(m_curMapConfig, writer);
         File.WriteAllText(mt_curFilePath, writer.ToString());
         Repaint();
     }
-    private void resizeCellMap(int x, int y)
-    {
+    private void resizeCellMap(int x, int y) {
         m_curMapConfig.resizeCellMap(x, y);
         saveCellMapSetting();
     }
     private Vector2 scrollPosition = new Vector2();
     private string keyCache = "";
-    private void curSelectCellChanged()
-    {
+    private void curSelectCellChanged() {
         keyCache = "";
     }
-    private void OnGUI()
-    {
+    private void OnGUI() {
         int dh = 0;
         var e = Event.current;
         bool isChanged = false;
-        if (e != null && e.isKey && e.type == EventType.KeyUp)
-        {
-            if (m_curMapConfig != null && m_curCellX < m_curMapConfig.mapSizeX && m_curCellY < m_curMapConfig.mapSizeY)
-            {
-                if (e.keyCode == KeyCode.W)
-                {
+        if (e != null && e.isKey && e.type == EventType.KeyUp) {
+            if (m_curMapConfig != null && m_curCellX < m_curMapConfig.mapSizeX && m_curCellY < m_curMapConfig.mapSizeY) {
+                if (e.keyCode == KeyCode.W) {
                     dh = 1;
                 }
-                if (e.keyCode == KeyCode.S)
-                {
+                if (e.keyCode == KeyCode.S) {
                     dh = -1;
                 }
-                if (e.keyCode == KeyCode.Minus)
-                {
+                if (e.keyCode == KeyCode.Minus) {
                     keyCache = "-";
                 }
-                if (e.keyCode >= KeyCode.Alpha0 && e.keyCode <= KeyCode.Alpha9)
-                {
+                if (e.keyCode >= KeyCode.Alpha0 && e.keyCode <= KeyCode.Alpha9) {
                     keyCache += (e.keyCode - KeyCode.Alpha0).ToString();
                     isChanged = true;
                 }
@@ -178,8 +149,7 @@ public class CellMapEditor : EditorWindow
             m_VerticalSplitterRectLeft.y
             );
 
-        if (GUILayout.Button("刷新", ZESetting.LayoutSetting("Button")) || m_cmdTree == null)
-        {
+        if (GUILayout.Button("刷新", ZESetting.LayoutSetting("Button")) || m_cmdTree == null) {
             m_cmdTree = new CellMapDataFileTreeView(new TreeViewState(), this);
         }
         var unitTreeRect2 = unitTreeRect;
@@ -202,16 +172,13 @@ public class CellMapEditor : EditorWindow
         m_isChangedValue = EditorGUILayout.Toggle("改disable", m_isChangedValue);
         GUILayout.BeginHorizontal();
         const int btnLen = 32;
-        if (GUILayout.Button("大", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) }))
-        {
+        if (GUILayout.Button("大", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) })) {
             m_cellButtonLen = c_cellButtonLenLarge;
         }
-        if (GUILayout.Button("中", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) }))
-        {
+        if (GUILayout.Button("中", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) })) {
             m_cellButtonLen = c_cellButtonLenMiddle;
         }
-        if (GUILayout.Button("小", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) }))
-        {
+        if (GUILayout.Button("小", new GUILayoutOption[] { GUILayout.Width(btnLen), GUILayout.Height(btnLen) })) {
             m_cellButtonLen = c_cellButtonLenSmall;
         }
         GUILayout.EndHorizontal();
@@ -231,37 +198,29 @@ public class CellMapEditor : EditorWindow
             panelHeight
             );
         GUILayout.BeginArea(unitListRect, EditorStyles.helpBox);
-        if (m_curMapConfig != null && m_isShowCanvas == true)
-        {
+        if (m_curMapConfig != null && m_isShowCanvas == true) {
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);
             GUILayout.BeginHorizontal(GUILayout.Width(m_curMapConfig.mapSizeX * m_cellButtonLen));
-            for (int i = 0; i < m_curMapConfig.mapSizeX; i++)
-            {
+            for (int i = 0; i < m_curMapConfig.mapSizeX; i++) {
                 GUILayout.BeginVertical();
-                if ((i & 1) == 1)
-                {
+                if ((i & 1) == 1) {
                     GUILayout.Space(m_cellButtonLen * 0.5f);
                 }
-                for (int j = m_curMapConfig.mapSizeY - 1; j >= 0; j--)
-                {
+                for (int j = m_curMapConfig.mapSizeY - 1; j >= 0; j--) {
                     //curTip = i.ToString() + ", " + j.ToString() + "\n";
                     uint texId = 0;
                     Texture2D tmpTex = null;
 
-                    if (m_curMapConfig != null)
-                    {
+                    if (m_curMapConfig != null) {
                         var curCell = m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j];
                         //if (m_curCellX == i && m_curCellY == j)
                         //{
                         //    //curSelect
                         //}
-                        if (curCell.disable)
-                        {
+                        if (curCell.disable) {
                             //disable
                             texId |= c_cbtnStateDisable;
-                        }
-                        else
-                        {
+                        } else {
                             //normal
                             texId |= c_cbtnStateNormal;
                             texId = (uint)(texId + curCell.height);
@@ -272,8 +231,7 @@ public class CellMapEditor : EditorWindow
                     texId |= (((uint)m_cellButtonLen) << 20);
                     //s.imagePosition = ImagePosition.ImageOnly;
                     tmpTex = getCellBtnTexCache(texId);
-                    if (tmpTex == null)
-                    {
+                    if (tmpTex == null) {
                         tmpTex = new Texture2D(m_cellButtonLen, m_cellButtonLen);
                     }
                     GUIContent gc = new GUIContent(tmpTex);
@@ -281,12 +239,10 @@ public class CellMapEditor : EditorWindow
                     //tex.height = m_cellButtonLen;
                     //GUILayout.Button()
                     //if (GUILayout.Button(curTip, new GUILayoutOption[] { GUILayout.Width(m_cellButtonLen), GUILayout.Height(m_cellButtonLen) }))
-                    if (GUILayout.Button(gc, s, new GUILayoutOption[] { GUILayout.Width(m_cellButtonLen), GUILayout.Height(m_cellButtonLen) }))
-                    {
+                    if (GUILayout.Button(gc, s, new GUILayoutOption[] { GUILayout.Width(m_cellButtonLen), GUILayout.Height(m_cellButtonLen) })) {
                         m_curCellX = i;
                         m_curCellY = j;
-                        if (m_isChangedValue == true)
-                        {
+                        if (m_isChangedValue == true) {
                             m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j].disable = !m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j].disable;
                             saveCellMapSetting();
                         }
@@ -334,8 +290,7 @@ public class CellMapEditor : EditorWindow
         EditorGUILayout.LabelField("资源路径", ZESetting.LayoutSetting("LabelFieldShort"));
         EditorGUILayout.TextField(m_curResPath, ZESetting.LayoutSetting("TextFieldLong"));
         EditorGUILayout.EndHorizontal();
-        if (!(m_curResPath == null || m_curResPath.Length == 0 || m_curResPath[m_curResPath.Length - 1] == '/'))
-        {
+        if (!(m_curResPath == null || m_curResPath.Length == 0 || m_curResPath[m_curResPath.Length - 1] == '/')) {
             m_isShowCanvas = true;
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("地图尺寸：", ZESetting.LayoutSetting("LabelFieldShort"));
@@ -345,13 +300,11 @@ public class CellMapEditor : EditorWindow
             m_mapSizeY = EditorGUILayout.TextField(m_mapSizeY, ZESetting.LayoutSetting("TextField"));
             var sizeX = Convert.ToInt32(m_mapSizeX);
             var sizeY = Convert.ToInt32(m_mapSizeY);
-            if (GUILayout.Button("设置", ZESetting.LayoutSetting("Button")))
-            {
+            if (GUILayout.Button("设置", ZESetting.LayoutSetting("Button"))) {
                 resizeCellMap(sizeX, sizeY);
             }
             EditorGUILayout.EndHorizontal();
-            if(m_curMapConfig != null && m_curCellX < m_curMapConfig.mapSizeX && m_curCellY < m_curMapConfig.mapSizeY)
-            {
+            if (m_curMapConfig != null && m_curCellX < m_curMapConfig.mapSizeX && m_curCellY < m_curMapConfig.mapSizeY) {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("当前Cell：" + m_curCellX.ToString() + ", " + m_curCellY.ToString(), ZESetting.LayoutSetting("LabelField"));
                 EditorGUILayout.EndHorizontal();
@@ -359,8 +312,7 @@ public class CellMapEditor : EditorWindow
                 EditorGUILayout.LabelField("disable:", ZESetting.LayoutSetting("LabelFieldShort"));
                 var oldValue = m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].disable;
                 var newValue = EditorGUILayout.Toggle(oldValue);
-                if(newValue != oldValue)
-                {
+                if (newValue != oldValue) {
                     m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].disable = newValue;
                     saveCellMapSetting();
                 }
@@ -368,18 +320,14 @@ public class CellMapEditor : EditorWindow
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("height:", ZESetting.LayoutSetting("LabelFieldShort"));
                 string newHeightStr;
-                if (isChanged == true)
-                {
+                if (isChanged == true) {
                     newHeightStr = keyCache;
                     isChanged = false;
-                }
-                else
-                {
+                } else {
                     newHeightStr = EditorGUILayout.TextField(m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height.ToString(), ZESetting.LayoutSetting("TextField"));
                 }
                 var newHeight = Convert.ToInt32(newHeightStr) + dh;
-                if(newHeight != m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height)
-                {
+                if (newHeight != m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height) {
                     m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height = newHeight;
                     saveCellMapSetting();
                 }
@@ -393,9 +341,7 @@ public class CellMapEditor : EditorWindow
             //{
             //}
             //EditorGUILayout.EndHorizontal();
-        }
-        else
-        {
+        } else {
             m_isShowCanvas = false;
         }
         EditorGUILayout.EndVertical();
@@ -404,38 +350,32 @@ public class CellMapEditor : EditorWindow
         GUILayout.EndArea();
         #endregion
 
-        if (m_ResizingHorizontalSplitter || m_ResizingVerticalSplitterLeft || m_ResizingVerticalSplitterRight)
-        {
+        if (m_ResizingHorizontalSplitter || m_ResizingVerticalSplitterLeft || m_ResizingVerticalSplitterRight) {
             Repaint();
         }
     }
 
     #region splitter
-    private void HandleHorizontalResize()
-    {
+    private void HandleHorizontalResize() {
         m_HorizontalSplitterRect.x = (int)(position.width * m_HorizontalSplitterPercent);
         m_HorizontalSplitterRect.height = position.height;
 
         EditorGUIUtility.AddCursorRect(m_HorizontalSplitterRect, MouseCursor.ResizeHorizontal);
-        if (Event.current.type == EventType.MouseDown && m_HorizontalSplitterRect.Contains(Event.current.mousePosition))
-        {
+        if (Event.current.type == EventType.MouseDown && m_HorizontalSplitterRect.Contains(Event.current.mousePosition)) {
             m_ResizingHorizontalSplitter = true;
         }
 
-        if (m_ResizingHorizontalSplitter)
-        {
+        if (m_ResizingHorizontalSplitter) {
             m_HorizontalSplitterPercent = Mathf.Clamp(Event.current.mousePosition.x / position.width, 0.1f, 0.9f);
             m_HorizontalSplitterRect.x = (int)(position.width * m_HorizontalSplitterPercent);
         }
 
-        if (Event.current.type == EventType.MouseUp)
-        {
+        if (Event.current.type == EventType.MouseUp) {
             m_ResizingHorizontalSplitter = false;
         }
     }
 
-    private void HandleVerticalResize()
-    {
+    private void HandleVerticalResize() {
         m_VerticalSplitterRectRight.x = m_HorizontalSplitterRect.x;
         m_VerticalSplitterRectRight.y = (int)(m_HorizontalSplitterRect.height * m_VerticalSplitterPercentRight);
         m_VerticalSplitterRectRight.width = position.width - m_HorizontalSplitterRect.x;
@@ -443,30 +383,24 @@ public class CellMapEditor : EditorWindow
         m_VerticalSplitterRectLeft.width = m_VerticalSplitterRectRight.width;
 
         EditorGUIUtility.AddCursorRect(m_VerticalSplitterRectRight, MouseCursor.ResizeVertical);
-        if (Event.current.type == EventType.MouseDown && m_VerticalSplitterRectRight.Contains(Event.current.mousePosition))
-        {
+        if (Event.current.type == EventType.MouseDown && m_VerticalSplitterRectRight.Contains(Event.current.mousePosition)) {
             m_ResizingVerticalSplitterRight = true;
         }
 
         EditorGUIUtility.AddCursorRect(m_VerticalSplitterRectLeft, MouseCursor.ResizeVertical);
-        if (Event.current.type == EventType.MouseDown && m_VerticalSplitterRectLeft.Contains(Event.current.mousePosition))
-        {
+        if (Event.current.type == EventType.MouseDown && m_VerticalSplitterRectLeft.Contains(Event.current.mousePosition)) {
             m_ResizingVerticalSplitterLeft = true;
         }
 
-        if (m_ResizingVerticalSplitterRight)
-        {
+        if (m_ResizingVerticalSplitterRight) {
             m_VerticalSplitterPercentRight = Mathf.Clamp(Event.current.mousePosition.y / m_HorizontalSplitterRect.height, 0.2f, 0.98f);
             m_VerticalSplitterRectRight.y = (int)(m_HorizontalSplitterRect.height * m_VerticalSplitterPercentRight);
-        }
-        else if (m_ResizingVerticalSplitterLeft)
-        {
+        } else if (m_ResizingVerticalSplitterLeft) {
             m_VerticalSplitterPercentLeft = Mathf.Clamp(Event.current.mousePosition.y / m_HorizontalSplitterRect.height, 0.25f, 0.98f);
             m_VerticalSplitterRectLeft.y = (int)(m_HorizontalSplitterRect.height * m_VerticalSplitterPercentLeft);
         }
 
-        if (Event.current.type == EventType.MouseUp)
-        {
+        if (Event.current.type == EventType.MouseUp) {
             m_ResizingVerticalSplitterRight = false;
             m_ResizingVerticalSplitterLeft = false;
         }
@@ -510,20 +444,15 @@ public class CellMapEditor : EditorWindow
     #endregion
 
     private string mt_curFilePath;
-    public string m_curFilePath
-    {
-        get
-        {
+    public string m_curFilePath {
+        get {
             return mt_curFilePath;
         }
-        set
-        {
+        set {
             mt_curFilePath = value;
-            if(File.Exists(value))
-            {
+            if (File.Exists(value)) {
                 m_curMapConfig = JsonMapper.ToObject<CellMapData>(File.ReadAllText(value));
-                if(m_curMapConfig == null)
-                {
+                if (m_curMapConfig == null) {
                     m_curMapConfig = new CellMapData(2, 2);
                     saveCellMapSetting();
                 }

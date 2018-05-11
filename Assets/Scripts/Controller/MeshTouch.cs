@@ -2,27 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MeshTouch : MonoBehaviour
-{
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
+public class MeshTouch : MonoBehaviour {
+    void Update() {
+        if (Input.GetMouseButtonDown(0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.transform == null)
-                {
+            if (Physics.Raycast(ray, out hit)) {
+                if (hit.transform == null) {
                     return;
                 }
                 MeshFilter meshFilter = hit.transform.GetComponent<MeshFilter>();
-                if (meshFilter == null)
-                {
+                if (meshFilter == null) {
                     return;
                 }
-                if (m_isHiddenTouch)
-                {
+                if (m_isHiddenTouch) {
                     Mesh mesh = meshFilter.mesh;
                     int[] triangles = mesh.triangles;
                     List<int> tris = new List<int>(triangles);
@@ -37,18 +30,15 @@ public class MeshTouch : MonoBehaviour
                     collider1.sharedMesh = mesh;
                 }
                 var curCell = meshFilter.gameObject;
-                if(curCell != null)
-                {
+                if (curCell != null) {
                     var cellData = curCell.GetComponent<Cell>();
-                    if(cellData != null)
-                    {
+                    if (cellData != null) {
                         //var render = curCell.GetComponent<Renderer>();
                         //render.enabled = !render.enabled;
                         //curCell.SetActive(!curCell.activeSelf);
 
                         var map = cellData.getParentMap();
-                        if(map != null)
-                        {
+                        if (map != null) {
                             map.setCurCell(cellData);
                         }
                     }

@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class CellMapPreview
-{
-    public CellMapPreview()
-    {
+public class CellMapPreview {
+    public CellMapPreview() {
         m_cellMapObject = AssetDatabase.LoadAssetAtPath<GameObject>(c_path);
     }
-    public void OnGUI(Rect pos)
-    {
+    public void OnGUI(Rect pos) {
 #if false
         if(m_cellMapObject == null)
         {
@@ -42,23 +39,18 @@ public class CellMapPreview
             EditorGUILayout.TextField("No GameObject", gs, GUILayout.Width(pos.width), GUILayout.Height(pos.height));
         }
 #else
-        if (m_cellMapObject != null)
-        {
-            if (m_cellMapObjectEditor == null)
-            {
+        if (m_cellMapObject != null) {
+            if (m_cellMapObjectEditor == null) {
                 m_cellMapObjectEditor = Editor.CreateEditor(m_cellMapObject);
                 m_curObject = m_cellMapObject;
             }
-            if (m_curObject != m_cellMapObject)
-            {
+            if (m_curObject != m_cellMapObject) {
                 Object.DestroyImmediate(m_cellMapObjectEditor);
                 m_cellMapObjectEditor = Editor.CreateEditor(m_cellMapObject);
                 m_curObject = m_cellMapObject;
             }
             m_cellMapObjectEditor.OnPreviewGUI(GUILayoutUtility.GetRect(pos.width, pos.height), EditorStyles.textField);
-        }
-        else
-        {
+        } else {
             GUIStyle gs = new GUIStyle();
             gs.alignment = TextAnchor.MiddleCenter;
             gs.fontSize = 40;

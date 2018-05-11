@@ -2,43 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalCamera : MonoBehaviour
-{
+public class NormalCamera : MonoBehaviour {
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-    private float getNormalAngle(float src)
-    {
+    void Start() {
+
+    }
+
+    private float getNormalAngle(float src) {
         float ret = src;
-        if(ret > -180.0f)
-        {
-            for(; ret >= 180.0f; ret -= 360.0f)
-            {
+        if (ret > -180.0f) {
+            for (; ret >= 180.0f; ret -= 360.0f) {
 
             }
-        }
-        else
-        {
-            for (; ret < -180.0f; ret += 360.0f)
-            {
+        } else {
+            for (; ret < -180.0f; ret += 360.0f) {
 
             }
         }
         return ret;
     }
-	// Update is called once per frame
-	void Update ()
-    {
+    // Update is called once per frame
+    void Update() {
 #if UNITY_ANDROID || UNITY_IPHONE || UNITY_IOS
         var tra = Camera.main.transform;
-        if (Input.GetMouseButton(0))
-        {
-            switch (m_fixedType)
-            {
-                case FixedType.RPG:
-                    {
+        if (Input.GetMouseButton(0)) {
+            switch (m_fixedType) {
+                case FixedType.RPG: {
                         float mx = Input.GetAxis("Mouse X") * m_rotationSpeed;
                         float my = Input.GetAxis("Mouse Y") * m_rotationSpeed;
                         var dpos = tra.rotation * new Vector3(mx, 0, my);
@@ -164,13 +153,11 @@ public class NormalCamera : MonoBehaviour
 #endif
     }
 
-    public enum FixedType
-    {
+    public enum FixedType {
         RPG,
         SLG,
     };
-    public enum ZoomType
-    {
+    public enum ZoomType {
         Move,
         Telescope,
     }

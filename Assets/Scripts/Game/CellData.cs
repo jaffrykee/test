@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class CellData
-{
+public class CellData {
     public bool disable = false;
     //高度级别
     public int height = 0;
