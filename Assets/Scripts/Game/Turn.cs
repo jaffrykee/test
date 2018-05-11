@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 
 public class Turn : Goods {
-    public Turn(string name) : base(BattleManager.instance(), name) {
+    public Army m_army;
+    public Turn(string name, Army army) : base(BattleManager.instance(), name) {
+        m_army = army;
     }
 }
