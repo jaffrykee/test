@@ -16,8 +16,6 @@ public class Unit : Goods {
     public int m_basicAttackRange = 1;
     public int m_basicSupplyRange = 1;
 
-
-
     public Unit(string name, Army army) : base(BattleManager.instance(), name) {
         m_army = army;
     }

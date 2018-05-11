@@ -19,7 +19,6 @@ public class BattleManager : Repertory {
             {typeof(Turn), new List<Turn>()},
             {typeof(Operation), new List<Operation>()},
         },
-
         new Dictionary<string, Goods>()) {
     }
 }
