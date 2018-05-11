@@ -4,58 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-public class BattleManager
+public class BattleManager : Repertory
 {
-    static public readonly BattleManager s_instance = new BattleManager();
+    static private BattleManager s_instance = new BattleManager();
     static public BattleManager instance()
     {
         return s_instance;
     }
 
-    private Dictionary<Type, Object> m_data = new Dictionary<Type, Object>
+    private BattleManager() : base()
     {
-        {typeof(Army), new List<Army>()},
-        {typeof(League), new List<League>()},
-        {typeof(Operation), new List<Operation>()},
-    };
-
-    #region 容器
-    public List<T> getList<T>()
-    {
-        Object lst;
-        if (m_data.TryGetValue(typeof(T), out lst) == true && lst != null)
+        m_data = new Dictionary<Type, Object>
         {
-            return lst as List<T>;
-        }
-        return null;
+            {typeof(League), new List<League>()},
+            {typeof(Army), new List<Army>()},
+            {typeof(Unit), new List<Unit>()},
+            {typeof(Turn), new List<Turn>()},
+            {typeof(Operation), new List<Operation>()},
+        };
     }
-    public int indexOf<T>(T item)
-    {
-        var lst = getList<T>();
-        if (lst != null)
-        {
-            return lst.IndexOf(item);
-        }
-        else
-        {
-            return -1;
-        }
-    }
-    public void addItem<T>(T item)
-    {
-        var lst = getList<T>();
-        if (lst != null)
-        {
-            lst.Add(item);
-        }
-    }
-    public void deleteItem<T>(T item)
-    {
-        var lst = getList<T>();
-        if (lst != null)
-        {
-            lst.Remove(item);
-        }
-    }
-    #endregion
 }

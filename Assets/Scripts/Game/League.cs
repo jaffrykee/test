@@ -3,7 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class League
+public class League : Goods
 {
-    public Dictionary<string, Army> m_mapArmy;
+    public bool isOwner(Army a)
+    {
+        return a.m_league == this;
+    }
+    public List<Army> m_armys
+    {
+        get
+        {
+            return BattleManager.instance().getList<Army>().FindAll(isOwner);
+        }
+    }
 }
