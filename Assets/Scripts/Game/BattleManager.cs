@@ -10,14 +10,15 @@ public class BattleManager : Repertory {
         return s_instance;
     }
 
-    private BattleManager() : base() {
-        m_data = new Dictionary<Type, Object>
+    private BattleManager() : base(
+        new Dictionary<Type, Object>
         {
             {typeof(League), new List<League>()},
             {typeof(Army), new List<Army>()},
             {typeof(Unit), new List<Unit>()},
             {typeof(Turn), new List<Turn>()},
             {typeof(Operation), new List<Operation>()},
-        };
+        },
+        new Dictionary<string, Goods>()) {
     }
 }

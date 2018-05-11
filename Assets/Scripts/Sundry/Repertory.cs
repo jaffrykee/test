@@ -7,7 +7,18 @@ using UnityEngine;
 
 public class Repertory {
     protected Dictionary<Type, object> m_data;
-    private Dictionary<string, Goods> m_dictionary;
+    private Dictionary<string, Goods> mt_dictionary;
+    protected Dictionary<string, Goods> m_dictionary {
+        get {
+            return mt_dictionary;
+        }
+    }
+
+    public Repertory(Dictionary<Type, object> data, Dictionary<string, Goods> dictionary) {
+        m_data = data;
+        mt_dictionary = dictionary;
+    }
+
     public List<T> getList<T>() {
         object lst;
         if (m_data.TryGetValue(typeof(T), out lst) == true && lst != null) {

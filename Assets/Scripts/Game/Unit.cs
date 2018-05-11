@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit {
-    public string m_name;
+public class Unit : Goods {
+    public Army m_army;
     public string m_text;
     //所属
     public int m_groupId;
@@ -16,4 +16,7 @@ public class Unit {
     public int m_basicAttackRange = 1;
     public int m_basicSupplyRange = 1;
 
+    public Unit(string name, Army army) : base(BattleManager.instance(), name) {
+        m_army = army;
+    }
 }
