@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+/// <summary>
+/// 操作。
+/// </summary>
 public class Operation : Goods {
     public enum OptType {
         //真正的操作，比如选中一个unit，让它攻击另一个unit。

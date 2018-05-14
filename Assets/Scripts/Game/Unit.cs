@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 代表了一个单位，可以是随从、放置物、陷阱、可破坏地貌等等。必须属于一个部队。
+/// </summary>
 public class Unit : Goods {
     public Army m_army;
     public string m_text;

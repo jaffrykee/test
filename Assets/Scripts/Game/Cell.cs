@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 蜂窝地图格子。
+/// </summary>
 public class Cell : MonoBehaviour {
     private const float c_dColor = 0.2f;
     private const uint c_max = 2;

@@ -6,9 +6,7 @@ using System.Text;
 /// <summary>
 /// 部队，代表了一个控制者，或者一个AI。
 /// </summary>
-public class Army : Goods {
-    public League m_league;
-    public Army(string name, League league) : base(BattleManager.instance(), name) {
-        m_league = league;
+public class Stage : Goods {
+    public Stage(string name) : base(BattleManager.instance(), name) {
     }
 }

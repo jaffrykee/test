@@ -4,6 +4,9 @@ using UnityEngine;
 using System.IO;
 using LitJson;
 
+/// <summary>
+/// 蜂窝地图。
+/// </summary>
 [System.Serializable]
 public class CellMap : MonoBehaviour {
     GameObject createCell(Vector3 poi, CellData data, int cellx = 0, int celly = 0, Quaternion rot = new Quaternion()) {

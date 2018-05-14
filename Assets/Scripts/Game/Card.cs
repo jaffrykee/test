@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 
 /// <summary>
-/// 回合。
+/// 卡片。
 /// </summary>
-public class Turn : Goods {
+public class Card : Goods {
+    public enum CardType {
+        
+    }
     public Army m_army;
-    public Turn(string name, Army army) : base(BattleManager.instance(), name) {
+    public Card(string name, Army army) : base(BattleManager.instance(), name) {
         m_army = army;
     }
 }
