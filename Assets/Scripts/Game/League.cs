@@ -10,7 +10,7 @@ public class League : Goods {
     public League(string name) : base(BattleManager.instance(), name) {
 
     }
-    public List<Army> m_armys {
+    public List<Army> m_armies {
         get {
             return BattleManager.instance().getList<Army>().FindAll(isOwner);
         }

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
+/// <summary>
+/// 战斗控制类。
+/// </summary>
 public class BattleManager : Repertory {
     static private BattleManager s_instance = new BattleManager();
     static public BattleManager instance() {
@@ -21,4 +24,10 @@ public class BattleManager : Repertory {
         },
         new Dictionary<string, Goods>()) {
     }
+    public void resetData(Stage data) {
+
+    }
+
+    public Stage m_curStage;
+    public CellMap m_curCellMap;
 }

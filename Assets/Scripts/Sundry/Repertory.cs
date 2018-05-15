@@ -20,7 +20,7 @@ public class Repertory {
     /// <summary>
     /// 以货物名字为索引的词典。（对外接口）
     /// </summary>
-    protected Dictionary<string, Goods> m_dictionary {
+    public Dictionary<string, Goods> m_dictionary {
         get {
             return mt_dictionary;
         }
@@ -72,7 +72,8 @@ public class Repertory {
                 Debug.LogWarning("Repertory.cs: Goods's name is Null.");
             } else {
                 if (m_dictionary.ContainsKey(goods.m_name)) {
-                    Debug.LogWarning("Repertory.cs: Goods's name is existed in the dictionary.");
+                    Debug.LogWarning("Repertory.cs: Goods's name is existed in the dictionary.The old one will lost in the dictionary.");
+                    m_dictionary[goods.m_name] = goods;
                 } else {
                     m_dictionary.Add(goods.m_name, goods);
                 }
