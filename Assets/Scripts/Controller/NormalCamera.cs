@@ -24,21 +24,21 @@ public class NormalCamera : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 #if UNITY_ANDROID || UNITY_IPHONE || UNITY_IOS
-        var tra = Camera.main.transform;
-        if (Input.GetMouseButton(0)) {
-            switch (m_fixedType) {
-                case FixedType.RPG: {
-                        float mx = Input.GetAxis("Mouse X") * m_rotationSpeed;
-                        float my = Input.GetAxis("Mouse Y") * m_rotationSpeed;
-                        var dpos = tra.rotation * new Vector3(mx, 0, my);
-                        dpos.y = 0;
-                        tra.position += dpos;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
+//        var tra = Camera.main.transform;
+//        if (Input.GetMouseButton(0)) {
+//            switch (m_fixedType) {
+//                case FixedType.RPG: {
+//                        float mx = Input.GetAxis("Mouse X") * m_rotationSpeed;
+//                        float my = Input.GetAxis("Mouse Y") * m_rotationSpeed;
+//                        var dpos = tra.rotation * new Vector3(mx, 0, my);
+//                        dpos.y = 0;
+//                        tra.position += dpos;
+//                    }
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
 #else
         var tra = Camera.main.transform;
         if (Input.GetMouseButton(1))

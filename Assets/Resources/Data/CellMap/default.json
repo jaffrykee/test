@@ -5,7 +5,13 @@
     "cellData" : [
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 2,
+            "sprite"  : [
+            ]
+        },
+        {
+            "disable" : false,
+            "height"  : 1,
             "sprite"  : [
             ]
         },
@@ -23,19 +29,13 @@
         },
         {
             "disable" : false,
-            "height"  : 0,
+            "height"  : 1,
             "sprite"  : [
             ]
         },
         {
             "disable" : false,
-            "height"  : 0,
-            "sprite"  : [
-            ]
-        },
-        {
-            "disable" : false,
-            "height"  : 0,
+            "height"  : 1,
             "sprite"  : [
             ]
         },
