@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SdkManager.iml" filepath="$PROJECT_DIR$/SdkManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SdkRepertory/SdkRepertory.iml" filepath="$PROJECT_DIR$/SdkRepertory/SdkRepertory.iml" />
+    </modules>
+  </component>
+</project>

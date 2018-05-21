@@ -10,10 +10,8 @@ namespace SDK {
             }
             return s_instance;
         }
-
         public User() {
         }
-
         public void showQQ() {
         }
     }

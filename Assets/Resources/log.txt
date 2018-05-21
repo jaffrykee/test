@@ -2,41 +2,19 @@
 C:/Program Files (x86)/Java/jdk1.8.0_144\bin\java.exe -classpath "C:\Program Files\Unity2017.3\Editor\Data\PlaybackEngines\AndroidPlayer\Tools\gradle\lib\gradle-launcher-4.0.1.jar" org.gradle.launcher.GradleMain "-Dorg.gradle.jvmargs=-Xmx1024m" "assembleDebug"
 
 stderr[
-C:\work\test\Temp\gradleOut\build\intermediates\res\merged\debug\values\values.xml:7: AAPT: Error retrieving parent for item: No resource found that matches the given name 'Theme.AppCompat.Light.DarkActionBar'.
-    
-C:\work\test\Temp\gradleOut\build\intermediates\res\merged\debug\values\values.xml:11:21-32: AAPT: No resource found that matches the given name: attr 'colorAccent'.
-    
-C:\work\test\Temp\gradleOut\build\intermediates\res\merged\debug\values\values.xml:9:21-33: AAPT: No resource found that matches the given name: attr 'colorPrimary'.
-    
-C:\work\test\Temp\gradleOut\build\intermediates\res\merged\debug\values\values.xml:10:21-37: AAPT: No resource found that matches the given name: attr 'colorPrimaryDark'.
-    
-C:\work\test\Temp\gradleOut\build\intermediates\res\merged\debug\values\values.xml:7: error: Error retrieving parent for item: No resource found that matches the given name 'Theme.AppCompat.Light.DarkActionBar'.
-
-C:\work\test\Temp\gradleOut\build\intermediates\res\merged\debug\values\values.xml:11: error: Error: No resource found that matches the given name: attr 'colorAccent'.
-
-C:\work\test\Temp\gradleOut\build\intermediates\res\merged\debug\values\values.xml:9: error: Error: No resource found that matches the given name: attr 'colorPrimary'.
-
-C:\work\test\Temp\gradleOut\build\intermediates\res\merged\debug\values\values.xml:10: error: Error: No resource found that matches the given name: attr 'colorPrimaryDark'.
-
-
 
 FAILURE: Build failed with an exception.
 
 * What went wrong:
 Execution failed for task ':processDebugResources'.
-> com.android.ide.common.process.ProcessException: Failed to execute aapt
+> Error: A library uses the same package as this project: com.tkmgame.cellmap
 
 * Try:
 Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
 
-BUILD FAILED in 6s
+BUILD FAILED in 1s
 ]
 stdout[
-Starting a Gradle Daemon, 1 incompatible and 3 stopped Daemons could not be reused, use --status for details
-NDK is missing a "platforms" directory.
-If you are using NDK, verify the ndk.dir is set to a valid NDK directory.  It is currently set to C:\work\tools\sdk\ndk-bundle.
-If you are not using NDK, unset the NDK variable from ANDROID_NDK_HOME or local.properties to remove this warning.
-
 The setTestClassesDir(File) method has been deprecated and is scheduled to be removed in Gradle 5.0. Please use the setTestClassesDirs(FileCollection) method instead.
 The getTestClassesDir() method has been deprecated and is scheduled to be removed in Gradle 5.0. Please use the getTestClassesDirs() method instead.
 The ConfigurableReport.setDestination(Object) method has been deprecated and is scheduled to be removed in Gradle 5.0. Please use the method ConfigurableReport.setDestination(File) instead.
@@ -44,17 +22,17 @@ The ConfigurableReport.setDestination(Object) method has been deprecated and is 
 :preDebugBuild UP-TO-DATE
 :checkDebugManifest
 :preReleaseBuild UP-TO-DATE
-:prepareAppDebugSdkm20180518113646Library
+:prepareSdkRepertoryDebugLibrary
 :prepareDebugDependencies
-:compileDebugAidl
+:compileDebugAidl UP-TO-DATE
 :compileDebugRenderscript UP-TO-DATE
 :generateDebugBuildConfig UP-TO-DATE
 :generateDebugResValues UP-TO-DATE
 :generateDebugResources UP-TO-DATE
-:mergeDebugResources
+:mergeDebugResources UP-TO-DATE
 :processDebugManifest
 :processDebugResources FAILED
-10 actionable tasks: 7 executed, 3 up-to-date
+10 actionable tasks: 5 executed, 5 up-to-date
 ]
 exit code: 1
 UnityEditor.Android.Command.WaitForProgramToRun (UnityEditor.Utils.Program p, UnityEditor.Android.WaitingForProcessToExit waitingForProcessToExit, System.String errorMsg)
