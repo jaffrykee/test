@@ -14,7 +14,7 @@ namespace SDK {
         public AndroidJavaClass m_tkapi;
         private SdkManager() {
 #if UNITY_ANDROID
-            m_tkapi = new AndroidJavaClass("com.tkmgame.sdk");
+            m_tkapi = new AndroidJavaClass("com.tkmgame.sdk.SdkRepertory");
 #endif
         }
         override public string ToString() {
