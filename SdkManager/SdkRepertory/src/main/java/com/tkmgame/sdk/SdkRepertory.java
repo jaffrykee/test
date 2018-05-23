@@ -61,8 +61,8 @@ public class SdkRepertory extends Fragment {
         } catch (Exception var2) {
             ;
         }
-
         this.m_tkapi.setITKAPICallback(this.itkCallback);
+        m_tkapi.open();
     }
 
     private void payOrder(String var1) {
@@ -102,14 +102,39 @@ public class SdkRepertory extends Fragment {
         this.showText("mx_log", var1);
     }
 
-    public void loginWeChat() {
+    //region 你的描述
+    public int loginQuick() {
+        int ret = m_tkapi.loginWithGuestAccount();
+        infoShow("loginWithGuestAccount ret:" + ret);
+        return ret;
+    }
+
+    public int logout() {
+        int ret = m_tkapi.logout();
+        infoShow("logout ret:" + ret);
+        return ret;
+    }
+
+    public int register(String user, String pw, String code, String name) {
+        int ret = m_tkapi.register(user, pw, code, name);
+        infoShow("register ret:" + ret);
+        return ret;
+    }
+
+    public int password() {
+        return 0;
+    }
+
+    public int loginWeChat() {
         if (this.m_tkapi.isWeChatInstalled()) {
             this.showLog("微信登录需要真实包名和签名");
             int var1 = this.m_tkapi.loginWithWeChat("wx1850d17139d5fab3", 16);
             this.showLog("loginWithWeChat ret:" + var1);
+            return var1;
         }
-
+        return -1;
     }
+    //endregion
 
     public void showLog(String var1) {
         this.showText("mx_log", var1);
