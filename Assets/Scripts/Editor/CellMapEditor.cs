@@ -149,7 +149,7 @@ public class CellMapEditor : EditorWindow {
             m_VerticalSplitterRectLeft.y
             );
 
-        if (GUILayout.Button("刷新", ZESetting.LayoutSetting("Button")) || m_cmdTree == null) {
+        if (GUILayout.Button("刷新", StyleSetting.LayoutSetting("Button")) || m_cmdTree == null) {
             m_cmdTree = new CellMapDataFileTreeView(new TreeViewState(), this);
         }
         var unitTreeRect2 = unitTreeRect;
@@ -283,33 +283,33 @@ public class CellMapEditor : EditorWindow {
         GUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("本地路径", ZESetting.LayoutSetting("LabelFieldShort"));
-        EditorGUILayout.TextField(m_curFilePath, ZESetting.LayoutSetting("TextFieldLong"));
+        EditorGUILayout.LabelField("本地路径", StyleSetting.LayoutSetting("LabelFieldShort"));
+        EditorGUILayout.TextField(m_curFilePath, StyleSetting.LayoutSetting("TextFieldLong"));
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("资源路径", ZESetting.LayoutSetting("LabelFieldShort"));
-        EditorGUILayout.TextField(m_curResPath, ZESetting.LayoutSetting("TextFieldLong"));
+        EditorGUILayout.LabelField("资源路径", StyleSetting.LayoutSetting("LabelFieldShort"));
+        EditorGUILayout.TextField(m_curResPath, StyleSetting.LayoutSetting("TextFieldLong"));
         EditorGUILayout.EndHorizontal();
         if (!(m_curResPath == null || m_curResPath.Length == 0 || m_curResPath[m_curResPath.Length - 1] == '/')) {
             m_isShowCanvas = true;
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("地图尺寸：", ZESetting.LayoutSetting("LabelFieldShort"));
-            EditorGUILayout.LabelField("x:", ZESetting.LayoutSetting("LabelFieldShort"));
-            m_mapSizeX = EditorGUILayout.TextField(m_mapSizeX, ZESetting.LayoutSetting("TextField"));
-            EditorGUILayout.LabelField("y:", ZESetting.LayoutSetting("LabelFieldShort"));
-            m_mapSizeY = EditorGUILayout.TextField(m_mapSizeY, ZESetting.LayoutSetting("TextField"));
+            EditorGUILayout.LabelField("地图尺寸：", StyleSetting.LayoutSetting("LabelFieldShort"));
+            EditorGUILayout.LabelField("x:", StyleSetting.LayoutSetting("LabelFieldShort"));
+            m_mapSizeX = EditorGUILayout.TextField(m_mapSizeX, StyleSetting.LayoutSetting("TextField"));
+            EditorGUILayout.LabelField("y:", StyleSetting.LayoutSetting("LabelFieldShort"));
+            m_mapSizeY = EditorGUILayout.TextField(m_mapSizeY, StyleSetting.LayoutSetting("TextField"));
             var sizeX = Convert.ToInt32(m_mapSizeX);
             var sizeY = Convert.ToInt32(m_mapSizeY);
-            if (GUILayout.Button("设置", ZESetting.LayoutSetting("Button"))) {
+            if (GUILayout.Button("设置", StyleSetting.LayoutSetting("Button"))) {
                 resizeCellMap(sizeX, sizeY);
             }
             EditorGUILayout.EndHorizontal();
             if (m_curMapConfig != null && m_curCellX < m_curMapConfig.mapSizeX && m_curCellY < m_curMapConfig.mapSizeY) {
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("当前Cell：" + m_curCellX.ToString() + ", " + m_curCellY.ToString(), ZESetting.LayoutSetting("LabelField"));
+                EditorGUILayout.LabelField("当前Cell：" + m_curCellX.ToString() + ", " + m_curCellY.ToString(), StyleSetting.LayoutSetting("LabelField"));
                 EditorGUILayout.EndHorizontal();
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("disable:", ZESetting.LayoutSetting("LabelFieldShort"));
+                EditorGUILayout.LabelField("disable:", StyleSetting.LayoutSetting("LabelFieldShort"));
                 var oldValue = m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].disable;
                 var newValue = EditorGUILayout.Toggle(oldValue);
                 if (newValue != oldValue) {
@@ -318,13 +318,13 @@ public class CellMapEditor : EditorWindow {
                 }
                 EditorGUILayout.EndHorizontal();
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("height:", ZESetting.LayoutSetting("LabelFieldShort"));
+                EditorGUILayout.LabelField("height:", StyleSetting.LayoutSetting("LabelFieldShort"));
                 string newHeightStr;
                 if (isChanged == true) {
                     newHeightStr = keyCache;
                     isChanged = false;
                 } else {
-                    newHeightStr = EditorGUILayout.TextField(m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height.ToString(), ZESetting.LayoutSetting("TextField"));
+                    newHeightStr = EditorGUILayout.TextField(m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height.ToString(), StyleSetting.LayoutSetting("TextField"));
                 }
                 var newHeight = Convert.ToInt32(newHeightStr) + dh;
                 if (newHeight != m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height) {
@@ -334,10 +334,10 @@ public class CellMapEditor : EditorWindow {
                 EditorGUILayout.EndHorizontal();
             }
             //EditorGUILayout.BeginHorizontal();
-            //if (GUILayout.Button("Ok", ZESetting.LayoutSetting("Button")))
+            //if (GUILayout.Button("Ok", StyleSetting.LayoutSetting("Button")))
             //{
             //}
-            //else if (GUILayout.Button("Cancel", ZESetting.LayoutSetting("Button")))
+            //else if (GUILayout.Button("Cancel", StyleSetting.LayoutSetting("Button")))
             //{
             //}
             //EditorGUILayout.EndHorizontal();

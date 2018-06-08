@@ -35,19 +35,19 @@ public class ZEditor : EditorWindow {
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("text:", ZESetting.LayoutSetting("LabelFieldShort"));
-        EditorGUILayout.TextField(UnityEngine.Random.value.ToString(), ZESetting.LayoutSetting("TextField"));
+        EditorGUILayout.LabelField("text:", StyleSetting.LayoutSetting("LabelFieldShort"));
+        EditorGUILayout.TextField(UnityEngine.Random.value.ToString(), StyleSetting.LayoutSetting("TextField"));
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Ok", ZESetting.LayoutSetting("Button"))) {
+        if (GUILayout.Button("Ok", StyleSetting.LayoutSetting("Button"))) {
             m_showValue = m_value00;
-        } else if (GUILayout.Button("Cancel", ZESetting.LayoutSetting("Button"))) {
+        } else if (GUILayout.Button("Cancel", StyleSetting.LayoutSetting("Button"))) {
             m_showValue = "";
         }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
 
-        //EditorGUILayout.LabelField(m_showValue, ZESetting.LayoutSetting("LabelField"));
+        //EditorGUILayout.LabelField(m_showValue, StyleSetting.LayoutSetting("LabelField"));
     }
 
     public static ZEditor s_instance = null;
