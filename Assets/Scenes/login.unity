@@ -1491,15 +1491,24 @@ MonoBehaviour:
   m_showOutline: 1
   m_isQuickOutline: 1
   m_outlineMaterial: {fileID: 2100000, guid: 134e0eac7ec054a4b979d9b262fff98d, type: 2}
-  m_outlineColor: {r: 0, g: 0, b: 0, a: 0.534}
+  m_outlineColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.534
   m_outlineWidth: 0.05
   m_outlineHeight: 0.01
   m_selectLineMaterial: {fileID: 2100000, guid: 323b4b446bdb01343a7314587e172b73,
     type: 2}
-  m_selectLineColor: {r: 1, g: 1, b: 1, a: 1}
+  m_selectLineColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
   m_selectLineWidth: 0.1
   m_selectLineHeight: 0.15
   m_curCell: {fileID: 0}
+  m_selectLine: {fileID: 0}
 --- !u!4 &975355442
 Transform:
   m_ObjectHideFlags: 0
