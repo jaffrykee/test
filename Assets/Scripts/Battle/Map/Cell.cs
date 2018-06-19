@@ -12,12 +12,11 @@ namespace TkmGame.Gtr.Battle {
         private const float c_minColor = 0.3f;
         private const float c_maxColor = c_minColor + c_max * c_dColor;
         static Dictionary<uint, Color> colorDictionary() {
-            var cd = new Dictionary<uint, Color>
-            {
-            {c_cbtnStateNormal,     new Color(c_minColor, c_maxColor, c_minColor, 1.0f)},
-            {c_cbtnStateCurSelect,  new Color(1.0f, 1.0f, 1.0f, 1.0f)},
-            {c_cbtnStateDisable,    new Color(0.1f, 0.1f, 0.1f, 1.0f)},
-        };
+            var cd = new Dictionary<uint, Color> {
+                {c_cbtnStateNormal,     new Color(c_minColor, c_maxColor, c_minColor, 1.0f)},
+                {c_cbtnStateCurSelect,  new Color(1.0f, 1.0f, 1.0f, 1.0f)},
+                {c_cbtnStateDisable,    new Color(0.1f, 0.1f, 0.1f, 1.0f)},
+            };
             for (uint i = 1; i <= c_max * 2; i++) {
                 if (i <= c_max) {
                     cd.Add(c_cbtnStateNormal + i, new Color(c_minColor + c_dColor * i, c_maxColor, c_minColor, 1.0f));

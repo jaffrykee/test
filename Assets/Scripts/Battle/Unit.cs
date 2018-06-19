@@ -1,4 +1,5 @@
 ﻿using TkmGame.Core;
+using System.Collections.Generic;
 
 namespace TkmGame.Gtr.Battle {
     /// <summary>
@@ -6,6 +7,7 @@ namespace TkmGame.Gtr.Battle {
     /// </summary>
     public class Unit : Goods {
         public Army m_army;
+        public Card m_card;
         public string m_text;
         //所属
         public int m_groupId;
@@ -17,8 +19,40 @@ namespace TkmGame.Gtr.Battle {
         public int m_basicAttackRange = 1;
         public int m_basicSupplyRange = 1;
 
+        public List<EffectFunc>[] m_arrEffect = new List<EffectFunc>[(int)EffectEvent.MAX];
+
         public Unit(string name, Army army) : base(BattleManager.instance(), name) {
             m_army = army;
+        }
+        public void onEffectEvent(EffectEvent e, Unit unit) {
+            var fl = m_arrEffect[(int)e];
+            if (fl != null) {
+                foreach (var ef in fl) {
+                    ef(this, unit);
+                }
+            }
+        }
+
+        public void onBorn() {
+
+        }
+        public void onEnter() {
+
+        }
+        public void onDead() {
+
+        }
+        public void onExit() {
+
+        }
+        public void onUnitEnter(Unit unit) {
+
+        }
+        public void onOtherUnitDead(Unit unit, bool isNormal) {
+
+        }
+        public void onOtherUnitInjured(Unit unit) {
+
         }
     }
 }

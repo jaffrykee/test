@@ -13,6 +13,7 @@ namespace TkmGame.Gtr.Battle {
         }
         public League m_league;
         public ArmyType m_type = ArmyType.Player;
+
         public Army(string name, League league, ArmyType type = ArmyType.Player) : base(BattleManager.instance(), name) {
             m_league = league;
             m_type = type;

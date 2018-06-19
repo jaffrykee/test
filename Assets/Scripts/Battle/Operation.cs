@@ -16,5 +16,8 @@ namespace TkmGame.Gtr.Battle {
         public Operation(string name, Turn turn) : base(BattleManager.instance(), name) {
             m_turn = turn;
         }
+        override public string ToString() {
+            return "";
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using TkmGame.Core;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace TkmGame.Gtr.Battle {
     /// <summary>
@@ -9,6 +11,8 @@ namespace TkmGame.Gtr.Battle {
 
         }
         public Army m_army;
+        public List<EffectFunc> m_beList;
+
         public Card(string name, Army army) : base(BattleManager.instance(), name) {
             m_army = army;
         }
