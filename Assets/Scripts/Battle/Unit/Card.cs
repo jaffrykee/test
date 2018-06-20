@@ -11,7 +11,8 @@ namespace TkmGame.Gtr.Battle {
 
         }
         public Army m_army;
-        public List<EffectFunc> m_beList;
+        public List<EffectFunc>[] m_arrEffect = new List<EffectFunc>[(int)EffectEvent.MAX];
+        public List<UnitProperty>[] m_arrBuff;
 
         public Card(string name, Army army) : base(BattleManager.instance(), name) {
             m_army = army;

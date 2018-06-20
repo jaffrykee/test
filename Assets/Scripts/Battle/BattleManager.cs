@@ -13,15 +13,13 @@ namespace TkmGame.Gtr.Battle {
         }
 
         private BattleManager() : base(
-            new Dictionary<Type, Object>
-            {
-            {typeof(League), new List<League>()},
-            {typeof(Army), new List<Army>()},
-            {typeof(Unit), new List<Unit>()},
-            {typeof(Turn), new List<Turn>()},
-            {typeof(Operation), new List<Operation>()},
-            },
-            new Dictionary<string, Goods>()) {
+            new Dictionary<Type, Object> {
+                {typeof(League), new List<League>()},
+                {typeof(Army), new List<Army>()},
+                {typeof(Unit), new List<Unit>()},
+                {typeof(Turn), new List<Turn>()},
+                {typeof(Operation), new List<Operation>()},
+            }, new Dictionary<string, Goods>()) {
         }
         public void resetData(Stage data) {
 

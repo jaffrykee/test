@@ -7,22 +7,17 @@ namespace TkmGame.Gtr.Battle {
     /// </summary>
     public class Unit : Goods {
         public Army m_army;
-        public Card m_card;
+        public string m_cardName;
         public string m_text;
         //所属
         public int m_groupId;
 
-        public int m_basicAttack;
-        public int m_basicDefense;
-        public int m_basicSupply;
-
-        public int m_basicAttackRange = 1;
-        public int m_basicSupplyRange = 1;
+        public UnitProperty m_basicProperty;
 
         public List<EffectFunc>[] m_arrEffect = new List<EffectFunc>[(int)EffectEvent.MAX];
+        public List<UnitProperty>[] m_arrBuff;
 
-        public Unit(string name, Army army) : base(BattleManager.instance(), name) {
-            m_army = army;
+        public Unit(string name, Card card) : base(BattleManager.instance(), name) {
         }
         public void onEffectEvent(EffectEvent e, Unit unit) {
             var fl = m_arrEffect[(int)e];
@@ -31,28 +26,6 @@ namespace TkmGame.Gtr.Battle {
                     ef(this, unit);
                 }
             }
-        }
-
-        public void onBorn() {
-
-        }
-        public void onEnter() {
-
-        }
-        public void onDead() {
-
-        }
-        public void onExit() {
-
-        }
-        public void onUnitEnter(Unit unit) {
-
-        }
-        public void onOtherUnitDead(Unit unit, bool isNormal) {
-
-        }
-        public void onOtherUnitInjured(Unit unit) {
-
         }
     }
 }

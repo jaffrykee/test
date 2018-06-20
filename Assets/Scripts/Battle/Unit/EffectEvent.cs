@@ -12,6 +12,10 @@ namespace TkmGame.Gtr.Battle {
         onUnitInjured,
         onAttack,
         onAttacked,
+        onSelfTurnBegin,
+        onSelfTurnEnd,
+        onEnemyTurnBegin,
+        onEnemyTurnEnd,
         MAX,
     };
 }
