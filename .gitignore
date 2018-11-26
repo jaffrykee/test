@@ -23,3 +23,5 @@ build
 /Assets/Resources/version.txt.meta
 /Assets/Resources/Bin.meta
 /Assets/Plugins/iOS
+/gamelibs/libmain/Debug/*.pdb
+/gamelibs/libmain/Debug

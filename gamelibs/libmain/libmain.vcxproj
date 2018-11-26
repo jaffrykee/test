@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{F21B89E2-A486-4833-97E6-D8DF9EAD170D}</ProjectGuid>
+    <RootNamespace>libmain</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="AABB2D.h" />
+    <ClInclude Include="AttrSetting.h" />
+    <ClInclude Include="AutoGrid.h" />
+    <ClInclude Include="BasicClip.h" />
+    <ClInclude Include="BasicContent.h" />
+    <ClInclude Include="BasicMeasure.h" />
+    <ClInclude Include="BasicTransform.h" />
+    <ClInclude Include="Blink.h" />
+    <ClInclude Include="Border.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="ButtonBase.h" />
+    <ClInclude Include="CheckButton.h" />
+    <ClInclude Include="ChildItem.h" />
+    <ClInclude Include="ComponentHeaders.h" />
+    <ClInclude Include="ContainerComponent.h" />
+    <ClInclude Include="Control.h" />
+    <ClInclude Include="DataHeaders.h" />
+    <ClInclude Include="DataInfoAttr.h" />
+    <ClInclude Include="DataInfoNode.h" />
+    <ClInclude Include="DataManager.h" />
+    <ClInclude Include="DictionaryManager.h" />
+    <ClInclude Include="ElementSetting.h" />
+    <ClInclude Include="EventNodeBase.h" />
+    <ClInclude Include="EventNodeGroup.h" />
+    <ClInclude Include="EventScript.h" />
+    <ClInclude Include="EventTrigger.h" />
+    <ClInclude Include="FlowElement.h" />
+    <ClInclude Include="Geometry.h" />
+    <ClInclude Include="GeometryHeaders.h" />
+    <ClInclude Include="GeometryManager.h" />
+    <ClInclude Include="GeometryPoly.h" />
+    <ClInclude Include="GeometryRect.h" />
+    <ClInclude Include="GeometryUnionPoly.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="GridItem.h" />
+    <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="ImagePackage.h" />
+    <ClInclude Include="ImageShape.h" />
+    <ClInclude Include="ImageSkinHeaders.h" />
+    <ClInclude Include="InputBox.h" />
+    <ClInclude Include="MeasureData.h" />
+    <ClInclude Include="NameSpaceSetting.h" />
+    <ClInclude Include="NodeHeaders.h" />
+    <ClInclude Include="NodeManager.h" />
+    <ClInclude Include="NodeTypeSetting.h" />
+    <ClInclude Include="ObjectAttrDef.hpp" />
+    <ClInclude Include="ObjectBase.h" />
+    <ClInclude Include="ObjectHeaders.h" />
+    <ClInclude Include="Para.h" />
+    <ClInclude Include="ParticleShape.h" />
+    <ClInclude Include="Progress.h" />
+    <ClInclude Include="ProgressSlider.h" />
+    <ClInclude Include="RadioButton.h" />
+    <ClInclude Include="ResPool.h" />
+    <ClInclude Include="ResPoolManager.h" />
+    <ClInclude Include="ScrollView.h" />
+    <ClInclude Include="ShapeGroup.h" />
+    <ClInclude Include="SimpleComponent.h" />
+    <ClInclude Include="Size.h" />
+    <ClInclude Include="SkillButton.h" />
+    <ClInclude Include="Skin.h" />
+    <ClInclude Include="SkinGroup.h" />
+    <ClInclude Include="SkinRow.h" />
+    <ClInclude Include="SlicedPanel.h" />
+    <ClInclude Include="ssuiBasic.h" />
+    <ClInclude Include="SSUIDef.h" />
+    <ClInclude Include="SSUIEvent.h" />
+    <ClInclude Include="SSUILib.h" />
+    <ClInclude Include="SSUIMath.h" />
+    <ClInclude Include="SSUIPublic.h" />
+    <ClInclude Include="StackPanel.h" />
+    <ClInclude Include="StaticCache.h" />
+    <ClInclude Include="StringManager.h" />
+    <ClInclude Include="SystemHeaders.h" />
+    <ClInclude Include="TextFlow.h" />
+    <ClInclude Include="TextShape.h" />
+    <ClInclude Include="TimeContent.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="ToggleButton.h" />
+    <ClInclude Include="UIComponent.h" />
+    <ClInclude Include="UIController.h" />
+    <ClInclude Include="UIDrawModel.h" />
+    <ClInclude Include="UIImageBase.h" />
+    <ClInclude Include="UIImagePoly.h" />
+    <ClInclude Include="UIImageRect.h" />
+    <ClInclude Include="UIKeySubject.h" />
+    <ClInclude Include="UIManager.h" />
+    <ClInclude Include="UIScene.h" />
+    <ClInclude Include="UITexture.h" />
+    <ClInclude Include="UIXmlConfig.h" />
+    <ClInclude Include="VirtualJoystick.h" />
+    <ClInclude Include="WrapPanel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AttrSetting.cpp" />
+    <ClCompile Include="AutoGrid.cpp" />
+    <ClCompile Include="BasicClip.cpp" />
+    <ClCompile Include="BasicContent.cpp" />
+    <ClCompile Include="BasicMeasure.cpp" />
+    <ClCompile Include="BasicTransform.cpp" />
+    <ClCompile Include="Blink.cpp" />
+    <ClCompile Include="Border.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ButtonBase.cpp" />
+    <ClCompile Include="CheckButton.cpp" />
+    <ClCompile Include="ChildItem.cpp" />
+    <ClCompile Include="ContainerComponent.cpp" />
+    <ClCompile Include="Control.cpp" />
+    <ClCompile Include="DataInfoAttr.cpp" />
+    <ClCompile Include="DataInfoNode.cpp" />
+    <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="DictionaryManager.cpp" />
+    <ClCompile Include="ElementSetting.cpp" />
+    <ClCompile Include="EventNodeBase.cpp" />
+    <ClCompile Include="EventNodeGroup.cpp" />
+    <ClCompile Include="EventScript.cpp" />
+    <ClCompile Include="EventTrigger.cpp" />
+    <ClCompile Include="FlowElement.cpp" />
+    <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="GeometryManager.cpp" />
+    <ClCompile Include="GeometryPoly.cpp" />
+    <ClCompile Include="GeometryRect.cpp" />
+    <ClCompile Include="GeometryUnionPoly.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="GridItem.cpp" />
+    <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="ImagePackage.cpp" />
+    <ClCompile Include="ImageShape.cpp" />
+    <ClCompile Include="InputBox.cpp" />
+    <ClCompile Include="MeasureData.cpp" />
+    <ClCompile Include="NameSpaceSetting.cpp" />
+    <ClCompile Include="NodeManager.cpp" />
+    <ClCompile Include="NodeTypeSetting.cpp" />
+    <ClCompile Include="ObjectBase.cpp" />
+    <ClCompile Include="Para.cpp" />
+    <ClCompile Include="ParticleShape.cpp" />
+    <ClCompile Include="Progress.cpp" />
+    <ClCompile Include="ProgressSlider.cpp" />
+    <ClCompile Include="RadioButton.cpp" />
+    <ClCompile Include="ResPoolManager.cpp" />
+    <ClCompile Include="ScrollView.cpp" />
+    <ClCompile Include="ShapeGroup.cpp" />
+    <ClCompile Include="SimpleComponent.cpp" />
+    <ClCompile Include="Size.cpp" />
+    <ClCompile Include="SkillButton.cpp" />
+    <ClCompile Include="Skin.cpp" />
+    <ClCompile Include="SkinGroup.cpp" />
+    <ClCompile Include="SkinRow.cpp" />
+    <ClCompile Include="SlicedPanel.cpp" />
+    <ClCompile Include="SSUIEvent.cpp" />
+    <ClCompile Include="SSUIMath.cpp" />
+    <ClCompile Include="SSUIPublic.cpp" />
+    <ClCompile Include="StackPanel.cpp" />
+    <ClCompile Include="StringManager.cpp" />
+    <ClCompile Include="TextFlow.cpp" />
+    <ClCompile Include="TextShape.cpp" />
+    <ClCompile Include="TimeContent.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="ToggleButton.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
+    <ClCompile Include="UIController.cpp" />
+    <ClCompile Include="UIDrawModel.cpp" />
+    <ClCompile Include="UIImageBase.cpp" />
+    <ClCompile Include="UIImagePoly.cpp" />
+    <ClCompile Include="UIImageRect.cpp" />
+    <ClCompile Include="UIKeySubject.cpp" />
+    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="UIScene.cpp" />
+    <ClCompile Include="UITexture.cpp" />
+    <ClCompile Include="UIXmlConfig.cpp" />
+    <ClCompile Include="VirtualJoystick.cpp" />
+    <ClCompile Include="WrapPanel.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
