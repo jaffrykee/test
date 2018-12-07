@@ -54,5 +54,4 @@ namespace TkmGame.Gtr.Battle {
             }
         }
     }
-
 }

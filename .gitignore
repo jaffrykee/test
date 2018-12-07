@@ -25,3 +25,5 @@ build
 /Assets/Plugins/iOS
 /gamelibs/libmain/Debug/*.pdb
 /gamelibs/libmain/Debug
+/gamelibs/Debug
+/gamelibs/libmain_old
