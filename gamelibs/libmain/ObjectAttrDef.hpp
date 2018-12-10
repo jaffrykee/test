@@ -6,13 +6,6 @@ inline int ObjectBase::getAttrValue(AttrSetting* pAs, DataType& retValue) {
     int ret = dealAttrValueFromAttrData(pAs, adt);
     if (ret >= 0) {
         retValue = pAs->getFuncDef<DataType, pGetFuncType>(this);
-    } else if (getNodeType() == NT_Control) {
-        for (const auto& pComp : ((Control*)this)->m_components) {
-            int retChild = pComp->getAttrValue<DataType, adt, pGetFuncType>(pAs, retValue);
-            if (retChild >= 0) {
-                return retChild;
-            }
-        }
     }
     return ret;
 }

@@ -248,14 +248,6 @@ void tkm::Control::set##AttrName(const dataType& value) {                      \
 
 #pragma endregion
 
-#define CCIT_DEF(Name, ...)                                                                      \
-m_ccitData[CCIT_##Name].m_id = CCIT_##Name;                                                      \
-m_ccitData[CCIT_##Name].addComps(__VA_ARGS__);                                                   \
-pEs = ElementSetting::createObject(pTkm, #Name, NT_Control, CCIT_##Name);                       \
-m_ccitData[CCIT_##Name].m_pEs = pEs;                                                             \
-DataManager::getInstance()->m_lmapCcit.insert(pEs->m_name.hashCode(), &m_ccitData[CCIT_##Name]);            \
-pEtkm->addChild(pEs);                                                                           \
-
 #pragma region "ÊôÐÔ½Ó¿Ú"
 #define ATTR_MENUM(NodeType, attrName) AT_##NodeType##_##attrName
 #define ATTR_GNAME(AttrName) get##AttrName
