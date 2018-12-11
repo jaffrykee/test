@@ -9,11 +9,11 @@ namespace TkmGame.Gtr.Battle {
         }
         public CellMapData(int x, int y) {
             int count = x * y;
-            mapSizeX = x;
-            mapSizeY = y;
-            cellData = new CellData[count];
-            for (int i = 0; i < cellData.Length; i++) {
-                cellData[i] = new CellData();
+            m_mapSizeX = x;
+            m_mapSizeY = y;
+            m_cellData = new CellData[count];
+            for (int i = 0; i < m_cellData.Length; i++) {
+                m_cellData[i] = new CellData();
             }
         }
         public void resizeCellMap(int x, int y) {
@@ -21,20 +21,28 @@ namespace TkmGame.Gtr.Battle {
             var newCellDataSetting = new CellData[newCount];
             for (int i = 0; i < x; i++) {
                 for (int j = 0; j < y; j++) {
-                    if (i < mapSizeX && j < mapSizeY && cellData[i * mapSizeY + j] != null) {
-                        newCellDataSetting[i * y + j] = cellData[i * mapSizeY + j];
+                    if (i < m_mapSizeX && j < m_mapSizeY && m_cellData[i * m_mapSizeY + j] != null) {
+                        newCellDataSetting[i * y + j] = m_cellData[i * m_mapSizeY + j];
                     } else {
                         newCellDataSetting[i * y + j] = new CellData();
                     }
                 }
             }
-            mapSizeX = x;
-            mapSizeY = y;
-            cellData = newCellDataSetting;
+            m_mapSizeX = x;
+            m_mapSizeY = y;
+            m_cellData = newCellDataSetting;
+        }
+        public void randomCellFunc001() {
+            var ba = System.Guid.NewGuid().ToByteArray();
+            int t = 0;
+            foreach (var cur in ba) {
+                t++;
+            }
+            Debug.LogWarning(t.ToString());
         }
 
-        public int mapSizeX = 1;
-        public int mapSizeY = 1;
-        public CellData[] cellData = new CellData[1];
+        public int m_mapSizeX = 1;
+        public int m_mapSizeY = 1;
+        public CellData[] m_cellData = new CellData[1];
     }
 }

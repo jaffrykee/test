@@ -1743,7 +1743,7 @@ MonoBehaviour:
   m_fixedType: 0
   m_zoomType: 0
   m_rotationSpeed: 3
-  m_moveSpeed: 0.1
+  m_moveSpeed: 0.5
   m_moveExTimes: 5
   m_curDistance: 0
   m_zoomSpeed: 25

@@ -123,7 +123,7 @@ namespace TkmGame.GtrEditor {
             var e = Event.current;
             bool isChanged = false;
             if (e != null && e.isKey && e.type == EventType.KeyUp) {
-                if (m_curMapConfig != null && m_curCellX < m_curMapConfig.mapSizeX && m_curCellY < m_curMapConfig.mapSizeY) {
+                if (m_curMapConfig != null && m_curCellX < m_curMapConfig.m_mapSizeX && m_curCellY < m_curMapConfig.m_mapSizeY) {
                     if (e.keyCode == KeyCode.W) {
                         dh = 1;
                     }
@@ -202,19 +202,19 @@ namespace TkmGame.GtrEditor {
             GUILayout.BeginArea(unitListRect, EditorStyles.helpBox);
             if (m_curMapConfig != null && m_isShowCanvas == true) {
                 scrollPosition = GUILayout.BeginScrollView(scrollPosition);
-                GUILayout.BeginHorizontal(GUILayout.Width(m_curMapConfig.mapSizeX * m_cellButtonLen));
-                for (int i = 0; i < m_curMapConfig.mapSizeX; i++) {
+                GUILayout.BeginHorizontal(GUILayout.Width(m_curMapConfig.m_mapSizeX * m_cellButtonLen));
+                for (int i = 0; i < m_curMapConfig.m_mapSizeX; i++) {
                     GUILayout.BeginVertical();
                     if ((i & 1) == 1) {
                         GUILayout.Space(m_cellButtonLen * 0.5f);
                     }
-                    for (int j = m_curMapConfig.mapSizeY - 1; j >= 0; j--) {
+                    for (int j = m_curMapConfig.m_mapSizeY - 1; j >= 0; j--) {
                         //curTip = i.ToString() + ", " + j.ToString() + "\n";
                         uint texId = 0;
                         Texture2D tmpTex = null;
 
                         if (m_curMapConfig != null) {
-                            var curCell = m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j];
+                            var curCell = m_curMapConfig.m_cellData[i * m_curMapConfig.m_mapSizeY + j];
                             //if (m_curCellX == i && m_curCellY == j)
                             //{
                             //    //curSelect
@@ -245,7 +245,7 @@ namespace TkmGame.GtrEditor {
                             m_curCellX = i;
                             m_curCellY = j;
                             if (m_isChangedValue == true) {
-                                m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j].disable = !m_curMapConfig.cellData[i * m_curMapConfig.mapSizeY + j].disable;
+                                m_curMapConfig.m_cellData[i * m_curMapConfig.m_mapSizeY + j].disable = !m_curMapConfig.m_cellData[i * m_curMapConfig.m_mapSizeY + j].disable;
                                 saveCellMapSetting();
                             }
                             GUI.SetNextControlName("mx_tmpFocus");
@@ -262,7 +262,7 @@ namespace TkmGame.GtrEditor {
                 const float dx = 0;
                 const float dy = 0;
                 float selbx = m_curCellX * m_cellButtonLen + dx;
-                float selby = ((m_curCellX & 1) * 0.5f + m_curMapConfig.mapSizeY - m_curCellY - 1) * m_cellButtonLen + dy;
+                float selby = ((m_curCellX & 1) * 0.5f + m_curMapConfig.m_mapSizeY - m_curCellY - 1) * m_cellButtonLen + dy;
                 GUILayout.BeginArea(new Rect(selbx, selby, m_cellButtonLen, m_cellButtonLen));
                 var texSel = getSelectBorderTexCache(m_cellButtonLen - c_cellButtonSpacing);
                 GUILayout.Button(new GUIContent(texSel), new GUIStyle(), new GUILayoutOption[] { GUILayout.Width(m_cellButtonLen), GUILayout.Height(m_cellButtonLen) });
@@ -306,16 +306,16 @@ namespace TkmGame.GtrEditor {
                     resizeCellMap(sizeX, sizeY);
                 }
                 EditorGUILayout.EndHorizontal();
-                if (m_curMapConfig != null && m_curCellX < m_curMapConfig.mapSizeX && m_curCellY < m_curMapConfig.mapSizeY) {
+                if (m_curMapConfig != null && m_curCellX < m_curMapConfig.m_mapSizeX && m_curCellY < m_curMapConfig.m_mapSizeY) {
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField("当前Cell：" + m_curCellX.ToString() + ", " + m_curCellY.ToString(), StyleSetting.LayoutSetting("LabelField"));
                     EditorGUILayout.EndHorizontal();
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField("disable:", StyleSetting.LayoutSetting("LabelFieldShort"));
-                    var oldValue = m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].disable;
+                    var oldValue = m_curMapConfig.m_cellData[m_curCellX * m_curMapConfig.m_mapSizeY + m_curCellY].disable;
                     var newValue = EditorGUILayout.Toggle(oldValue);
                     if (newValue != oldValue) {
-                        m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].disable = newValue;
+                        m_curMapConfig.m_cellData[m_curCellX * m_curMapConfig.m_mapSizeY + m_curCellY].disable = newValue;
                         saveCellMapSetting();
                     }
                     EditorGUILayout.EndHorizontal();
@@ -326,11 +326,11 @@ namespace TkmGame.GtrEditor {
                         newHeightStr = keyCache;
                         isChanged = false;
                     } else {
-                        newHeightStr = EditorGUILayout.TextField(m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height.ToString(), StyleSetting.LayoutSetting("TextField"));
+                        newHeightStr = EditorGUILayout.TextField(m_curMapConfig.m_cellData[m_curCellX * m_curMapConfig.m_mapSizeY + m_curCellY].height.ToString(), StyleSetting.LayoutSetting("TextField"));
                     }
                     var newHeight = Convert.ToInt32(newHeightStr) + dh;
-                    if (newHeight != m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height) {
-                        m_curMapConfig.cellData[m_curCellX * m_curMapConfig.mapSizeY + m_curCellY].height = newHeight;
+                    if (newHeight != m_curMapConfig.m_cellData[m_curCellX * m_curMapConfig.m_mapSizeY + m_curCellY].height) {
+                        m_curMapConfig.m_cellData[m_curCellX * m_curMapConfig.m_mapSizeY + m_curCellY].height = newHeight;
                         saveCellMapSetting();
                     }
                     EditorGUILayout.EndHorizontal();
@@ -458,8 +458,8 @@ namespace TkmGame.GtrEditor {
                         m_curMapConfig = new CellMapData(2, 2);
                         saveCellMapSetting();
                     }
-                    m_mapSizeX = m_curMapConfig.mapSizeX.ToString();
-                    m_mapSizeY = m_curMapConfig.mapSizeY.ToString();
+                    m_mapSizeX = m_curMapConfig.m_mapSizeX.ToString();
+                    m_mapSizeY = m_curMapConfig.m_mapSizeY.ToString();
                 }
             }
         }
