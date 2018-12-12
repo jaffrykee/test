@@ -603,5 +603,6 @@
             "sprite"  : [
             ]
         }
-    ]
+    ],
+    "m_arrRandomPoi" : null
 }

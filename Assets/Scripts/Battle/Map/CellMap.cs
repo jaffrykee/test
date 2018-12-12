@@ -38,11 +38,11 @@ namespace TkmGame.Gtr.Battle {
                 return;
             }
             if (m_curData == null) {
-                m_curData = new CellMapData(100, 100);
+                m_curData = new CellMapData(128, 128);
                 m_curData.randomCellFunc001();
             }
-            m_mapSizeX = m_curData.m_mapSizeX;
-            m_mapSizeY = m_curData.m_mapSizeY;
+            m_mapSizeX = m_curData.mapSizeX;
+            m_mapSizeY = m_curData.mapSizeY;
             m_cellData = new Cell[m_mapSizeX, m_mapSizeY];
             float di = (3 + m_spacing * Mathf.Sqrt(3)) * 0.5f;
             float dj = Mathf.Sqrt(3) + m_spacing;
@@ -64,11 +64,11 @@ namespace TkmGame.Gtr.Battle {
             for (int i = 0; i < m_mapSizeX; i++) {
                 if (i % 2 == 0) {
                     for (int j = 0; j < m_mapSizeY; j++) {
-                        createCell(new Vector3(i * di + dx, 0, j * dj + dy), m_curData.m_cellData[i * m_mapSizeY + j], i, j);
+                        createCell(new Vector3(i * di + dx, 0, j * dj + dy), m_curData.cellData[i * m_mapSizeY + j], i, j);
                     }
                 } else {
                     for (int j = 0; j < m_mapSizeY; j++) {
-                        createCell(new Vector3(i * di + dx, 0, (j - 0.5f) * dj + dy), m_curData.m_cellData[i * m_mapSizeY + j], i, j);
+                        createCell(new Vector3(i * di + dx, 0, (j - 0.5f) * dj + dy), m_curData.cellData[i * m_mapSizeY + j], i, j);
                     }
                 }
             }
@@ -147,6 +147,7 @@ namespace TkmGame.Gtr.Battle {
                     lr.endWidth = m_selectLineWidth;
                 }
             }
+            Debug.Log(curCell.m_cellPoi.ToString());
         }
 
         const string c_dataFolder = "Data/CellMap/";
