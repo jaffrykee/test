@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace TkmGame.Gtr.Battle {
     public class CellMapData {
+        public const int c_rcf001Per = 2;
+        public const int c_rcf001MaxHeight = 4;
+
         public CellMapData() {
 
         }
@@ -32,7 +35,7 @@ namespace TkmGame.Gtr.Battle {
             mapSizeY = y;
             cellData = newCellDataSetting;
         }
-        public void randomCellFunc101() {
+        public void rcf101() {
             for (int i = 0; i <= mapSizeX * mapSizeY - 32; i += 32) {
                 var ba = System.Guid.NewGuid().ToByteArray();
                 for (int j = 0; j < 16; j++) {
@@ -49,10 +52,9 @@ namespace TkmGame.Gtr.Battle {
                 }
             }
         }
-        public void randomCellFunc001_getPois() {
-            const int per = 6;
+        public void rcf001_getPois() {
             int mapSize = mapSizeX * mapSizeY;
-            int countPoi = (mapSizeX * mapSizeY) >> per;
+            int countPoi = (mapSizeX * mapSizeY) >> c_rcf001Per;
             m_arrRandomPoi = new uint[countPoi];
             if (countPoi < 20000) {
                 for (int i = 0; i <= countPoi - 8; i++) {
@@ -161,19 +163,28 @@ namespace TkmGame.Gtr.Battle {
                 }
             }
         }
-        public void randomCellFunc001_terrain() {
+        public void rcf001_terrain() {
             foreach (var curPoi in m_arrRandomPoi) {
                 var cx = getCellX((int)curPoi);
                 var cy = getCellY((int)curPoi);
                 var cell = getCell(cx, cy);
                 if (cell.height != 0) {
-                    //Debug.LogWarning(cell.height.ToString());
                     rcf001_terrainFunc(cx, cy);
                 }
             }
         }
-        public void randomCellFunc001() {
-            randomCellFunc001_getPois();
+        public void test(int x, int y) {
+            var curCell = getCell(x, y);
+            curCell.height = -4;
+            getNeighbor0(x, y).m_cell.height = -2;
+            getNeighbor2(x, y).m_cell.height = -1;
+            getNeighbor4(x, y).m_cell.height = 0;
+            getNeighbor6(x, y).m_cell.height = 1;
+            getNeighbor8(x, y).m_cell.height = 2;
+            getNeighbor10(x, y).m_cell.height = 3;
+        }
+        public void rcf001Ex() {
+            rcf001_getPois();
             for (int i = 0; i < m_arrRandomPoi.Length; i += 32) {
                 var ba = System.Guid.NewGuid().ToByteArray();
                 for (int j = 0; j < 16; j++) {
@@ -197,7 +208,14 @@ namespace TkmGame.Gtr.Battle {
                     }
                 }
             }
-            randomCellFunc001_terrain();
+            rcf001_terrain();
+        }
+        public void rcf001() {
+            rcf001_getPois();
+            for (int i = 0; i < m_arrRandomPoi.Length; i++) {
+                cellData[m_arrRandomPoi[i]].height = c_rcf001MaxHeight;
+            }
+            rcf001_terrain();
         }
         public int getCellX(int index) {
             return index % mapSizeY;
@@ -215,73 +233,65 @@ namespace TkmGame.Gtr.Battle {
             }
             return ret;
         }
-        #region Neighbor
+#region Neighbor
         public class CellDataWithPoi {
             public int m_x;
             public int m_y;
             public CellData m_cell;
         }
-        public CellDataWithPoi getNeighbor0(int x, int y) {
+        public CellDataWithPoi assignNeighbor(int nx, int ny) {
             CellDataWithPoi ret = null;
-            if (isLegal(x, y + 1) == true) {
+            if (isLegal(nx, ny) == true) {
                 ret = new CellDataWithPoi();
-                ret.m_x = x;
-                ret.m_y = y + 1;
-                ret.m_cell = cellData[ret.m_x + mapSizeX * ret.m_y];
+                ret.m_x = nx;
+                ret.m_y = ny;
+                ret.m_cell = cellData[nx + mapSizeX * ny];
             }
             return ret;
+        }
+        public CellDataWithPoi getNeighbor0(int x, int y) {
+            if (x % 2 == 0) {
+                return assignNeighbor(x, y + 1);
+            } else {
+                return assignNeighbor(x, y + 1);
+            }
         }
         public CellDataWithPoi getNeighbor2(int x, int y) {
-            CellDataWithPoi ret = null;
-            if (isLegal(x + 1, y + 1)) {
-                ret = new CellDataWithPoi();
-                ret.m_x = x + 1;
-                ret.m_y = y + 1;
-                ret.m_cell = cellData[ret.m_x + mapSizeX * ret.m_y];
+            if (x % 2 == 0) {
+                return assignNeighbor(x + 1, y + 1);
+            } else {
+                return assignNeighbor(x + 1, y);
             }
-            return ret;
         }
         public CellDataWithPoi getNeighbor4(int x, int y) {
-            CellDataWithPoi ret = null;
-            if (isLegal(x + 1, y) == true) {
-                ret = new CellDataWithPoi();
-                ret.m_x = x + 1;
-                ret.m_y = y;
-                ret.m_cell = cellData[ret.m_x + mapSizeX * ret.m_y];
+            if (x % 2 == 0) {
+                return assignNeighbor(x + 1, y);
+            } else {
+                return assignNeighbor(x + 1, y - 1);
             }
-            return ret;
         }
         public CellDataWithPoi getNeighbor6(int x, int y) {
-            CellDataWithPoi ret = null;
-            if (isLegal(x, y - 1) == true) {
-                ret = new CellDataWithPoi();
-                ret.m_x = x;
-                ret.m_y = y - 1;
-                ret.m_cell = cellData[ret.m_x + mapSizeX * ret.m_y];
+            if (x % 2 == 0) {
+                return assignNeighbor(x, y - 1);
+            } else {
+                return assignNeighbor(x, y - 1);
             }
-            return ret;
         }
         public CellDataWithPoi getNeighbor8(int x, int y) {
-            CellDataWithPoi ret = null;
-            if (isLegal(x - 1, y) == true) {
-                ret = new CellDataWithPoi();
-                ret.m_x = x - 1;
-                ret.m_y = y;
-                ret.m_cell = cellData[ret.m_x + mapSizeX * ret.m_y];
+            if (x % 2 == 0) {
+                return assignNeighbor(x - 1, y);
+            } else {
+                return assignNeighbor(x - 1, y - 1);
             }
-            return ret;
         }
         public CellDataWithPoi getNeighbor10(int x, int y) {
-            CellDataWithPoi ret = null;
-            if (isLegal(x - 1, y + 1) == true) {
-                ret = new CellDataWithPoi();
-                ret.m_x = x - 1;
-                ret.m_y = y + 1;
-                ret.m_cell = cellData[ret.m_x + mapSizeX * ret.m_y];
+            if (x % 2 == 0) {
+                return assignNeighbor(x - 1, y + 1);
+            } else {
+                return assignNeighbor(x - 1, y);
             }
-            return ret;
         }
-        #endregion
+#endregion
 
         public int mapSizeX = 1;
         public int mapSizeY = 1;

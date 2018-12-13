@@ -10,6 +10,9 @@ namespace TkmGame.Gtr.Battle {
     /// </summary>
     [System.Serializable]
     public class CellMap : MonoBehaviour {
+        public const int c_cellSizeX = 128;
+        public const int c_cellSizeY = 128;
+
         GameObject createCell(Vector3 poi, CellData data, int cellx = 0, int celly = 0, Quaternion rot = new Quaternion()) {
             GameObject cell = new GameObject();
             cell.transform.position = poi;
@@ -38,8 +41,8 @@ namespace TkmGame.Gtr.Battle {
                 return;
             }
             if (m_curData == null) {
-                m_curData = new CellMapData(128, 128);
-                m_curData.randomCellFunc001();
+                m_curData = new CellMapData(c_cellSizeX, c_cellSizeY);
+                m_curData.rcf001();
             }
             m_mapSizeX = m_curData.mapSizeX;
             m_mapSizeY = m_curData.mapSizeY;
@@ -64,11 +67,11 @@ namespace TkmGame.Gtr.Battle {
             for (int i = 0; i < m_mapSizeX; i++) {
                 if (i % 2 == 0) {
                     for (int j = 0; j < m_mapSizeY; j++) {
-                        createCell(new Vector3(i * di + dx, 0, j * dj + dy), m_curData.cellData[i * m_mapSizeY + j], i, j);
+                        createCell(new Vector3(i * di + dx, 0, j * dj + dy), m_curData.cellData[i + m_mapSizeX * j], i, j);
                     }
                 } else {
                     for (int j = 0; j < m_mapSizeY; j++) {
-                        createCell(new Vector3(i * di + dx, 0, (j - 0.5f) * dj + dy), m_curData.cellData[i * m_mapSizeY + j], i, j);
+                        createCell(new Vector3(i * di + dx, 0, (j - 0.5f) * dj + dy), m_curData.cellData[i + m_mapSizeX * j], i, j);
                     }
                 }
             }
@@ -154,7 +157,7 @@ namespace TkmGame.Gtr.Battle {
         const string c_defaultData = c_dataFolder + "default";
 
         public int m_mapSizeX = 10;
-        public int m_mapSizeY = 20;
+        public int m_mapSizeY = 10;
         public bool m_isCenter = true;
         public float m_spacing = 0;
         public float m_x = 0;

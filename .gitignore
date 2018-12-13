@@ -27,3 +27,5 @@ build
 /gamelibs/libmain/Debug
 /gamelibs/Debug
 /gamelibs/libmain_old
+/*.vspx
+/*.psess
