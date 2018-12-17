@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TkmGame.Gtr.Battle;
 
 namespace TkmGame.Gtr.Controller {
     public class NormalCamera : MonoBehaviour {
@@ -128,6 +129,17 @@ namespace TkmGame.Gtr.Controller {
                 tra.position += dpos;
             }
 #endif
+            foreach (var cell in BattleManager.instance().m_curCellMap.m_cellData) {
+                cell.gameObject.SetActive(true);
+            }
+            var curCell = CellMap.getCellByScreenPoisition(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0), false);
+            if (curCell != null) {
+                var map = curCell.getParentMap();
+                if (map != null) {
+                    //map.setCurCell(curCell);
+                    map.showCellNeighbors(curCell, 0);
+                }
+            }
         }
 
         public enum FixedType {

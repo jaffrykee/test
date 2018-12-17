@@ -213,7 +213,11 @@ namespace TkmGame.Gtr.Battle {
         public void rcf001() {
             rcf001_getPois();
             for (int i = 0; i < m_arrRandomPoi.Length; i++) {
-                cellData[m_arrRandomPoi[i]].height = c_rcf001MaxHeight;
+                if (i % 2 == 0) {
+                    cellData[m_arrRandomPoi[i]].height = c_rcf001MaxHeight;
+                } else {
+                    cellData[m_arrRandomPoi[i]].height = -c_rcf001MaxHeight;
+                }
             }
             rcf001_terrain();
         }

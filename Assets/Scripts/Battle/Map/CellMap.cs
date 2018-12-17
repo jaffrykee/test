@@ -10,8 +10,8 @@ namespace TkmGame.Gtr.Battle {
     /// </summary>
     [System.Serializable]
     public class CellMap : MonoBehaviour {
-        public const int c_cellSizeX = 128;
-        public const int c_cellSizeY = 128;
+        public const int c_cellSizeX = 64;
+        public const int c_cellSizeY = 64;
 
         GameObject createCell(Vector3 poi, CellData data, int cellx = 0, int celly = 0, Quaternion rot = new Quaternion()) {
             GameObject cell = new GameObject();
@@ -117,6 +117,7 @@ namespace TkmGame.Gtr.Battle {
         }
         // Use this for initialization
         void Start() {
+            BattleManager.instance().m_curCellMap = this;
             if (m_curData == null) {
                 resetData(c_defaultData);
             } else {
@@ -142,6 +143,10 @@ namespace TkmGame.Gtr.Battle {
                     lr.numCornerVertices = 6;
                     var linePoi = m_curCell.m_centerPoi;
                     linePoi.y += m_selectLineHeight;
+                    var curHeight = m_curCell.m_data.height;
+                    if (curHeight > 0) {
+                        linePoi.y += (curHeight * Cell.c_height);
+                    }
                     lr.SetPositions(Cell.getLinesVertexs(linePoi));
                     lr.material = m_selectLineMaterial;
                     lr.startColor = m_selectLineColor;
@@ -151,6 +156,104 @@ namespace TkmGame.Gtr.Battle {
                 }
             }
             Debug.Log(curCell.m_cellPoi.ToString());
+        }
+
+        #region Neighbor
+        public bool isLegal(int x, int y) {
+            bool ret = false;
+            if (x >= 0 && y >= 0 && x < c_cellSizeX && y < c_cellSizeY) {
+                ret = true;
+            }
+            return ret;
+        }
+        public Cell assignNeighbor(int nx, int ny) {
+            Cell ret = null;
+            if (isLegal(nx, ny) == true) {
+                ret = m_cellData[nx, ny];
+            }
+            return ret;
+        }
+        public Cell getNeighbor0(int x, int y) {
+            if (x % 2 == 0) {
+                return assignNeighbor(x, y + 1);
+            } else {
+                return assignNeighbor(x, y + 1);
+            }
+        }
+        public Cell getNeighbor2(int x, int y) {
+            if (x % 2 == 0) {
+                return assignNeighbor(x + 1, y + 1);
+            } else {
+                return assignNeighbor(x + 1, y);
+            }
+        }
+        public Cell getNeighbor4(int x, int y) {
+            if (x % 2 == 0) {
+                return assignNeighbor(x + 1, y);
+            } else {
+                return assignNeighbor(x + 1, y - 1);
+            }
+        }
+        public Cell getNeighbor6(int x, int y) {
+            if (x % 2 == 0) {
+                return assignNeighbor(x, y - 1);
+            } else {
+                return assignNeighbor(x, y - 1);
+            }
+        }
+        public Cell getNeighbor8(int x, int y) {
+            if (x % 2 == 0) {
+                return assignNeighbor(x - 1, y);
+            } else {
+                return assignNeighbor(x - 1, y - 1);
+            }
+        }
+        public Cell getNeighbor10(int x, int y) {
+            if (x % 2 == 0) {
+                return assignNeighbor(x - 1, y + 1);
+            } else {
+                return assignNeighbor(x - 1, y);
+            }
+        }
+        public void showCellNeighbors(Cell center, int range) {
+            foreach (var curCell in m_cellData) {
+                curCell.gameObject.SetActive(false);
+            }
+            center.gameObject.SetActive(true);
+        }
+    #endregion
+
+        //屏幕坐标法线所穿过的Cell。
+        public static Cell getCellByScreenPoisition(Vector3 position, bool isHiddenTouch) {
+            Cell ret = null;
+            Ray ray = Camera.main.ScreenPointToRay(position);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit)) {
+                if (hit.transform != null) {
+                    MeshFilter meshFilter = hit.transform.GetComponent<MeshFilter>();
+                    if (meshFilter != null) {
+                        if (isHiddenTouch) {
+                            Mesh mesh = meshFilter.mesh;
+                            int[] triangles = mesh.triangles;
+                            List<int> tris = new List<int>(triangles);
+                            tris.RemoveAt(hit.triangleIndex * 3 + 2);
+                            tris.RemoveAt(hit.triangleIndex * 3 + 1);
+                            tris.RemoveAt(hit.triangleIndex * 3);
+                            int[] newTri = tris.ToArray();
+                            mesh.triangles = newTri;
+                            mesh.RecalculateNormals();
+                            mesh.RecalculateBounds();
+                            MeshCollider collider1 = hit.transform.GetComponent<MeshCollider>();
+                            collider1.sharedMesh = mesh;
+                        }
+                        var objCell = meshFilter.gameObject;
+                        if (objCell != null) {
+                            ret = objCell.GetComponent<Cell>();
+                        }
+                    }
+                }
+            }
+            return ret;
         }
 
         const string c_dataFolder = "Data/CellMap/";
