@@ -7,7 +7,8 @@ namespace TkmGame.Gtr.Controller {
     public class NormalCamera : MonoBehaviour {
         // Use this for initialization
         void Start() {
-
+        }
+        private void Awake() {
         }
 
         private float getNormalAngle(float src) {
@@ -23,6 +24,7 @@ namespace TkmGame.Gtr.Controller {
             }
             return ret;
         }
+        uint tmp_refreshCount = 0;
         // Update is called once per frame
         void Update() {
 #if UNITY_ANDROID || UNITY_IPHONE || UNITY_IOS
@@ -42,6 +44,7 @@ namespace TkmGame.Gtr.Controller {
 //            }
 //        }
 #else
+            bool isChanged = false;
             var tra = Camera.main.transform;
             if (Input.GetMouseButton(1)) {
                 switch (m_fixedType) {
@@ -76,6 +79,7 @@ namespace TkmGame.Gtr.Controller {
                     default:
                         break;
                 }
+                isChanged = true;
             }
             switch (m_zoomType) {
                 case ZoomType.Move: {
@@ -107,39 +111,59 @@ namespace TkmGame.Gtr.Controller {
             float curMove = m_moveSpeed;
             if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftShift)) {
                 curMove *= m_moveExTimes;
+                isChanged = true;
             }
             if (Input.GetKey(KeyCode.W)) {
                 var dpos = tra.rotation * new Vector3(0, 0, curMove);
                 dpos.y = 0;
                 tra.position += dpos;
+                isChanged = true;
             }
             if (Input.GetKey(KeyCode.S)) {
                 var dpos = tra.rotation * new Vector3(0, 0, -curMove);
                 dpos.y = 0;
                 tra.position += dpos;
+                isChanged = true;
             }
             if (Input.GetKey(KeyCode.D)) {
                 var dpos = tra.rotation * new Vector3(curMove, 0, 0);
                 dpos.y = 0;
                 tra.position += dpos;
+                isChanged = true;
             }
             if (Input.GetKey(KeyCode.A)) {
                 var dpos = tra.rotation * new Vector3(-curMove, 0, 0);
                 dpos.y = 0;
                 tra.position += dpos;
+                isChanged = true;
             }
 #endif
-            foreach (var cell in BattleManager.instance().m_curCellMap.m_cellData) {
-                cell.gameObject.SetActive(true);
-            }
-            var curCell = CellMap.getCellByScreenPoisition(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0), false);
-            if (curCell != null) {
-                var map = curCell.getParentMap();
-                if (map != null) {
-                    //map.setCurCell(curCell);
-                    map.showCellNeighbors(curCell, 0);
+            if (isChanged == true) {
+                tmp_refreshCount++;
+                var cellDList = BattleManager.instance().m_curCellMap.m_cellData;
+                for (int i = 0; i < cellDList.GetLength(0); i ++) {
+                    var cell = cellDList[i, tmp_refreshCount % cellDList.GetLength(1)];
+                    cell.gameObject.SetActive(false);
+                }
+                for (int j = 0; j < cellDList.GetLength(1); j += 10) {
+                    for (int i = 0; i < cellDList.GetLength(0); i += 10) {
+                        var cell = cellDList[i, j];
+                        Vector3 screenPos = Camera.main.WorldToScreenPoint(cell.m_centerPoi);
+                        if (screenPos.x > 0 && screenPos.y > 0 && screenPos.x < Screen.width && screenPos.y < Screen.height) {
+                            cell.gameObject.SetActive(true);
+                            cell.getParentMap().showCellNeighbors(cell, 7);
+                        }
+                    }
                 }
             }
+            //var curCell = CellMap.getCellByScreenPoisition(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0), false);
+            //if (curCell != null) {
+            //    var map = curCell.getParentMap();
+            //    if (map != null) {
+            //        //map.setCurCell(curCell);
+            //        map.showCellNeighbors(curCell, 0);
+            //    }
+            //}
         }
 
         public enum FixedType {

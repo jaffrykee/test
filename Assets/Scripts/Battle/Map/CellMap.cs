@@ -10,8 +10,8 @@ namespace TkmGame.Gtr.Battle {
     /// </summary>
     [System.Serializable]
     public class CellMap : MonoBehaviour {
-        public const int c_cellSizeX = 64;
-        public const int c_cellSizeY = 64;
+        public const int c_cellSizeX = 300;
+        public const int c_cellSizeY = 300;
 
         GameObject createCell(Vector3 poi, CellData data, int cellx = 0, int celly = 0, Quaternion rot = new Quaternion()) {
             GameObject cell = new GameObject();
@@ -22,7 +22,7 @@ namespace TkmGame.Gtr.Battle {
             var mc = cell.AddComponent<MeshCollider>();
             var cellData = cell.AddComponent<Cell>();
             mc.sharedMesh = mf.mesh;
-            mr.material = m_matCell;
+            //mr.material = m_matCell;
             var mesh = mf.mesh;
             mesh.vertices = Cell.getCellVertexs();
             mesh.triangles = getTriangles();
@@ -74,6 +74,10 @@ namespace TkmGame.Gtr.Battle {
                         createCell(new Vector3(i * di + dx, 0, (j - 0.5f) * dj + dy), m_curData.cellData[i + m_mapSizeX * j], i, j);
                     }
                 }
+            }
+
+            foreach (var cell in m_cellData) {
+                //cell.gameObject.SetActive(false);
             }
         }
         public void resetData(CellMapData newData) {
@@ -155,7 +159,7 @@ namespace TkmGame.Gtr.Battle {
                     lr.endWidth = m_selectLineWidth;
                 }
             }
-            Debug.Log(curCell.m_cellPoi.ToString());
+            Debug.Log(curCell.m_cellPoi.ToString() + curCell.m_centerPoi.ToString());
         }
 
         #region Neighbor
@@ -215,11 +219,28 @@ namespace TkmGame.Gtr.Battle {
                 return assignNeighbor(x - 1, y);
             }
         }
-        public void showCellNeighbors(Cell center, int range) {
-            foreach (var curCell in m_cellData) {
-                curCell.gameObject.SetActive(false);
+        public delegate Cell GetNeighborFunc_D(int x, int y);
+        private void showCellNeighborsFunc(Cell center, int range, GetNeighborFunc_D mainFunc, GetNeighborFunc_D subFunc) {
+            Cell curCell = center;
+            Cell curSubCell = null;
+            for (int i = 0; i < range; i++) {
+                curCell = mainFunc(curCell.m_cellPoi.x, curCell.m_cellPoi.y);
+                curSubCell = curCell;
+                for (int j = 0; j < range - 1; j++) {
+                    curSubCell = subFunc(curSubCell.m_cellPoi.x, curSubCell.m_cellPoi.y);
+                    curSubCell.gameObject.SetActive(true);
+                }
+                curCell.gameObject.SetActive(true);
             }
+        }
+        public void showCellNeighbors(Cell center, int range) {
             center.gameObject.SetActive(true);
+            showCellNeighborsFunc(center, range, getNeighbor0, getNeighbor4);
+            showCellNeighborsFunc(center, range, getNeighbor2, getNeighbor6);
+            showCellNeighborsFunc(center, range, getNeighbor4, getNeighbor8);
+            showCellNeighborsFunc(center, range, getNeighbor6, getNeighbor10);
+            showCellNeighborsFunc(center, range, getNeighbor8, getNeighbor0);
+            showCellNeighborsFunc(center, range, getNeighbor10, getNeighbor2);
         }
     #endregion
 
