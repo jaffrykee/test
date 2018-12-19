@@ -12,29 +12,29 @@ namespace TkmGame.Gtr.Battle {
     public class CellMap : MonoBehaviour {
         public const int c_cellSizeX = 300;
         public const int c_cellSizeY = 300;
-
+        
         GameObject createCell(Vector3 poi, CellData data, int cellx = 0, int celly = 0, Quaternion rot = new Quaternion()) {
-            GameObject cell = new GameObject();
-            cell.transform.position = poi;
-            cell.transform.rotation = rot;
-            var mf = cell.AddComponent<MeshFilter>();
-            var mr = cell.AddComponent<MeshRenderer>();
-            var mc = cell.AddComponent<MeshCollider>();
-            var cellData = cell.AddComponent<Cell>();
+            GameObject cellObj = new GameObject();
+            cellObj.transform.position = poi;
+            cellObj.transform.rotation = rot;
+            var mf = cellObj.AddComponent<MeshFilter>();
+            var mr = cellObj.AddComponent<MeshRenderer>();
+            var mc = cellObj.AddComponent<MeshCollider>();
+            var newCell = cellObj.AddComponent<Cell>();
             mc.sharedMesh = mf.mesh;
             //mr.material = m_matCell;
             var mesh = mf.mesh;
             mesh.vertices = Cell.getCellVertexs();
             mesh.triangles = getTriangles();
-            cell.transform.parent = gameObject.transform;
-            cellData.m_data = data;
-            cellData.m_centerPoi = poi;
-            cellData.m_cellPoi = new Vector2Int(cellx, celly);
+            cellObj.transform.parent = gameObject.transform;
+            newCell.m_data = data;
+            newCell.m_centerPoi = poi;
+            newCell.m_cellPoi = new Vector2Int(cellx, celly);
             if (m_showOutline == false) {
 
             }
-            m_cellData[cellx, celly] = cellData;
-            return cell;
+            m_cellData[cellx, celly] = newCell;
+            return cellObj;
         }
         public void resetData() {
             if (gameObject == null || m_mapSizeX <= 0 || m_mapSizeY <= 0) {
@@ -219,7 +219,7 @@ namespace TkmGame.Gtr.Battle {
                 return assignNeighbor(x - 1, y);
             }
         }
-        public delegate Cell GetNeighborFunc_D(int x, int y);
+        private delegate Cell GetNeighborFunc_D(int x, int y);
         private void showCellNeighborsFunc(Cell center, int range, GetNeighborFunc_D mainFunc, GetNeighborFunc_D subFunc) {
             Cell curCell = center;
             Cell curSubCell = null;
