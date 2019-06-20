@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -18,45 +18,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AttrSetting.h" />
-    <ClInclude Include="DataHeaders.h" />
-    <ClInclude Include="DataManager.h" />
-    <ClInclude Include="LinkedHashMap.h" />
-    <ClInclude Include="NodeManager.h" />
-    <ClInclude Include="NodeTypeSetting.h" />
-    <ClInclude Include="ObjectAttrDef.hpp" />
-    <ClInclude Include="ObjectBase.h" />
-    <ClInclude Include="ResPool.h" />
-    <ClInclude Include="ResPoolManager.h" />
-    <ClInclude Include="tkmBasic.h" />
-    <ClInclude Include="TKMDef.h" />
-    <ClInclude Include="TKMLib.h" />
-    <ClInclude Include="TKMPublic.h" />
-    <ClInclude Include="StaticCache.h" />
-    <ClInclude Include="StringManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="AttrSetting.cpp" />
-    <ClCompile Include="DataManager.cpp" />
-    <ClCompile Include="NodeManager.cpp" />
-    <ClCompile Include="NodeTypeSetting.cpp" />
-    <ClCompile Include="ObjectBase.cpp" />
-    <ClCompile Include="ResPoolManager.cpp" />
-    <ClCompile Include="TKMPublic.cpp" />
-    <ClCompile Include="StringManager.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{F21B89E2-A486-4833-97E6-D8DF9EAD170D}</ProjectGuid>
-    <RootNamespace>libmain</RootNamespace>
+    <ProjectGuid>{3A3EC069-C824-449D-9C01-02AD43C48B58}</ProjectGuid>
+    <RootNamespace>testMain</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -96,7 +69,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>..\gamelibs\libmain;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>..\gamelibs\libmain;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>..\gamelibs\libmain;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>..\gamelibs\libmain;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -137,6 +121,9 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

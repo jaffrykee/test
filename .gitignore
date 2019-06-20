@@ -29,3 +29,4 @@ build
 /gamelibs/libmain_old
 /*.vspx
 /*.psess
+/testMain/Debug
