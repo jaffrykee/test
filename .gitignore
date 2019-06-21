@@ -13,6 +13,7 @@ build
 
 /temp
 /Temp
+Debug/
 /Assets/StreamingAssets
 /Assets/StreamingAssets.meta
 /obj
@@ -23,10 +24,6 @@ build
 /Assets/Resources/version.txt.meta
 /Assets/Resources/Bin.meta
 /Assets/Plugins/iOS
-/gamelibs/libmain/Debug/*.pdb
-/gamelibs/libmain/Debug
-/gamelibs/Debug
 /gamelibs/libmain_old
 /*.vspx
 /*.psess
-/testMain/Debug

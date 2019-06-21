@@ -49,6 +49,7 @@ enum NodeType_e : unsigned short {
 
     NT_NodeTypeSetting,         //ObjectBase:NodeTypeSetting
     NT_AttrSetting,             //ObjectBase:AttrSetting
+    NT_Unit,
 
     NT_MAX,
 };
