@@ -19,13 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AttrSetting.h" />
-    <ClInclude Include="DataHeaders.h" />
-    <ClInclude Include="DataManager.h" />
     <ClInclude Include="LinkedHashMap.h" />
     <ClInclude Include="NodeManager.h" />
-    <ClInclude Include="NodeTypeSetting.h" />
-    <ClInclude Include="ObjectAttrDef.hpp" />
     <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="ResPool.h" />
     <ClInclude Include="ResPoolManager.h" />
@@ -37,10 +32,7 @@
     <ClInclude Include="StringManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AttrSetting.cpp" />
-    <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="NodeManager.cpp" />
-    <ClCompile Include="NodeTypeSetting.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="ResPoolManager.cpp" />
     <ClCompile Include="TKMPublic.cpp" />

@@ -48,7 +48,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{F21B89E2-A486-4833-97E6-D8DF9EAD170D}</ProjectGuid>
+    <ProjectGuid>{CC080F3C-415E-4786-B0E5-DEA68A1D42DA}</ProjectGuid>
     <RootNamespace>libmain</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

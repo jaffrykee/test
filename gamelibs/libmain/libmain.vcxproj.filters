@@ -24,31 +24,16 @@
     <ClInclude Include="StringManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="DataManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="LinkedHashMap.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="AttrSetting.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="NodeManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectAttrDef.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ResPool.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="StaticCache.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="NodeTypeSetting.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="DataHeaders.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="tkmBasic.h">
@@ -74,16 +59,7 @@
     <ClCompile Include="StringManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="DataManager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="AttrSetting.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="NodeManager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="NodeTypeSetting.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TKMPublic.cpp">
