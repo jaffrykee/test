@@ -1,5 +1,4 @@
 #include "Unit.h"
-#include "DataHeaders.h"
 
 NODETYPE_COMMON_PART_DEFINITION_BEGIN(Unit, 300, 1000);
 #pragma region "ÊôÐÔ×¢²á"

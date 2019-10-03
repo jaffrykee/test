@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmain", "libmain\libmain.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "srpgLib", "srpgLib\srpgLib.vcxproj", "{2F883FD7-851C-47E9-BA96-09338825B80E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmain_old2", "libmain_old2\libmain_old2.vcxproj", "{CC080F3C-415E-4786-B0E5-DEA68A1D42DA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -43,14 +41,6 @@ Global
 		{2F883FD7-851C-47E9-BA96-09338825B80E}.Release|x64.Build.0 = Release|x64
 		{2F883FD7-851C-47E9-BA96-09338825B80E}.Release|x86.ActiveCfg = Release|Win32
 		{2F883FD7-851C-47E9-BA96-09338825B80E}.Release|x86.Build.0 = Release|Win32
-		{CC080F3C-415E-4786-B0E5-DEA68A1D42DA}.Debug|x64.ActiveCfg = Debug|x64
-		{CC080F3C-415E-4786-B0E5-DEA68A1D42DA}.Debug|x64.Build.0 = Debug|x64
-		{CC080F3C-415E-4786-B0E5-DEA68A1D42DA}.Debug|x86.ActiveCfg = Debug|Win32
-		{CC080F3C-415E-4786-B0E5-DEA68A1D42DA}.Debug|x86.Build.0 = Debug|Win32
-		{CC080F3C-415E-4786-B0E5-DEA68A1D42DA}.Release|x64.ActiveCfg = Release|x64
-		{CC080F3C-415E-4786-B0E5-DEA68A1D42DA}.Release|x64.Build.0 = Release|x64
-		{CC080F3C-415E-4786-B0E5-DEA68A1D42DA}.Release|x86.ActiveCfg = Release|Win32
-		{CC080F3C-415E-4786-B0E5-DEA68A1D42DA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -29,10 +29,6 @@ public:
 
 #pragma region "·½·¨"
 public:
-    inline Unit& assign(const Unit& other) {
-        Base::assign(other);
-        return *this;
-    }
 #pragma endregion
 };
 
