@@ -79,7 +79,6 @@ public:
         utPtr._srcPtr = srcPtr;
         return utPtr._dstPtr;
     }
-    void createFast();
     void showObjectCount();
 #pragma endregion
 };
