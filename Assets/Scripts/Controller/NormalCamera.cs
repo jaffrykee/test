@@ -141,17 +141,22 @@ namespace TkmGame.Gtr.Controller {
             if (isChanged == true) {
                 tmp_refreshCount++;
                 var cellDList = BattleManager.instance().m_curCellMap.m_cellData;
-                for (int i = 0; i < cellDList.GetLength(0); i ++) {
-                    var cell = cellDList[i, tmp_refreshCount % cellDList.GetLength(1)];
-                    cell.gameObject.SetActive(false);
-                }
+                //for (int i = 0; i < cellDList.GetLength(0); i ++) {
+                //    var cell = cellDList[i, tmp_refreshCount % cellDList.GetLength(1)];
+                //    cell.gameObject.SetActive(false);
+                //}
                 for (int j = 0; j < cellDList.GetLength(1); j += 10) {
                     for (int i = 0; i < cellDList.GetLength(0); i += 10) {
                         var cell = cellDList[i, j];
                         Vector3 screenPos = Camera.main.WorldToScreenPoint(cell.m_centerPoi);
-                        if (screenPos.x > 0 && screenPos.y > 0 && screenPos.x < Screen.width && screenPos.y < Screen.height) {
+                        var aValue = Screen.width + Screen.height;
+                        if (screenPos.x > -aValue && screenPos.y > -aValue &&
+                            screenPos.x < aValue && screenPos.y < aValue) {
                             cell.gameObject.SetActive(true);
-                            cell.getParentMap().showCellNeighbors(cell, 7);
+                            cell.getParentMap().setCellNeighborsVisible(cell, 7, true);
+                        } else {
+                            cell.gameObject.SetActive(false);
+                            cell.getParentMap().setCellNeighborsVisible(cell, 7, false);
                         }
                     }
                 }

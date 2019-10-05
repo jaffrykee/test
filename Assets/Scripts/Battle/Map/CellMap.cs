@@ -10,8 +10,8 @@ namespace TkmGame.Gtr.Battle {
     /// </summary>
     [System.Serializable]
     public class CellMap : MonoBehaviour {
-        public const int c_cellSizeX = 300;
-        public const int c_cellSizeY = 300;
+        public const int c_cellSizeX = 100;
+        public const int c_cellSizeY = 100;
         
         GameObject createCell(Vector3 poi, CellData data, int cellx = 0, int celly = 0, Quaternion rot = new Quaternion()) {
             GameObject cellObj = new GameObject();
@@ -34,6 +34,7 @@ namespace TkmGame.Gtr.Battle {
 
             }
             m_cellData[cellx, celly] = newCell;
+            newCell.gameObject.SetActive(false);
             return cellObj;
         }
         public void resetData() {
@@ -220,27 +221,35 @@ namespace TkmGame.Gtr.Battle {
             }
         }
         private delegate Cell GetNeighborFunc_D(int x, int y);
-        private void showCellNeighborsFunc(Cell center, int range, GetNeighborFunc_D mainFunc, GetNeighborFunc_D subFunc) {
+        private void setCellNeighborsVisibleFunc(Cell center, int range, GetNeighborFunc_D mainFunc, GetNeighborFunc_D subFunc, bool value) {
             Cell curCell = center;
             Cell curSubCell = null;
             for (int i = 0; i < range; i++) {
                 curCell = mainFunc(curCell.m_cellPoi.x, curCell.m_cellPoi.y);
-                curSubCell = curCell;
-                for (int j = 0; j < range - 1; j++) {
-                    curSubCell = subFunc(curSubCell.m_cellPoi.x, curSubCell.m_cellPoi.y);
-                    curSubCell.gameObject.SetActive(true);
+                if (curCell != null) {
+                    curSubCell = curCell;
+                    for (int j = 0; j < range - 1; j++) {
+                        curSubCell = subFunc(curSubCell.m_cellPoi.x, curSubCell.m_cellPoi.y);
+                        if (curSubCell != null) {
+                            curSubCell.gameObject.SetActive(value);
+                        } else {
+                            break;
+                        }
+                    }
+                    curCell.gameObject.SetActive(value);
+                } else {
+                    break;
                 }
-                curCell.gameObject.SetActive(true);
             }
         }
-        public void showCellNeighbors(Cell center, int range) {
-            center.gameObject.SetActive(true);
-            showCellNeighborsFunc(center, range, getNeighbor0, getNeighbor4);
-            showCellNeighborsFunc(center, range, getNeighbor2, getNeighbor6);
-            showCellNeighborsFunc(center, range, getNeighbor4, getNeighbor8);
-            showCellNeighborsFunc(center, range, getNeighbor6, getNeighbor10);
-            showCellNeighborsFunc(center, range, getNeighbor8, getNeighbor0);
-            showCellNeighborsFunc(center, range, getNeighbor10, getNeighbor2);
+        public void setCellNeighborsVisible(Cell center, int range, bool value = true) {
+            center.gameObject.SetActive(value);
+            setCellNeighborsVisibleFunc(center, range, getNeighbor0, getNeighbor4, value);
+            setCellNeighborsVisibleFunc(center, range, getNeighbor2, getNeighbor6, value);
+            setCellNeighborsVisibleFunc(center, range, getNeighbor4, getNeighbor8, value);
+            setCellNeighborsVisibleFunc(center, range, getNeighbor6, getNeighbor10, value);
+            setCellNeighborsVisibleFunc(center, range, getNeighbor8, getNeighbor0, value);
+            setCellNeighborsVisibleFunc(center, range, getNeighbor10, getNeighbor2, value);
         }
     #endregion
 

@@ -9,8 +9,6 @@ int main() {
     NodeManager::getInstance()->initialize();
     Unit::initialize();
 
-
-
     string a;
     auto pUnit = Unit::createObject();
     stringstream ss;
