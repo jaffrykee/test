@@ -142,7 +142,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 518813702}
   - {fileID: 543130275}
   m_Father: {fileID: 212315118}
   m_RootOrder: 0
@@ -581,97 +580,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 453939514}
---- !u!1 &518813701
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1842298487266632, guid: 682bcb169826fdb468761a6270640caa,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 518813702}
-  - component: {fileID: 518813704}
-  - component: {fileID: 518813703}
-  - component: {fileID: 518813705}
-  m_Layer: 0
-  m_Name: mx_log
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &518813702
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 224835407619683348, guid: 682bcb169826fdb468761a6270640caa,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 518813701}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 195687242}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
---- !u!114 &518813703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114582567654383796, guid: 682bcb169826fdb468761a6270640caa,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 518813701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 120
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Test
---- !u!222 &518813704
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 222035575594246032, guid: 682bcb169826fdb468761a6270640caa,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 518813701}
---- !u!114 &518813705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114818665406853530, guid: 682bcb169826fdb468761a6270640caa,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 518813701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb34b665b7a033f439e442987c07bf9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &543130274
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,7 +617,7 @@ RectTransform:
   - {fileID: 866670135}
   - {fileID: 453939515}
   m_Father: {fileID: 195687242}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1477,9 +1385,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 975355440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83406136b8ad1c74bad743fc55878f7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f56b7eff88f5514fa09af4aa609fe5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mapSizeX: 10
+  m_mapSizeY: 10
+  m_isCenter: 1
+  m_spacing: 0
+  m_x: 0
+  m_y: 0
+  m_z: 0
+  m_matCell: {fileID: 0}
+  m_showOutline: 1
+  m_isQuickOutline: 1
+  m_outlineMaterial: {fileID: 0}
+  m_outlineColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_outlineWidth: 0.05
+  m_outlineHeight: 0.01
+  m_selectLineMaterial: {fileID: 0}
+  m_selectLineColor: {r: 1, g: 1, b: 1, a: 1}
+  m_selectLineWidth: 0.1
+  m_selectLineHeight: 0.15
+  m_curCell: {fileID: 0}
 --- !u!4 &975355442
 Transform:
   m_ObjectHideFlags: 0

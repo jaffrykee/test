@@ -1,0 +1,17 @@
+{
+    "worldcell": {
+        "poi": {
+            "x": 1,
+            "y": 1
+        },
+        "height": 1,
+        "terrainType": 1,
+        "road": 1,
+        "influenceCost": 1
+    },
+    "city": {
+        "id": 1,
+        "level": 1,
+        "influence": 1
+    }
+}

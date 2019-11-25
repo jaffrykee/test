@@ -28,7 +28,8 @@ namespace TkmGame.Gtr.Controller {
         // Update is called once per frame
         void Update() {
             bool isChanged = false;
-#if UNITY_ANDROID || UNITY_IPHONE || UNITY_IOS
+            //UNITY_ANDROID || 
+#if (UNITY_IPHONE || UNITY_IOS)
             //        var tra = Camera.main.transform;
             //        if (Input.GetMouseButton(0)) {
             //            switch (m_fixedType) {
