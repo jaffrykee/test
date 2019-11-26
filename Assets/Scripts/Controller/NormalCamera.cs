@@ -60,9 +60,6 @@ namespace TkmGame.Gtr.Controller {
                             } else if (ax > 90) {
                                 ax = 89.9f;
                             }
-                            if (ax < 30) {
-                                ax = 30;
-                            }
                             tra.localEulerAngles = new Vector3(ax, lea.y + mx, 0);
                         }
                         break;
@@ -144,16 +141,6 @@ namespace TkmGame.Gtr.Controller {
 #endif
             if (isChanged == true) {
                 tmp_refreshCount++;
-
-                foreach(var cell in BattleManager.instance().m_curCellMap.s_visibleCells) {
-                    BattleManager.instance().m_curCellMap.SetCellVisibleAndMark(cell, false);
-                }
-                var curCenter = CellMap.getCellByScreenPoisition(new Vector3(Screen.width / 2, Screen.height / 2, 0), false);
-                curCenter.getParentMap().setCellNeighborsVisible(curCenter, 7, true);
-                
-
-
-
                 var cellDList = BattleManager.instance().m_curCellMap.m_cellData;
                 //for (int i = 0; i < cellDList.GetLength(0); i ++) {
                 //    var cell = cellDList[i, tmp_refreshCount % cellDList.GetLength(1)];
@@ -164,8 +151,8 @@ namespace TkmGame.Gtr.Controller {
                         var cell = cellDList[i, j];
                         Vector3 screenPos = Camera.main.WorldToScreenPoint(cell.m_centerPoi);
                         var aValue = Screen.width + Screen.height;
-                        if (screenPos.x > 0 && screenPos.y > 0 &&
-                            screenPos.x < Screen.width && screenPos.y < Screen.height) {
+                        if (screenPos.x > -aValue && screenPos.y > -aValue &&
+                            screenPos.x < aValue && screenPos.y < aValue) {
                             cell.gameObject.SetActive(true);
                             cell.getParentMap().setCellNeighborsVisible(cell, 7, true);
                         } else {

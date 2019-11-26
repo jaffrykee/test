@@ -10,8 +10,8 @@ namespace TkmGame.Gtr.Battle {
     /// </summary>
     [System.Serializable]
     public class CellMap : MonoBehaviour {
-        public const int c_cellSizeX = 200;
-        public const int c_cellSizeY = 200;
+        public const int c_cellSizeX = 100;
+        public const int c_cellSizeY = 100;
         
         GameObject createCell(Vector3 poi, CellData data, int cellx = 0, int celly = 0, Quaternion rot = new Quaternion()) {
             GameObject cellObj = new GameObject();
@@ -220,24 +220,6 @@ namespace TkmGame.Gtr.Battle {
                 return assignNeighbor(x - 1, y);
             }
         }
-
-        public HashSet<Cell> s_visibleCells = new HashSet<Cell>();
-        public void SetCellVisibleAndMark(Cell cell, bool visible) {
-            cell.gameObject.SetActive(visible);
-            if (visible == true) {
-                if (s_visibleCells.Contains(cell) == false) {
-                    s_visibleCells.Add(cell);
-                } else {
-                    Debug.LogWarning("cell应该是隐藏的，但是却出现在了s_visibleCells里。");
-                }
-            } else {
-                if (s_visibleCells.Contains(cell) == true) {
-                    s_visibleCells.Remove(cell);
-                } else {
-                    Debug.LogWarning("cell应该是显示的，但是却没有出现在s_visibleCells里。");
-                }
-            }
-        }
         private delegate Cell GetNeighborFunc_D(int x, int y);
         private void setCellNeighborsVisibleFunc(Cell center, int range, GetNeighborFunc_D mainFunc, GetNeighborFunc_D subFunc, bool value) {
             Cell curCell = center;
@@ -249,19 +231,19 @@ namespace TkmGame.Gtr.Battle {
                     for (int j = 0; j < range - 1; j++) {
                         curSubCell = subFunc(curSubCell.m_cellPoi.x, curSubCell.m_cellPoi.y);
                         if (curSubCell != null) {
-                            SetCellVisibleAndMark(curSubCell, value);
+                            curSubCell.gameObject.SetActive(value);
                         } else {
                             break;
                         }
                     }
-                    SetCellVisibleAndMark(curCell, value);
+                    curCell.gameObject.SetActive(value);
                 } else {
                     break;
                 }
             }
         }
         public void setCellNeighborsVisible(Cell center, int range, bool value = true) {
-            SetCellVisibleAndMark(center, value);
+            center.gameObject.SetActive(value);
             setCellNeighborsVisibleFunc(center, range, getNeighbor0, getNeighbor4, value);
             setCellNeighborsVisibleFunc(center, range, getNeighbor2, getNeighbor6, value);
             setCellNeighborsVisibleFunc(center, range, getNeighbor4, getNeighbor8, value);
@@ -275,8 +257,6 @@ namespace TkmGame.Gtr.Battle {
         public static Cell getCellByScreenPoisition(Vector3 position, bool isHiddenTouch) {
             Cell ret = null;
             Ray ray = Camera.main.ScreenPointToRay(position);
-            ray.
-            //UnityEngine.
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform != null) {
