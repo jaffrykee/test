@@ -54,7 +54,7 @@ public class WorldDebug : MonoBehaviour {
         GL.LoadPixelMatrix();
 
         GL.Begin(GL.QUADS);
-        GL.Color(m_lineMat.color);
+        GL.Color(new Color(0.8f, 0.8f, 0.2f, 0.5f));
         GL.Vertex3(start.x, start.y, 0);
         GL.Vertex3(end.x, start.y, 0);
         GL.Vertex3(end.x, end.y, 0);
@@ -62,7 +62,7 @@ public class WorldDebug : MonoBehaviour {
         GL.End();
         
         GL.Begin(GL.LINES);
-        GL.Color(Color.green);
+        GL.Color(new Color(0.2f, 0.8f, 0.8f, 0.5f));
         GL.Vertex3(start.x, start.y, 0);
         GL.Vertex3(end.x, start.y, 0);
         GL.Vertex3(start.x, end.y, 0);
