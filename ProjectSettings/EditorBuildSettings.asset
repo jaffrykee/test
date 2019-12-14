@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/WorldDebug.unity
+    guid: 2c2223464757f124395889a4d9c4b2b0
+  - enabled: 1
     path: Assets/Scenes/login.unity
     guid: 7e9753ad5923bee4b8690cf1705b8b82

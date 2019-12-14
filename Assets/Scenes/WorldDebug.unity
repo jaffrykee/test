@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &434466417
 Light:
   m_ObjectHideFlags: 0
@@ -186,7 +186,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 599502344}
-  - component: {fileID: 599502345}
   m_Layer: 0
   m_Name: GameRoot
   m_TagString: Untagged
@@ -207,19 +206,6 @@ Transform:
   m_Father: {fileID: 1970151883}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &599502345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 599502343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2aa95fb4ba59f947ac960ef4b5e9bd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_lineShader: {fileID: 4800000, guid: 67b2bca9f9afbb84fbe5500cb1f2f93e, type: 3}
-  m_lineTexture: {fileID: 2800000, guid: e3e6ec8a6fc942e4f832316f49c80758, type: 3}
 --- !u!1 &798123167
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +217,7 @@ GameObject:
   - component: {fileID: 798123170}
   - component: {fileID: 798123169}
   - component: {fileID: 798123168}
+  - component: {fileID: 798123172}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -301,6 +288,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &798123172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 798123167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2aa95fb4ba59f947ac960ef4b5e9bd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_lineShader: {fileID: 4800000, guid: e5702a4c9b314784d88a24674bfd0454, type: 3}
+  m_lineTexture: {fileID: 2800000, guid: e3e6ec8a6fc942e4f832316f49c80758, type: 3}
+  m_lineMat: {fileID: 0}
+  m_curCenter: {x: 0, y: 0}
+  m_worldSize: {x: 10000, y: 10000}
 --- !u!1 &1584084573
 GameObject:
   m_ObjectHideFlags: 0
