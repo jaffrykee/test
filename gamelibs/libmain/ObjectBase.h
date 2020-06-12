@@ -5,6 +5,8 @@
 #include "ResPoolManager.h"
 #include "StringManager.h"
 
+#include <typeinfo>
+
 using namespace std;
 using namespace tkm;
 

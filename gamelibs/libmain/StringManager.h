@@ -106,15 +106,6 @@ public:
         result = pwchar;
         return result;
     }
-    inline static void getMemStringFromByteNum(string& memString, int byteNum) {
-        if (byteNum > 1024 * 1024) {
-            memString = to_string(byteNum / (1024 * 1024)) + " MB";
-        } else if (byteNum > 1024) {
-            memString = to_string(byteNum / 1024) + " KB";
-        } else {
-            memString = to_string(byteNum);
-        }
-    }
     inline static void wstringToString(const wstring& src, string& dst) {
         dst.clear();
         str2str(src, dst);
